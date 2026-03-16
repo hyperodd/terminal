@@ -9,6 +9,49 @@ import { visualizer } from 'rollup-plugin-visualizer'
 
 const isAnalyze = process.env.ANALYZE === 'true'
 
+const browserOnlyModules: Record<string, string> = {
+  klinecharts: `
+    export const init = () => ({});
+    export const dispose = () => {};
+    export const FormatDateType = {};
+    export const LoadDataType = {};
+    export const CandleType = {};
+    export const LineType = {};
+    export const TooltipShowRule = {};
+    export const TooltipShowType = {};
+    export const YAxisPosition = {};
+    export default {};
+  `,
+  'motion/react': `
+    import { createElement, forwardRef } from 'react';
+    const el = (tag) => forwardRef(({ children, animate, initial, exit, transition, variants,
+      whileHover, whileTap, whileFocus, whileInView, whileDrag, drag, dragConstraints,
+      layout, layoutId, onAnimationStart, onAnimationComplete, ...rest }, ref) =>
+      createElement(tag, { ...rest, ref }, children));
+    export const motion = new Proxy({}, { get: (_, tag) => el(tag) });
+    export const m = motion;
+    export const AnimatePresence = ({ children }) => children;
+    export const MotionConfig = ({ children }) => children;
+    export const LazyMotion = ({ children }) => children;
+    export const useReducedMotion = () => null;
+    export const domAnimation = {};
+    export const domMax = {};
+    export default {};
+  `,
+}
+
+const ssrStubPlugin = {
+  name: 'ssr-stub-browser-only-modules',
+  enforce: 'pre' as const,
+  resolveId(id: string, _: string | undefined, options: { ssr?: boolean } | undefined) {
+    if (options?.ssr && id in browserOnlyModules) return `\0virtual:${id}`
+  },
+  load(id: string) {
+    const name = id.replace('\0virtual:', '')
+    if (name in browserOnlyModules) return browserOnlyModules[name]
+  },
+}
+
 function createManualChunks(id: string) {
   if (id.includes('node_modules')) {
     if (id.includes('@radix-ui')) return 'vendor-radix'
@@ -38,8 +81,17 @@ const config = defineConfig({
     },
   },
   plugins: [
+    ssrStubPlugin,
     nitro({
       compressPublicAssets: true,
+      minify: true,
+      rollupConfig: {
+        treeshake: {
+          moduleSideEffects: false,
+          propertyReadSideEffects: false,
+          unknownGlobalSideEffects: false,
+        },
+      },
       routeRules: {
         '/assets/**': {
           headers: { 'cache-control': 'public, max-age=31536000, immutable' },

@@ -1,6 +1,6 @@
 import type { ChartingLibraryFeatureset, ResolutionString, TimeFrameItem } from "@/types/charting_library";
 
-export const APP_NAME = "HypeTerminal";
+export const APP_NAME = "HyperOdd";
 export const APP_VERSION = "v0.1.0";
 
 export const QUICK_PERCENT_OPTIONS = [25, 50, 100, 200, 400] as const;
@@ -48,7 +48,7 @@ export const STORAGE_KEYS = {
 	ORDER_ENTRY: "order-entry-v2",
 } as const;
 
-export const GITHUB_URL = "https://github.com/vipineth/hypeterminal/";
+export const GITHUB_URL = "https://github.com/hyperodd/terminal/";
 export const TOKEN_ICON_BASE_URL = "https://app.hyperliquid.xyz/coins";
 
 export const PANEL_LAYOUT = {
@@ -78,11 +78,11 @@ export const SIDEBAR_LAYOUT = {
 
 export const SEO_DEFAULTS = {
 	siteName: APP_NAME,
-	siteUrl: "https://hypeterminal.xyz",
-	defaultTitle: "HypeTerminal - Hyperliquid Trading Terminal",
+	siteUrl: "https://hyperodd.com",
+	defaultTitle: "HyperOdd - HyperOdd Trading Terminal",
 	defaultDescription:
 		"A professional trading terminal for Hyperliquid DEX. Trade perpetuals and spot markets with real-time data, advanced charting, and seamless wallet connectivity.",
-	twitterHandle: "@hypeterminal",
+	twitterHandle: "@hyperoddx",
 	locale: "en_US",
 	themeColor: "#0a0a0a",
 } as const;

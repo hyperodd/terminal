@@ -1,6 +1,6 @@
 {
-  "short_name": "HypeTerminal",
-  "name": "HypeTerminal",
+  "short_name": "HyperOdd",
+  "name": "HyperOdd",
   "icons": [
     {
       "src": "favicon.ico",
@@ -16,6 +16,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#0a0a0a",
-  "background_color": "#0a0a0a"
+  "theme_color": "#1c1c1d",
+  "background_color": "#1c1c1d"
 }

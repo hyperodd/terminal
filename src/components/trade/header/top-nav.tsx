@@ -63,8 +63,8 @@ export function TopNav() {
 						<TerminalIcon className="size-3 text-primary-default" />
 					</div>
 					<span className="text-xs font-bold tracking-tight">
-						<span className="text-primary-default">HYPE</span>
-						<span className="text-text-950">TERMINAL</span>
+						<span className="text-primary-default">HyperOdd</span>
+						<span className="text-text-950">Terminal</span>
 					</span>
 				</div>
 				<div className="h-4 w-px bg-border-200 hidden md:block" />
