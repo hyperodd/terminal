@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "lingui compile && vite build",
+		"build": "lingui compile && vite build && node scripts/clean-worker-statics.mjs",
 		"build:analyze": "ANALYZE=true lingui compile && vite build",
 		"serve": "vite preview",
 		"format": "biome format",

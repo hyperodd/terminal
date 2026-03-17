@@ -119,6 +119,9 @@ const config = defineConfig({
       compressPublicAssets: true,
       minify: true,
       rollupConfig: {
+        output: {
+          inlineDynamicImports: true,
+        },
         treeshake: {
           moduleSideEffects: false,
           propertyReadSideEffects: false,
