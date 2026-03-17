@@ -38,6 +38,39 @@ const browserOnlyModules: Record<string, string> = {
     export const domMax = {};
     export default {};
   `,
+  wagmi: `
+    import { createElement } from 'react';
+    export const WagmiProvider = ({ children }) => children;
+    export const createConfig = () => ({});
+    export const http = () => ({});
+    export const useAccount = () => ({ address: undefined, isConnected: false, status: 'disconnected' });
+    export const useBalance = () => ({ data: undefined, isLoading: false, error: null });
+    export const useConnect = () => ({ connect: () => {}, connectors: [], status: 'idle', error: null });
+    export const useConnectors = () => [];
+    export const useConnection = () => ({ address: undefined, isConnected: false, connector: null, status: 'disconnected' });
+    export const useDisconnect = () => ({ disconnect: () => {} });
+    export const useEnsName = () => ({ data: undefined, isLoading: false });
+    export const useSwitchChain = () => ({ switchChain: () => {}, chains: [], status: 'idle', error: null });
+    export const useWalletClient = () => ({ data: null, isLoading: false, error: null });
+    export const usePublicClient = () => undefined;
+    export const useChainId = () => 42161;
+    export const useSignMessage = () => ({ signMessage: () => {}, status: 'idle', data: undefined });
+    export const useWriteContract = () => ({ writeContract: () => {}, status: 'idle', data: undefined });
+    export const useWaitForTransactionReceipt = () => ({ data: undefined, isLoading: false, status: 'idle', error: null });
+    export const useReadContract = () => ({ data: undefined, isLoading: false, error: null });
+    export const serialize = (x) => JSON.stringify(x);
+    export const deserialize = JSON.parse;
+    export const cookieToInitialState = () => undefined;
+    export const cookieStorage = {};
+    export default {};
+  `,
+  'wagmi/connectors': `
+    export const injected = () => ({});
+    export const coinbaseWallet = () => ({});
+    export const walletConnect = () => ({});
+    export const mock = () => ({});
+    export default {};
+  `,
 }
 
 const ssrStubPlugin = {
