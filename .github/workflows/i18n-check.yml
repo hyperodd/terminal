@@ -30,16 +30,16 @@ jobs:
 
       - name: Check for uncommitted changes
         run: |
-          if ! git diff --quiet src/locales/**/*.po; then
+          if ! git diff --quiet -- src/locales/; then
             echo "::error::Translation catalogs are out of date."
             echo ""
             echo "Run 'pnpm i18n:extract' locally and commit the changes."
             echo ""
             echo "Changed files:"
-            git diff --name-only src/locales/**/*.po
+            git diff --name-only -- src/locales/
             echo ""
             echo "Diff:"
-            git diff src/locales/**/*.po
+            git diff -- src/locales/
             exit 1
           fi
           echo "Translation catalogs are up to date."
