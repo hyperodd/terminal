@@ -1,4 +1,4 @@
-import { DEFAULT_QUOTE_TOKEN } from "@/config/constants";
+import { isUsdStablecoin } from "@/config/constants";
 import type { SpotMarketInfo } from "@/lib/hyperliquid/hooks/useMarketsInfo";
 import type { SpotToken } from "@/lib/hyperliquid/markets/types";
 
@@ -25,27 +25,20 @@ export function getAvailablePairTokens(token: string, spotMarkets: SpotMarketInf
 	}
 
 	return Array.from(tokenMap.values()).sort((a, b) => {
-		if (a.name === DEFAULT_QUOTE_TOKEN) return -1;
-		if (b.name === DEFAULT_QUOTE_TOKEN) return 1;
+		if (isUsdStablecoin(a.name)) return -1;
+		if (isUsdStablecoin(b.name)) return 1;
 		return a.displayName.localeCompare(b.displayName);
 	});
 }
 
-export function findSpotPair(
-	tokenA: string,
-	tokenB: string,
-	spotMarkets: SpotMarketInfo[],
-): SpotMarketInfo | null {
+export function findSpotPair(tokenA: string, tokenB: string, spotMarkets: SpotMarketInfo[]): SpotMarketInfo | null {
 	for (const market of spotMarkets) {
 		if (market.tokensInfo.length < 2) continue;
 
 		const baseToken = market.tokensInfo[0]?.name;
 		const quoteToken = market.tokensInfo[1]?.name;
 
-		if (
-			(baseToken === tokenA && quoteToken === tokenB) ||
-			(baseToken === tokenB && quoteToken === tokenA)
-		) {
+		if ((baseToken === tokenA && quoteToken === tokenB) || (baseToken === tokenB && quoteToken === tokenA)) {
 			return market;
 		}
 	}

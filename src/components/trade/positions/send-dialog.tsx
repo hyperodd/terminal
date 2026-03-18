@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from "@/components/ui/input";
 import { NumberInput } from "@/components/ui/number-input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DEFAULT_QUOTE_TOKEN } from "@/config/constants";
+import { DEFAULT_QUOTE_TOKEN, isUsdStablecoin } from "@/config/constants";
 import { exceedsBalance, isAmountWithinBalance } from "@/domain/market";
 import { type BalanceRow, getAvailableFromTotals, getPerpAvailable } from "@/domain/trade/balances";
 import { useAccountBalances } from "@/hooks/trade/use-account-balances";
@@ -60,7 +60,7 @@ export function SendDialog({
 				available: String(getAvailableFromTotals(b.total, b.hold)),
 				inOrder: b.hold,
 				total: b.total,
-				usdValue: b.coin === DEFAULT_QUOTE_TOKEN ? b.total : b.entryNtl,
+				usdValue: isUsdStablecoin(b.coin) ? b.total : b.entryNtl,
 				entryNtl: b.entryNtl,
 			}));
 	}, [spotBalances]);

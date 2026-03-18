@@ -1,5 +1,5 @@
 import { ArrowSquareOutIcon, CopyIcon, LightningIcon, SignOutIcon, WalletIcon } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useLogin, useLogout, usePrivy } from "@privy-io/react-auth";
 import { useConnection, useDisconnect } from "wagmi";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,6 @@ import { cn } from "@/lib/cn";
 import { formatPercent, formatUSD } from "@/lib/format";
 import { toNumber, toNumberOrZero } from "@/lib/trade/numbers";
 import { useDepositModalActions } from "@/stores/use-global-modal-store";
-import { WalletDialog } from "../components/wallet-dialog";
 import { MobileBottomNavSpacer } from "./mobile-bottom-nav";
 
 const ACCOUNT_TEXT = UI_TEXT.ACCOUNT_PANEL;
@@ -22,11 +21,21 @@ interface MobileAccountViewProps {
 
 export function MobileAccountView({ className }: MobileAccountViewProps) {
 	const { address, isConnected } = useConnection();
-	const disconnect = useDisconnect();
+	const { authenticated } = usePrivy();
+	const { login } = useLogin();
+	const { logout } = useLogout();
+	const { disconnect } = useDisconnect();
 
 	const { perpSummary, perpPositions, isLoading } = useAccountBalances();
 
-	const [walletDialogOpen, setWalletDialogOpen] = useState(false);
+	function handleLogout() {
+		if (authenticated) {
+			logout();
+		} else {
+			disconnect();
+		}
+	}
+
 	const { copied, copy } = useCopyToClipboard();
 	const { open: openDepositModal } = useDepositModalActions();
 
@@ -64,7 +73,7 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 					<Button
 						variant="text"
 						size="none"
-						onClick={() => setWalletDialogOpen(true)}
+						onClick={login}
 						className={cn(
 							"px-6 py-3 text-base font-semibold rounded-xs",
 							"bg-primary-default/20 border border-primary-default text-primary-default",
@@ -76,7 +85,6 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 					</Button>
 				</div>
 				<MobileBottomNavSpacer />
-				<WalletDialog open={walletDialogOpen} onOpenChange={setWalletDialogOpen} />
 			</div>
 		);
 	}
@@ -113,7 +121,7 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 					<Button
 						variant="text"
 						size="none"
-						onClick={() => disconnect.mutate()}
+						onClick={handleLogout}
 						className={cn(
 							"p-2.5 text-text-600 hover:text-market-down-600",
 							"transition-colors rounded-xs hover:bg-transparent",

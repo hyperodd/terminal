@@ -13,6 +13,7 @@ interface MaxSizeInput {
 interface OrderEntryMaxSizeInput {
 	isConnected: boolean;
 	isSpotMarket: boolean;
+	isBuilderPerpMarket: boolean;
 	side: Side;
 	price: number;
 	spotBalance: SpotBalanceData;
@@ -76,6 +77,19 @@ export function getMaxSizeForOrderEntry(input: OrderEntryMaxSizeInput): number {
 			return Number.isFinite(floored) ? floored : 0;
 		}
 		const floored = floorToDecimals(input.spotBalance.baseAvailable, input.szDecimals);
+		return Number.isFinite(floored) ? floored : 0;
+	}
+
+	// Builder perps: use exchange-reported max size when available; fall back to spot quote collateral / price.
+	if (input.isBuilderPerpMarket) {
+		const exchangeMax = input.maxTradeSzs?.[isBuy ? 0 : 1] ?? 0;
+		if (exchangeMax > 0) return exchangeMax;
+
+		const quote = toBig(input.spotBalance.quoteAvailable);
+		const px = toBig(input.price);
+		if (!quote || !px || quote.lte(0) || px.lte(0)) return 0;
+		const size = quote.div(px).toNumber();
+		const floored = floorToDecimals(size, input.szDecimals);
 		return Number.isFinite(floored) ? floored : 0;
 	}
 

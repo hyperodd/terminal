@@ -24,7 +24,9 @@ function getOrCreate<T>(key: string, create: () => T): T {
 
 function getHttpOptions(): HttpTransportOptions {
 	const isTestnet = typeof import.meta !== "undefined" && import.meta.env?.VITE_HYPERLIQUID_TESTNET === "true";
-	return { isTestnet };
+	// Testnet nodes are slower; 30s covers order placement latency without false timeouts.
+	const timeout = isTestnet ? 30_000 : 15_000;
+	return { isTestnet, timeout };
 }
 
 function getWsOptions(): WebSocketTransportOptions {

@@ -25,6 +25,7 @@ interface ButtonContentInput {
 function getRegisterText(isLoading: boolean, registerStatus: RegistrationStatus, canApprove: boolean): string {
 	if (isLoading) return t`Loading...`;
 	if (!canApprove) return t`Loading...`;
+	if (registerStatus === "switching_account_mode") return t`Sign in wallet...`;
 	if (registerStatus === "approving_fee" || registerStatus === "approving_agent") return t`Sign in wallet...`;
 	if (registerStatus === "verifying") return t`Verifying...`;
 	return t`Enable Trading`;
@@ -32,6 +33,7 @@ function getRegisterText(isLoading: boolean, registerStatus: RegistrationStatus,
 
 export function useButtonContent(input: ButtonContentInput): ButtonContent {
 	const isRegistering =
+		input.registerStatus === "switching_account_mode" ||
 		input.registerStatus === "approving_fee" ||
 		input.registerStatus === "approving_agent" ||
 		input.registerStatus === "verifying";

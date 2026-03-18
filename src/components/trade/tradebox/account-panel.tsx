@@ -5,7 +5,7 @@ import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { InfoRow, InfoRowGroup } from "@/components/ui/info-row";
 import { Tabs, TabsContent, TabsContentGroup, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DEFAULT_QUOTE_TOKEN, FALLBACK_VALUE_PLACEHOLDER } from "@/config/constants";
+import { FALLBACK_VALUE_PLACEHOLDER, isUsdStablecoin } from "@/config/constants";
 import { useAccountBalances } from "@/hooks/trade/use-account-balances";
 import { cn } from "@/lib/cn";
 import { formatPercent, formatToken, formatUSD } from "@/lib/format";
@@ -75,11 +75,11 @@ export function AccountPanel() {
 			if (total === 0) continue;
 
 			const available = Math.max(0, total - hold);
-			const usdValue = b.coin === DEFAULT_QUOTE_TOKEN ? total : entryNtl;
+			const usdValue = isUsdStablecoin(b.coin) ? total : entryNtl;
 
 			totalValue += usdValue;
-			availableValue += b.coin === DEFAULT_QUOTE_TOKEN ? available : (available / total) * usdValue;
-			inOrderValue += b.coin === DEFAULT_QUOTE_TOKEN ? hold : (hold / total) * usdValue;
+			availableValue += isUsdStablecoin(b.coin) ? available : (available / total) * usdValue;
+			inOrderValue += isUsdStablecoin(b.coin) ? hold : (hold / total) * usdValue;
 
 			tokens.push({ coin: b.coin, total, available, usdValue });
 		}
@@ -100,7 +100,10 @@ export function AccountPanel() {
 
 	function getHeaderEquity() {
 		if (activeTab === "perps") {
-			return hasPerpData ? formatUSD(perpMetrics.accountValue) : FALLBACK_VALUE_PLACEHOLDER;
+			if (hasPerpData) return formatUSD(perpMetrics.accountValue);
+			// Unified account: perp state can be empty; spot USDC/USDH is the single collateral.
+			if (hasSpotData) return formatUSD(spotMetrics.totalValue);
+			return FALLBACK_VALUE_PLACEHOLDER;
 		}
 		return hasSpotData ? formatUSD(spotMetrics.totalValue) : FALLBACK_VALUE_PLACEHOLDER;
 	}
@@ -179,7 +182,7 @@ export function AccountPanel() {
 			},
 			...spotMetrics.topTokens.map((token) => ({
 				label: token.coin,
-				value: formatToken(token.total, token.coin === DEFAULT_QUOTE_TOKEN ? 2 : 4),
+				value: formatToken(token.total, isUsdStablecoin(token.coin) ? 2 : 4),
 				valueClassName: "tabular-nums",
 			})),
 		];

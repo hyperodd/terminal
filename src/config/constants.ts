@@ -17,6 +17,8 @@ export const DEFAULT_MARKET_KEY = "perp:BTC";
 export const DEFAULT_MARKET_NAME = "BTC";
 export const DEFAULT_MARKET_SCOPE = "perp" as const;
 export const DEFAULT_QUOTE_TOKEN = "USDC";
+export const USD_STABLECOINS = new Set(["USDC", "USDH"]);
+export const isUsdStablecoin = (coin: string): boolean => USD_STABLECOINS.has(coin);
 
 export const HL_ALL_DEXS = "ALL_DEXS" as const;
 

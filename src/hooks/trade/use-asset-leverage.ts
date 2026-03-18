@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useConnection } from "wagmi";
 import { DEFAULT_MAX_LEVERAGE } from "@/config/constants";
+import { getUnifiedStablecoinAvailable } from "@/domain/trade/balances";
+import { useAccountBalances } from "@/hooks/trade/use-account-balances";
 import { getMarketCapabilities, useSelectedMarketInfo, useUserPositions } from "@/lib/hyperliquid";
 import { useExchangeUpdateLeverage } from "@/lib/hyperliquid/hooks/exchange/useExchangeUpdateLeverage";
 import { useSubActiveAssetData } from "@/lib/hyperliquid/hooks/subscription";
@@ -43,6 +45,7 @@ function getDefaultLeverage(maxLeverage: number): number {
 export function useAssetLeverage(): UseAssetLeverageReturn {
 	const { address, isConnected } = useConnection();
 	const { data: market } = useSelectedMarketInfo();
+	const { spotBalances } = useAccountBalances();
 
 	const storedMarginMode = useMarginMode();
 	const { setMarginMode: setStoredMarginMode } = useGlobalSettingsActions();
@@ -191,11 +194,22 @@ export function useAssetLeverage(): UseAssetLeverageReturn {
 
 	const availableToTrade = useMemo((): [number, number] | null => {
 		const raw = activeAssetData?.availableToTrade;
-		if (!raw) return null;
-		const long = toNumber(raw[0]);
-		const short = toNumber(raw[1]);
-		return long !== null && short !== null ? [long, short] : null;
-	}, [activeAssetData?.availableToTrade]);
+		const long = raw ? toNumber(raw[0]) : null;
+		const short = raw ? toNumber(raw[1]) : null;
+		const fromSubscription = long !== null && short !== null ? ([long, short] as [number, number]) : null;
+
+		// Unified account: perp clearinghouse can show zero; spot USDC/USDH is the single collateral.
+		// Use spot stablecoin available as perp available when on main-dex perp and subscription has no balance.
+		if (market?.kind === "perp") {
+			const subscriptionHasBalance = fromSubscription && (fromSubscription[0] > 0 || fromSubscription[1] > 0);
+			if (!subscriptionHasBalance) {
+				const unified = getUnifiedStablecoinAvailable(spotBalances);
+				if (unified > 0) return [unified, unified];
+			}
+		}
+
+		return fromSubscription;
+	}, [activeAssetData?.availableToTrade, market?.kind, spotBalances]);
 
 	const normalizedStatus = useMemo((): "idle" | "loading" | "success" | "error" => {
 		if (!isConnected || !baseToken) return "idle";

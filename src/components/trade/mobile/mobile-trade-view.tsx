@@ -1,4 +1,5 @@
 import { CaretDownIcon, SpinnerGapIcon, TrendDownIcon, TrendUpIcon } from "@phosphor-icons/react";
+import { useLogin } from "@privy-io/react-auth";
 import { useEffect, useMemo, useState } from "react";
 import { useConnection, useSwitchChain, useWalletClient } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -31,7 +32,6 @@ import { useMarketActions } from "@/stores/use-market-store";
 import { useOrderQueueActions } from "@/stores/use-order-queue-store";
 import { getOrderbookActionsStore, useSelectedPrice } from "@/stores/use-orderbook-actions-store";
 import { TokenSelector } from "../chart/token-selector";
-import { WalletDialog } from "../components/wallet-dialog";
 import { AdvancedOrderDropdown } from "../tradebox/advanced-order-dropdown";
 import { LeverageControl } from "../tradebox/leverage-control";
 import { OrderToast } from "../tradebox/order-toast";
@@ -48,6 +48,7 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 	const { address, isConnected } = useConnection();
 	const { data: walletClient, isLoading: isWalletLoading, error: walletClientError } = useWalletClient();
 	const { switchChain, isPending: isSwitchingChain } = useSwitchChain();
+	const { login } = useLogin();
 
 	const needsChainSwitch = !!walletClientError && walletClientError.message.includes("does not match");
 
@@ -69,7 +70,10 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 
 	const canApprove = !!walletClient && !!address;
 	const isRegistering =
-		registerStatus === "approving_fee" || registerStatus === "approving_agent" || registerStatus === "verifying";
+		registerStatus === "switching_account_mode" ||
+		registerStatus === "approving_fee" ||
+		registerStatus === "approving_agent" ||
+		registerStatus === "verifying";
 
 	const slippageBps = useMarketOrderSlippageBps();
 
@@ -85,7 +89,6 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 	const [limitPriceInput, setLimitPriceInput] = useState("");
 	const [approvalError, setApprovalError] = useState<string | null>(null);
 
-	const [walletDialogOpen, setWalletDialogOpen] = useState(false);
 	const { open: openDepositModal } = useDepositModalActions();
 
 	const { mutateAsync: placeOrder, isPending: isSubmitting } = useExchangeOrder();
@@ -283,7 +286,7 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 		if (!isConnected)
 			return {
 				text: ORDER_TEXT.BUTTON_CONNECT,
-				action: () => setWalletDialogOpen(true),
+				action: login,
 				disabled: false,
 				variant: "cyan" as const,
 			};
@@ -507,7 +510,6 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 
 			<MobileBottomNavSpacer />
 
-			<WalletDialog open={walletDialogOpen} onOpenChange={setWalletDialogOpen} />
 			<OrderToast />
 		</div>
 	);

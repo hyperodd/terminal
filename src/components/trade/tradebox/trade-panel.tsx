@@ -1,9 +1,10 @@
 import { t } from "@lingui/core/macro";
 import { SpinnerGapIcon } from "@phosphor-icons/react";
+import { useLogin } from "@privy-io/react-auth";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { useConnection, useSwitchChain, useWalletClient } from "wagmi";
 import { Button } from "@/components/ui/button";
-import { DEFAULT_QUOTE_TOKEN, TWAP_MINUTES_MAX, TWAP_MINUTES_MIN } from "@/config/constants";
+import { DEFAULT_QUOTE_TOKEN, isUsdStablecoin, TWAP_MINUTES_MAX, TWAP_MINUTES_MIN } from "@/config/constants";
 import { APPROVAL_ERROR_DISMISS_MS } from "@/config/time";
 import { getMarketQuoteToken } from "@/domain/trade/balances";
 import { getLiquidationInfo, getOrderMetrics } from "@/domain/trade/order/metrics";
@@ -54,7 +55,6 @@ import {
 } from "@/stores/use-order-entry-store";
 import { useOrderQueueActions } from "@/stores/use-order-queue-store";
 import { getOrderbookActionsStore, useSelectedPrice } from "@/stores/use-orderbook-actions-store";
-import { WalletDialog } from "../components/wallet-dialog";
 import { LeverageControl } from "./leverage-control";
 import { MarginModeDialog, MarginModeToggle } from "./margin-mode-dialog";
 import { OrderSummary } from "./order-summary";
@@ -69,6 +69,7 @@ export function TradePanel() {
 	const { address, isConnected } = useConnection();
 	const { data: walletClient, isLoading: isWalletLoading, error: walletClientError } = useWalletClient();
 	const switchChain = useSwitchChain();
+	const { login } = useLogin();
 	const needsChainSwitch = !!walletClientError && walletClientError.message.includes("does not match");
 
 	const { data: market } = useSelectedMarketInfo();
@@ -136,7 +137,7 @@ export function TradePanel() {
 	const { setSide, setOrderType, setSizeMode, setSize, setLimitPrice, resetForm } = useOrderEntryActions();
 
 	const [approvalError, setApprovalError] = useState<string | null>(null);
-	const [activeDialog, setActiveDialog] = useState<ActiveDialog>(null);
+	const [activeDialog, setActiveDialog] = useState<Exclude<ActiveDialog, "wallet">>(null);
 
 	const { open: openDepositModal } = useDepositModalActions();
 	const { open: openSettingsDialog } = useSettingsDialogActions();
@@ -146,7 +147,7 @@ export function TradePanel() {
 		if (!market || market.kind !== "builderPerp") return null;
 
 		const quoteToken = getMarketQuoteToken(market);
-		if (quoteToken === DEFAULT_QUOTE_TOKEN) return null;
+		if (isUsdStablecoin(quoteToken)) return null;
 
 		return quoteToken;
 	}, [market]);
@@ -262,7 +263,10 @@ export function TradePanel() {
 	}
 
 	const isRegistering =
-		registerStatus === "approving_fee" || registerStatus === "approving_agent" || registerStatus === "verifying";
+		registerStatus === "switching_account_mode" ||
+		registerStatus === "approving_fee" ||
+		registerStatus === "approving_agent" ||
+		registerStatus === "verifying";
 
 	const handleMarginModeConfirm = useCallback(
 		async (mode: MarginMode) => {
@@ -427,7 +431,7 @@ export function TradePanel() {
 		canApprove,
 		side,
 		isSubmitting,
-		onConnectWallet: () => setActiveDialog("wallet"),
+		onConnectWallet: login,
 		onDeposit: () => openDepositModal("deposit"),
 		onRegister: handleRegister,
 		onSubmit: handleSubmit,
@@ -518,8 +522,6 @@ export function TradePanel() {
 					marketKind={market?.kind}
 				/>
 			</div>
-
-			<WalletDialog open={activeDialog === "wallet"} onOpenChange={(open) => setActiveDialog(open ? "wallet" : null)} />
 
 			<OrderToast />
 		</div>

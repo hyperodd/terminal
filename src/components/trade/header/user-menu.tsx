@@ -8,6 +8,7 @@ import {
 	SpinnerGapIcon,
 	WalletIcon,
 } from "@phosphor-icons/react";
+import { useLogin, useLogout, usePrivy } from "@privy-io/react-auth";
 import { useEffect, useState } from "react";
 import { useConnection, useDisconnect, useEnsName } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCopyToClipboard } from "@/hooks/ui/use-copy-to-clipboard";
 import { shortenAddress } from "@/lib/format";
-import { WalletDialog } from "../components/wallet-dialog";
 
 function CopyAddressMenuItem({ address }: { address: string }) {
 	const { copied, copy } = useCopyToClipboard();
@@ -46,14 +46,24 @@ function CopyAddressMenuItem({ address }: { address: string }) {
 
 export function UserMenu() {
 	const { address, isConnected, isConnecting } = useConnection();
-	const disconnect = useDisconnect();
+	const { authenticated } = usePrivy();
+	const { login } = useLogin();
+	const { logout } = useLogout();
+	const { disconnect } = useDisconnect();
 	const { data: ensName } = useEnsName({ address });
-	const [isOpen, setIsOpen] = useState(false);
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
+
+	function handleLogout() {
+		if (authenticated) {
+			logout();
+		} else {
+			disconnect();
+		}
+	}
 
 	if (!mounted || isConnecting) {
 		return (
@@ -66,13 +76,10 @@ export function UserMenu() {
 
 	if (!isConnected) {
 		return (
-			<>
-				<Button size="md" variant="outlined" onClick={() => setIsOpen(true)}>
-					<WalletIcon className="size-4" />
-					<Trans>Connect Wallet</Trans>
-				</Button>
-				<WalletDialog open={isOpen} onOpenChange={setIsOpen} />
-			</>
+			<Button size="md" variant="outlined" onClick={login}>
+				<WalletIcon className="size-4" />
+				<Trans>Connect Wallet</Trans>
+			</Button>
 		);
 	}
 
@@ -95,11 +102,7 @@ export function UserMenu() {
 						</span>
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem
-						variant="destructive"
-						className="flex items-center gap-2"
-						onClick={() => disconnect.mutate()}
-					>
+					<DropdownMenuItem variant="destructive" className="flex items-center gap-2" onClick={handleLogout}>
 						<SignOutIcon className="size-3.5" />
 						<span>
 							<Trans>Disconnect</Trans>

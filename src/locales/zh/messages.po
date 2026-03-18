@@ -30,8 +30,8 @@ msgstr ""
 #~ msgstr "24小时价格"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "A crypto wallet lets you store and manage your digital assets securely."
-msgstr ""
+#~ msgid "A crypto wallet lets you store and manage your digital assets securely."
+#~ msgstr ""
 
 #: src/components/pages/builder-page.tsx
 #~ msgid "About Builder Codes"
@@ -315,8 +315,8 @@ msgid "Confirm in wallet"
 msgstr ""
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Connect"
-msgstr ""
+#~ msgid "Connect"
+#~ msgstr ""
 
 #: src/components/trade/positions/orders-tab.tsx
 #~ msgid "Connect a wallet to manage orders."
@@ -326,7 +326,6 @@ msgstr ""
 #~ msgid "Connect a wallet to manage positions."
 #~ msgstr "连接钱包以管理仓位。"
 
-#: src/components/trade/components/wallet-dialog.tsx
 #: src/components/trade/header/user-menu.tsx
 #: src/lib/trade/use-button-content.ts
 msgid "Connect Wallet"
@@ -341,8 +340,8 @@ msgstr "连接钱包查看账户"
 #~ msgstr ""
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Connect your wallet to start trading on Hyperliquid"
-msgstr ""
+#~ msgid "Connect your wallet to start trading on Hyperliquid"
+#~ msgstr ""
 
 #: src/components/trade/positions/balances-tab.tsx
 msgid "Connect your wallet to view balances."
@@ -742,8 +741,8 @@ msgstr ""
 #~ msgstr "使用中"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Install a wallet extension to continue"
-msgstr ""
+#~ msgid "Install a wallet extension to continue"
+#~ msgstr ""
 
 #. placeholder {0}: ctx.baseToken
 #. placeholder {0}: ctx.quoteToken
@@ -798,8 +797,8 @@ msgid "Leaderboard"
 msgstr "排行榜"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Learn more"
-msgstr ""
+#~ msgid "Learn more"
+#~ msgstr ""
 
 #: src/components/trade/tradebox/leverage-control.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
@@ -1030,8 +1029,8 @@ msgid "Minimum withdrawal is ${MIN_WITHDRAW_USD}"
 msgstr ""
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Mock Wallet (Testing)"
-msgstr ""
+#~ msgid "Mock Wallet (Testing)"
+#~ msgstr ""
 
 #: src/components/trade/header/top-nav.tsx
 #~ msgid "More"
@@ -1066,8 +1065,8 @@ msgid "NEW"
 msgstr "新"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "New to wallets?"
-msgstr ""
+#~ msgid "New to wallets?"
+#~ msgstr ""
 
 #: src/components/ui/pagination.tsx
 #~ msgid "Next"
@@ -1155,8 +1154,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "No wallets found"
-msgstr "未找到钱包"
+#~ msgid "No wallets found"
+#~ msgstr "未找到钱包"
 
 #: src/lib/errors/definitions/connection.ts
 msgid "Not connected"
@@ -1183,8 +1182,8 @@ msgid "OI"
 msgstr "持仓量"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Only you control your funds. No email or password required."
-msgstr ""
+#~ msgid "Only you control your funds. No email or password required."
+#~ msgstr ""
 
 #: src/components/trade/positions/orders-tab.tsx
 #~ msgid "open"
@@ -1234,8 +1233,8 @@ msgid "Other"
 msgstr ""
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Other Options"
-msgstr ""
+#~ msgid "Other Options"
+#~ msgstr ""
 
 #: src/components/trade/positions/position-tpsl-modal.tsx
 #~ msgid "P&L"
@@ -1295,8 +1294,8 @@ msgid "PNL"
 msgstr "盈亏"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Popular"
-msgstr ""
+#~ msgid "Popular"
+#~ msgstr ""
 
 #: src/components/trade/header/top-nav.tsx
 msgid "Portfolio"
@@ -1434,8 +1433,8 @@ msgid "Search markets..."
 msgstr "搜索市场..."
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Secure & Private"
-msgstr ""
+#~ msgid "Secure & Private"
+#~ msgstr ""
 
 #: src/components/trade/header/favorites-strip.tsx
 #~ msgid "Select {coin} market"
@@ -1597,6 +1596,7 @@ msgstr ""
 msgid "Sidebar"
 msgstr "侧边栏"
 
+#: src/lib/trade/use-button-content.ts
 #: src/lib/trade/use-button-content.ts
 msgid "Sign in wallet..."
 msgstr ""
@@ -2103,8 +2103,8 @@ msgstr "钱包未连接"
 #~ msgstr "WebSocket 错误"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "What is a wallet?"
-msgstr ""
+#~ msgid "What is a wallet?"
+#~ msgstr ""
 
 #: src/components/trade/order-entry/deposit-modal.tsx
 #~ msgid "will arrive in ~3 min"
