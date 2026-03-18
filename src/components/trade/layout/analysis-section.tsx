@@ -14,6 +14,7 @@ export function AnalysisSection() {
 	const chartPanelRef = usePanelRef();
 	const positionsPanelRef = usePanelRef();
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: refs are stable, only run when isConnected changes
 	useLayoutEffect(() => {
 		const chartSize = isConnected ? chart.defaultSize : chart.disconnectedSize;
 		const positionsSize = isConnected ? positions.defaultSize : positions.disconnectedSize;

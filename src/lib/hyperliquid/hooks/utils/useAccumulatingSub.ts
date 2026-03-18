@@ -34,7 +34,8 @@ export function useAccumulatingSub<TEvent, TItem>(
 		key,
 		(listener) =>
 			subscribe((event) => {
-				const buffer = bufferRef.current!;
+				const buffer = bufferRef.current;
+				if (!buffer) return;
 				if (config.isSnapshot(event)) {
 					buffer.clear();
 				}

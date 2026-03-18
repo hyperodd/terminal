@@ -17,5 +17,5 @@ export function getSideLabels(isSpotMarket: boolean): SideLabels {
 }
 
 export function getSizeModeLabel(sizeMode: SizeMode, baseToken: string, quoteToken: string): string {
-	return sizeMode === "base" ? (baseToken || "---") : quoteToken;
+	return sizeMode === "base" ? baseToken || "---" : quoteToken;
 }

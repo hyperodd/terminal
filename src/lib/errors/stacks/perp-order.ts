@@ -1,5 +1,9 @@
 import { noBalanceValidator } from "../definitions/balance";
-import { signerNotReadyValidator, walletLoadingValidator, walletNotConnectedValidator } from "../definitions/connection";
+import {
+	signerNotReadyValidator,
+	walletLoadingValidator,
+	walletNotConnectedValidator,
+} from "../definitions/connection";
 import { marketNotReadyValidator, noMarketValidator, noMarkPriceValidator } from "../definitions/market";
 import {
 	enterLimitPriceValidator,
