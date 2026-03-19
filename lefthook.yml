@@ -6,7 +6,7 @@ pre-commit:
       run: npx biome check --write --staged --no-errors-on-unmatched && git add {staged_files}
     lingui-extract:
       glob: "src/**/*.{ts,tsx}"
-      run: pnpm i18n:extract && git add src/locales/**/*.po
+      run: bash -c '. "$NVM_DIR/nvm.sh" && npx lingui extract' && git add src/locales/**/*.po
 
 # Commit message validation
 commit-msg:
