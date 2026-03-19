@@ -35,7 +35,7 @@ const buttonVariants = cva(
 			{
 				variant: "contained",
 				tone: "accent",
-				class: "bg-primary-default text-white hover:bg-primary-hover active:bg-primary-active",
+				class: "bg-primary-default text-primary-text hover:bg-primary-hover active:bg-primary-active",
 			},
 			{
 				variant: "outlined",

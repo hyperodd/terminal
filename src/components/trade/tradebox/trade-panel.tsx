@@ -13,7 +13,6 @@ import { buildOrderPlan } from "@/domain/trade/order-intent";
 import { formatPriceForOrder, formatSizeForOrder, throwIfResponseError } from "@/domain/trade/orders";
 import { useFeeRates } from "@/hooks/trade/use-fee-rates";
 import { useOrderEntryData } from "@/hooks/trade/use-order-entry-data";
-import { cn } from "@/lib/cn";
 import { useAgentRegistration, useAgentStatus, useSelectedMarketInfo, useUserPositions } from "@/lib/hyperliquid";
 import { useExchangeOrder } from "@/lib/hyperliquid/hooks/exchange/useExchangeOrder";
 import { useExchangeTwapOrder } from "@/lib/hyperliquid/hooks/exchange/useExchangeTwapOrder";
@@ -501,7 +500,7 @@ export function TradePanel() {
 						size="lg"
 						onClick={buttonContent.action}
 						disabled={buttonContent.disabled}
-						className={cn("w-full", !isConnected && "text-primary-text")}
+						className="w-full"
 						aria-label={buttonContent.text}
 					>
 						{(isSubmitting || isRegistering) && <SpinnerGapIcon className="size-3 animate-spin" />}
