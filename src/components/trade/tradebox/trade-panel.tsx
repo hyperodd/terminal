@@ -501,7 +501,7 @@ export function TradePanel() {
 						size="lg"
 						onClick={buttonContent.action}
 						disabled={buttonContent.disabled}
-						className={cn("w-full")}
+						className={cn("w-full", !isConnected && "text-primary-text")}
 						aria-label={buttonContent.text}
 					>
 						{(isSubmitting || isRegistering) && <SpinnerGapIcon className="size-3 animate-spin" />}

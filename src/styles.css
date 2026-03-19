@@ -101,10 +101,11 @@
   --border-50: #F6F7F8;
 
   /* Primary */
-  --primary-default: #2563EB;
-  --primary-hover: #1D4ED8;
-  --primary-active: #1E40AF;
-  --primary-muted: #92B1F5;
+  --primary-default: #005562;
+  --primary-hover: #006B7A;
+  --primary-active: #004A56;
+  --primary-muted: #E8FBFD;
+  --primary-text: #D5F7FB;
 
   /* Market Up */
   --market-up-600: #3C7D3E;
@@ -178,10 +179,11 @@
   --border-50: #222833;
 
   /* Primary */
-  --primary-default: #4F7DFF;
-  --primary-hover: #3B6CF6;
-  --primary-active: #2F5CE0;
-  --primary-muted: #385194;
+  --primary-default: #D5F7FB;
+  --primary-hover: #B8EFF5;
+  --primary-active: #9AE7F0;
+  --primary-muted: #1A3D40;
+  --primary-text: #131619;
 
   /* Market Up */
   --market-up-600: #4CAF6A;
@@ -267,6 +269,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-active: var(--primary-active);
   --color-primary-muted: var(--primary-muted);
+  --color-primary-text: var(--primary-text);
 
   /* Market */
   --color-market-up-600: var(--market-up-600);
