@@ -105,6 +105,7 @@
   --primary-hover: #006B7A;
   --primary-active: #004A56;
   --primary-muted: #E8FBFD;
+  --primary-text: #D5F7FB;
 
   /* Market Up */
   --market-up-600: #3C7D3E;
@@ -182,6 +183,7 @@
   --primary-hover: #B8EFF5;
   --primary-active: #9AE7F0;
   --primary-muted: #1A3D40;
+  --primary-text: #131619;
 
   /* Market Up */
   --market-up-600: #4CAF6A;
@@ -267,6 +269,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-active: var(--primary-active);
   --color-primary-muted: var(--primary-muted);
+  --color-primary-text: var(--primary-text);
 
   /* Market */
   --color-market-up-600: var(--market-up-600);
