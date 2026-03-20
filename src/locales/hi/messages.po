@@ -1791,7 +1791,6 @@ msgid "Switch to {displayName} market"
 msgstr ""
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switch to Arbitrum"
 msgstr "Arbitrum पर स्विच करें"
 
@@ -1808,7 +1807,6 @@ msgid "Switch to light mode"
 msgstr "लाइट मोड में बदलें"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switching..."
 msgstr "स्विच हो रहा है..."
 

@@ -201,7 +201,6 @@ export function TradePanel() {
 
 	const baseInput = {
 		isConnected,
-		isWalletLoading: false,
 		availableBalance,
 		hasMarket: !!market,
 		hasAssetIndex: typeof market?.assetId === "number",
@@ -417,9 +416,6 @@ export function TradePanel() {
 
 	const buttonContent = useButtonContent({
 		isConnected,
-		needsChainSwitch: false,
-		isSwitchingChain: false,
-		switchChain: () => {},
 		availableBalance,
 		validation,
 		isAgentLoading,
