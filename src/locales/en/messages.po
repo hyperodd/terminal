@@ -205,8 +205,8 @@ msgstr "Builder Fee"
 #~ msgstr "Builder must have at least 100 USDC in perps account value"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Builders"
-msgstr "Builders"
+#~ msgid "Builders"
+#~ msgstr "Builders"
 
 #: src/components/trade/positions/twap-tab.tsx
 msgid "buy"
@@ -797,8 +797,8 @@ msgstr "Isolated"
 #~ msgstr "Latency:"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Leaderboard"
-msgstr "Leaderboard"
+#~ msgid "Leaderboard"
+#~ msgstr "Leaderboard"
 
 #: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Learn more"
@@ -1302,8 +1302,8 @@ msgstr "PNL"
 #~ msgstr "Popular"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Portfolio"
-msgstr "Portfolio"
+#~ msgid "Portfolio"
+#~ msgstr "Portfolio"
 
 #: src/components/trade/positions/funding-tab.tsx
 #: src/components/trade/tradebox/trade-form-fields.tsx
@@ -1684,7 +1684,6 @@ msgstr "Sorted by {0}"
 #~ msgid "spot"
 #~ msgstr "spot"
 
-#: src/components/trade/header/top-nav.tsx
 #: src/components/trade/positions/balances-tab.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
@@ -1705,8 +1704,8 @@ msgid "Spread"
 msgstr "Spread"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Staking"
-msgstr "Staking"
+#~ msgid "Staking"
+#~ msgstr "Staking"
 
 #: src/lib/errors/definitions/scale.ts
 msgid "Start and end must differ"
@@ -1796,7 +1795,6 @@ msgid "Switch to {displayName} market"
 msgstr "Switch to {displayName} market"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switch to Arbitrum"
 msgstr "Switch to Arbitrum"
 
@@ -1813,7 +1811,6 @@ msgid "Switch to light mode"
 msgstr "Switch to light mode"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switching..."
 msgstr "Switching..."
 
@@ -2067,8 +2064,8 @@ msgstr "USD Value"
 #~ msgstr "Value"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Vaults"
-msgstr "Vaults"
+#~ msgid "Vaults"
+#~ msgstr "Vaults"
 
 #: src/lib/trade/use-button-content.ts
 msgid "Verifying..."

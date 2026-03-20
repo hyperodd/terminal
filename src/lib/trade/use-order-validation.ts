@@ -4,7 +4,6 @@ import type { Side, ValidationResult } from "@/lib/trade/types";
 
 export interface BaseOrderInput {
 	isConnected: boolean;
-	isWalletLoading: boolean;
 	availableBalance: number;
 	hasMarket: boolean;
 	hasAssetIndex: boolean;

@@ -205,8 +205,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Builders"
-msgstr ""
+#~ msgid "Builders"
+#~ msgstr ""
 
 #: src/components/trade/positions/twap-tab.tsx
 msgid "buy"
@@ -793,8 +793,8 @@ msgstr "Aislado"
 #~ msgstr "Latencia:"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Leaderboard"
-msgstr "Clasificación"
+#~ msgid "Leaderboard"
+#~ msgstr "Clasificación"
 
 #: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Learn more"
@@ -1298,8 +1298,8 @@ msgstr "PNL"
 #~ msgstr ""
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Portfolio"
-msgstr "Portafolio"
+#~ msgid "Portfolio"
+#~ msgstr "Portafolio"
 
 #: src/components/trade/positions/funding-tab.tsx
 #: src/components/trade/tradebox/trade-form-fields.tsx
@@ -1680,7 +1680,6 @@ msgstr "Ordenado por {0}"
 #~ msgid "spot"
 #~ msgstr "spot"
 
-#: src/components/trade/header/top-nav.tsx
 #: src/components/trade/positions/balances-tab.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
@@ -1701,8 +1700,8 @@ msgid "Spread"
 msgstr "Diferencial"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Staking"
-msgstr "Staking"
+#~ msgid "Staking"
+#~ msgstr "Staking"
 
 #: src/lib/errors/definitions/scale.ts
 msgid "Start and end must differ"
@@ -1792,7 +1791,6 @@ msgid "Switch to {displayName} market"
 msgstr ""
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switch to Arbitrum"
 msgstr "Cambiar a Arbitrum"
 
@@ -1809,7 +1807,6 @@ msgid "Switch to light mode"
 msgstr "Cambiar a modo claro"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switching..."
 msgstr "Cambiando..."
 
@@ -2059,8 +2056,8 @@ msgstr "Valor en USD"
 #~ msgstr "Valor"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Vaults"
-msgstr "Bóvedas"
+#~ msgid "Vaults"
+#~ msgstr "Bóvedas"
 
 #: src/lib/trade/use-button-content.ts
 msgid "Verifying..."

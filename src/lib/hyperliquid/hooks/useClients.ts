@@ -1,10 +1,11 @@
 import type { ExchangeClient, InfoClient, SubscriptionClient } from "@nktkas/hyperliquid";
+import { useWallets } from "@privy-io/react-auth";
 import { useMemo } from "react";
-import { useConnection, useWalletClient } from "wagmi";
+import { useConnection } from "wagmi";
+import { arbitrum, arbitrumSepolia } from "wagmi/chains";
 import { createExchangeClient } from "@/lib/hyperliquid/clients";
 import { useHyperliquid } from "@/lib/hyperliquid/provider";
 import { useAgentWallet } from "@/lib/hyperliquid/signing/use-agent-wallet";
-import { toHyperliquidWallet } from "@/lib/hyperliquid/wallet";
 
 export interface HyperliquidClients {
 	info: InfoClient;
@@ -16,10 +17,10 @@ export interface HyperliquidClients {
 }
 
 export function useHyperliquidClients(): HyperliquidClients {
-	const { info, subscription } = useHyperliquid();
+	const { info, subscription, env } = useHyperliquid();
 	const { signer, isReady: agentReady } = useAgentWallet();
 	const { address } = useConnection();
-	const { data: walletClient } = useWalletClient();
+	const { wallets } = useWallets();
 
 	const trading = useMemo(() => {
 		if (!signer || !agentReady) return null;
@@ -27,11 +28,32 @@ export function useHyperliquidClients(): HyperliquidClients {
 	}, [signer, agentReady]);
 
 	const user = useMemo(() => {
-		if (!walletClient || !address) return null;
-		const wallet = toHyperliquidWallet(walletClient, address);
-		if (!wallet) return null;
-		return createExchangeClient(wallet);
-	}, [walletClient, address]);
+		if (!address) return null;
+		const privyWallet = wallets.find((w) => w.address.toLowerCase() === address.toLowerCase());
+		if (!privyWallet) return null;
+		const chain = env === "Testnet" ? arbitrumSepolia : arbitrum;
+		return createExchangeClient({
+			address,
+			// Required for SDK to detect this as AbstractViemJsonRpcAccount and call getChainId()
+			// for signatureChainId. Without these, SDK falls back to chainId 1 (mainnet), which
+			// causes switchChain(1) and Hyperliquid signature validation to fail.
+			getAddresses: async () => [address],
+			getChainId: async () => chain.id,
+			signTypedData: async (params) => {
+				const provider = await privyWallet.getEthereumProvider();
+				// Switch chain only if needed — avoids redundant popups on subsequent signing steps
+				// MetaMask v11+ rejects eth_signTypedData_v4 if domain chainId ≠ active chain
+				const currentChainId = parseInt((await provider.request({ method: "eth_chainId" })) as string, 16);
+				if (currentChainId !== chain.id) {
+					await privyWallet.switchChain(chain.id);
+				}
+				return provider.request({
+					method: "eth_signTypedData_v4",
+					params: [address, JSON.stringify(params)],
+				}) as Promise<`0x${string}`>;
+			},
+		});
+	}, [address, wallets, env]);
 
 	return {
 		info,

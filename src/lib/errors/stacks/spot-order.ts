@@ -1,9 +1,5 @@
 import { noBalanceValidator } from "../definitions/balance";
-import {
-	signerNotReadyValidator,
-	walletLoadingValidator,
-	walletNotConnectedValidator,
-} from "../definitions/connection";
+import { signerNotReadyValidator, walletNotConnectedValidator } from "../definitions/connection";
 import { marketNotReadyValidator, noMarketValidator } from "../definitions/market";
 import {
 	insufficientBaseBalanceValidator,
@@ -20,7 +16,6 @@ import { runValidators, type ValidationError, type Validator } from "../types";
 
 export interface SpotOrderContext extends SpotInputContext, SpotBalanceContext {
 	isConnected: boolean;
-	isWalletLoading: boolean;
 	isReadyToTrade: boolean;
 	needsAgentApproval: boolean;
 	availableBalance: number;
@@ -37,7 +32,6 @@ export interface SpotOrderValidationResult {
 
 const spotOrderValidators: Validator<SpotOrderContext>[] = [
 	walletNotConnectedValidator,
-	walletLoadingValidator,
 	noBalanceValidator,
 	noMarketValidator,
 	marketNotReadyValidator,

@@ -2,7 +2,7 @@ import { t } from "@lingui/core/macro";
 import { SpinnerGapIcon } from "@phosphor-icons/react";
 import { useLogin } from "@privy-io/react-auth";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
-import { useConnection, useSwitchChain, useWalletClient } from "wagmi";
+import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_QUOTE_TOKEN, isUsdStablecoin, TWAP_MINUTES_MAX, TWAP_MINUTES_MIN } from "@/config/constants";
 import { APPROVAL_ERROR_DISMISS_MS } from "@/config/time";
@@ -13,7 +13,6 @@ import { buildOrderPlan } from "@/domain/trade/order-intent";
 import { formatPriceForOrder, formatSizeForOrder, throwIfResponseError } from "@/domain/trade/orders";
 import { useFeeRates } from "@/hooks/trade/use-fee-rates";
 import { useOrderEntryData } from "@/hooks/trade/use-order-entry-data";
-import { cn } from "@/lib/cn";
 import { useAgentRegistration, useAgentStatus, useSelectedMarketInfo, useUserPositions } from "@/lib/hyperliquid";
 import { useExchangeOrder } from "@/lib/hyperliquid/hooks/exchange/useExchangeOrder";
 import { useExchangeTwapOrder } from "@/lib/hyperliquid/hooks/exchange/useExchangeTwapOrder";
@@ -67,10 +66,7 @@ export function TradePanel() {
 	const tpSlId = useId();
 
 	const { address, isConnected } = useConnection();
-	const { data: walletClient, isLoading: isWalletLoading, error: walletClientError } = useWalletClient();
-	const switchChain = useSwitchChain();
 	const { login } = useLogin();
-	const needsChainSwitch = !!walletClientError && walletClientError.message.includes("does not match");
 
 	const { data: market } = useSelectedMarketInfo();
 
@@ -201,11 +197,10 @@ export function TradePanel() {
 
 	const needsAgentApproval = !isAgentReady;
 	const isReadyToTrade = isAgentReady;
-	const canApprove = !!walletClient && !!address;
+	const canApprove = !!address;
 
 	const baseInput = {
 		isConnected,
-		isWalletLoading,
 		availableBalance,
 		hasMarket: !!market,
 		hasAssetIndex: typeof market?.assetId === "number",
@@ -421,9 +416,6 @@ export function TradePanel() {
 
 	const buttonContent = useButtonContent({
 		isConnected,
-		needsChainSwitch,
-		isSwitchingChain: switchChain.isPending,
-		switchChain: (chainId) => switchChain.mutate({ chainId }),
 		availableBalance,
 		validation,
 		isAgentLoading,
@@ -501,7 +493,7 @@ export function TradePanel() {
 						size="lg"
 						onClick={buttonContent.action}
 						disabled={buttonContent.disabled}
-						className={cn("w-full", !isConnected && "text-primary-text")}
+						className="w-full"
 						aria-label={buttonContent.text}
 					>
 						{(isSubmitting || isRegistering) && <SpinnerGapIcon className="size-3 animate-spin" />}

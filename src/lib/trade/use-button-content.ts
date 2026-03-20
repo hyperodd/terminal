@@ -1,14 +1,10 @@
 import { t } from "@lingui/core/macro";
 import { useMemo } from "react";
-import { ARBITRUM_CHAIN_ID } from "@/config/contracts";
 import type { RegistrationStatus } from "@/lib/hyperliquid/signing/types";
 import type { ButtonContent, Side, ValidationResult } from "@/lib/trade/types";
 
 interface ButtonContentInput {
 	isConnected: boolean;
-	needsChainSwitch: boolean;
-	isSwitchingChain: boolean;
-	switchChain: (chainId: number) => void;
 	availableBalance: number;
 	validation: ValidationResult;
 	isAgentLoading: boolean;
@@ -52,14 +48,6 @@ export function useButtonContent(input: ButtonContentInput): ButtonContent {
 				variant: "cyan",
 			};
 		}
-		if (input.needsChainSwitch) {
-			return {
-				text: input.isSwitchingChain ? t`Switching...` : t`Switch to Arbitrum`,
-				action: () => input.switchChain(ARBITRUM_CHAIN_ID),
-				disabled: input.isSwitchingChain,
-				variant: "cyan",
-			};
-		}
 		if (input.validation.needsApproval) {
 			return {
 				text: registerText,
@@ -84,9 +72,6 @@ export function useButtonContent(input: ButtonContentInput): ButtonContent {
 		};
 	}, [
 		input.isConnected,
-		input.needsChainSwitch,
-		input.isSwitchingChain,
-		input.switchChain,
 		input.availableBalance,
 		input.validation.needsApproval,
 		input.validation.canSubmit,
