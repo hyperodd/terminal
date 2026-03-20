@@ -1,13 +1,12 @@
 import { CaretDownIcon, SpinnerGapIcon, TrendDownIcon, TrendUpIcon } from "@phosphor-icons/react";
 import { useLogin } from "@privy-io/react-auth";
 import { useEffect, useMemo, useState } from "react";
-import { useConnection, useSwitchChain, useWalletClient } from "wagmi";
+import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Slider, type SliderMark } from "@/components/ui/slider";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FALLBACK_VALUE_PLACEHOLDER, ORDER_MIN_NOTIONAL_USD, UI_TEXT } from "@/config/constants";
-import { ARBITRUM_CHAIN_ID } from "@/config/contracts";
 import { getBaseQuoteFromPairName } from "@/domain/market";
 import { formatPriceForOrder, formatSizeForOrder, throwIfResponseError } from "@/domain/trade/orders";
 import { useAccountBalances } from "@/hooks/trade/use-account-balances";
@@ -46,11 +45,7 @@ interface MobileTradeViewProps {
 
 export function MobileTradeView({ className }: MobileTradeViewProps) {
 	const { address, isConnected } = useConnection();
-	const { data: walletClient, isLoading: isWalletLoading, error: walletClientError } = useWalletClient();
-	const { switchChain, isPending: isSwitchingChain } = useSwitchChain();
 	const { login } = useLogin();
-
-	const needsChainSwitch = !!walletClientError && walletClientError.message.includes("does not match");
 
 	const { data: market } = useSelectedMarketInfo();
 	const { scope } = useExchangeScope();
@@ -68,7 +63,7 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 	const { isReady: isAgentApproved } = useAgentStatus();
 	const { register: registerAgent, status: registerStatus } = useAgentRegistration();
 
-	const canApprove = !!walletClient && !!address;
+	const canApprove = !!address;
 	const isRegistering =
 		registerStatus === "switching_account_mode" ||
 		registerStatus === "approving_fee" ||
@@ -149,14 +144,12 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 		return side === "buy" ? price - buffer : price + buffer;
 	})();
 
-	const canSign = isAgentApproved || !!walletClient;
+	const canSign = isAgentApproved || !!address;
 
 	const validation = useMemo(() => {
 		const errors: string[] = [];
 		if (!isConnected)
 			return { valid: false, errors: [ORDER_TEXT.ERROR_NOT_CONNECTED], canSubmit: false, needsApproval: false };
-		if (isWalletLoading)
-			return { valid: false, errors: [ORDER_TEXT.ERROR_LOADING_WALLET], canSubmit: false, needsApproval: false };
 		if (availableBalance <= 0)
 			return { valid: false, errors: [ORDER_TEXT.ERROR_NO_BALANCE], canSubmit: false, needsApproval: false };
 		if (!market) return { valid: false, errors: [ORDER_TEXT.ERROR_NO_MARKET], canSubmit: false, needsApproval: false };
@@ -174,7 +167,6 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 		return { valid: errors.length === 0, errors, canSubmit: errors.length === 0, needsApproval: false };
 	}, [
 		isConnected,
-		isWalletLoading,
 		availableBalance,
 		market,
 		isMarketExecution,
@@ -217,8 +209,6 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 	const handleMarkPriceClick = () => {
 		if (markPx > 0) setLimitPriceInput(markPx.toFixed(szDecimalsToPriceDecimals(market?.szDecimals ?? 4)));
 	};
-
-	const handleSwitchChain = () => switchChain({ chainId: ARBITRUM_CHAIN_ID });
 
 	const handleApprove = async () => {
 		if (isRegistering) return;
@@ -288,13 +278,6 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 				text: ORDER_TEXT.BUTTON_CONNECT,
 				action: login,
 				disabled: false,
-				variant: "cyan" as const,
-			};
-		if (needsChainSwitch)
-			return {
-				text: isSwitchingChain ? ORDER_TEXT.BUTTON_SWITCHING : ORDER_TEXT.BUTTON_SWITCH_CHAIN,
-				action: handleSwitchChain,
-				disabled: isSwitchingChain,
 				variant: "cyan" as const,
 			};
 		if (availableBalance <= 0)

@@ -205,8 +205,8 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Builders"
-msgstr ""
+#~ msgid "Builders"
+#~ msgstr ""
 
 #: src/components/trade/positions/twap-tab.tsx
 msgid "buy"
@@ -793,8 +793,8 @@ msgstr "逐仓"
 #~ msgstr "延迟:"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Leaderboard"
-msgstr "排行榜"
+#~ msgid "Leaderboard"
+#~ msgstr "排行榜"
 
 #: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Learn more"
@@ -1298,8 +1298,8 @@ msgstr "盈亏"
 #~ msgstr ""
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Portfolio"
-msgstr "投资组合"
+#~ msgid "Portfolio"
+#~ msgstr "投资组合"
 
 #: src/components/trade/positions/funding-tab.tsx
 #: src/components/trade/tradebox/trade-form-fields.tsx
@@ -1680,7 +1680,6 @@ msgstr "已按 {0} 排序"
 #~ msgid "spot"
 #~ msgstr "现货"
 
-#: src/components/trade/header/top-nav.tsx
 #: src/components/trade/positions/balances-tab.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
@@ -1701,8 +1700,8 @@ msgid "Spread"
 msgstr "价差"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Staking"
-msgstr "质押"
+#~ msgid "Staking"
+#~ msgstr "质押"
 
 #: src/lib/errors/definitions/scale.ts
 msgid "Start and end must differ"
@@ -2059,8 +2058,8 @@ msgstr "美元价值"
 #~ msgstr "价值"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Vaults"
-msgstr "金库"
+#~ msgid "Vaults"
+#~ msgstr "金库"
 
 #: src/lib/trade/use-button-content.ts
 msgid "Verifying..."

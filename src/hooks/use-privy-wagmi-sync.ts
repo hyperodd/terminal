@@ -1,5 +1,5 @@
 import { usePrivy } from "@privy-io/react-auth";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useConnection, useDisconnect } from "wagmi";
 
 /**
@@ -11,16 +11,25 @@ import { useConnection, useDisconnect } from "wagmi";
  *
  * This hook detects that mismatch once Privy is ready and force-disconnects
  * wagmi so both layers agree on the unauthenticated state.
+ *
+ * The check runs only when Privy becomes ready (once on init), not reactively
+ * on auth/connection changes — otherwise it would disconnect wagmi mid-login
+ * before Privy finishes the wallet authentication handshake.
  */
 export function usePrivyWagmiSync() {
 	const { ready, authenticated } = usePrivy();
 	const { isConnected } = useConnection();
-	const { disconnect } = useDisconnect();
+	const { mutate: disconnect } = useDisconnect();
+
+	const authenticatedRef = useRef(authenticated);
+	const isConnectedRef = useRef(isConnected);
+	authenticatedRef.current = authenticated;
+	isConnectedRef.current = isConnected;
 
 	useEffect(() => {
 		if (!ready) return;
-		if (!authenticated && isConnected) {
+		if (!authenticatedRef.current && isConnectedRef.current) {
 			disconnect();
 		}
-	}, [ready, authenticated, isConnected, disconnect]);
+	}, [ready, disconnect]);
 }

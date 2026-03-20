@@ -2,7 +2,7 @@ import { t } from "@lingui/core/macro";
 import { SpinnerGapIcon } from "@phosphor-icons/react";
 import { useLogin } from "@privy-io/react-auth";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
-import { useConnection, useSwitchChain, useWalletClient } from "wagmi";
+import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_QUOTE_TOKEN, isUsdStablecoin, TWAP_MINUTES_MAX, TWAP_MINUTES_MIN } from "@/config/constants";
 import { APPROVAL_ERROR_DISMISS_MS } from "@/config/time";
@@ -66,10 +66,7 @@ export function TradePanel() {
 	const tpSlId = useId();
 
 	const { address, isConnected } = useConnection();
-	const { data: walletClient, isLoading: isWalletLoading, error: walletClientError } = useWalletClient();
-	const switchChain = useSwitchChain();
 	const { login } = useLogin();
-	const needsChainSwitch = !!walletClientError && walletClientError.message.includes("does not match");
 
 	const { data: market } = useSelectedMarketInfo();
 
@@ -200,11 +197,11 @@ export function TradePanel() {
 
 	const needsAgentApproval = !isAgentReady;
 	const isReadyToTrade = isAgentReady;
-	const canApprove = !!walletClient && !!address;
+	const canApprove = !!address;
 
 	const baseInput = {
 		isConnected,
-		isWalletLoading,
+		isWalletLoading: false,
 		availableBalance,
 		hasMarket: !!market,
 		hasAssetIndex: typeof market?.assetId === "number",
@@ -420,9 +417,9 @@ export function TradePanel() {
 
 	const buttonContent = useButtonContent({
 		isConnected,
-		needsChainSwitch,
-		isSwitchingChain: switchChain.isPending,
-		switchChain: (chainId) => switchChain.mutate({ chainId }),
+		needsChainSwitch: false,
+		isSwitchingChain: false,
+		switchChain: () => {},
 		availableBalance,
 		validation,
 		isAgentLoading,
