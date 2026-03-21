@@ -19,7 +19,7 @@ import { cn } from "@/lib/cn";
 import { useFaucetClaim } from "@/lib/faucet/use-faucet-claim";
 import { useFaucetModalActions, useFaucetModalOpen } from "@/stores/use-global-modal-store";
 
-const TURNSTILE_SITE_KEY = "0x4AAAAAACFqV43jRR_HRsJ2";
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
 interface StepProps {
 	label: string;
