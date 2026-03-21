@@ -1,6 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { SpinnerGapIcon } from "@phosphor-icons/react";
-import { useLogin } from "@privy-io/react-auth";
+import { useLogin, usePrivy } from "@privy-io/react-auth";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -67,6 +67,7 @@ export function TradePanel() {
 
 	const { address, isConnected } = useConnection();
 	const { login } = useLogin();
+	const { authenticated } = usePrivy();
 
 	const { data: market } = useSelectedMarketInfo();
 
@@ -423,7 +424,7 @@ export function TradePanel() {
 		canApprove,
 		side,
 		isSubmitting,
-		onConnectWallet: login,
+		onConnectWallet: () => !authenticated && login(),
 		onDeposit: () => openDepositModal("deposit"),
 		onRegister: handleRegister,
 		onSubmit: handleSubmit,

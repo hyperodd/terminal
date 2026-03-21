@@ -17,6 +17,14 @@ msgstr ""
 msgid "% filled"
 msgstr "% 已成交"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "$5+ USDC balance"
+msgstr ""
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "24 hours"
+msgstr ""
+
 #: src/components/trade/market-overview.tsx
 msgid "24H"
 msgstr ""
@@ -107,6 +115,7 @@ msgstr ""
 #: src/components/trade/positions/send-dialog.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Amount"
 msgstr ""
 
@@ -226,6 +235,7 @@ msgstr "买入"
 #: src/components/trade/positions/twap-tab.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
 #: src/components/trade/tradebox/margin-mode-dialog.tsx
 msgid "Cancel"
@@ -276,6 +286,22 @@ msgstr ""
 #: src/components/trade/components/global-settings-dialog.tsx
 msgid "Chart"
 msgstr "图表"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Checking balance"
+msgstr ""
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claim 1,000 USDH"
+msgstr ""
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claim failed"
+msgstr ""
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claiming USDH"
+msgstr ""
 
 #: src/components/trade/positions/position-actions-dropdown.tsx
 #: src/components/ui/dialog.tsx
@@ -335,6 +361,10 @@ msgstr "连接钱包"
 msgid "Connect wallet to view account"
 msgstr "连接钱包查看账户"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Connect your wallet to claim USDH"
+msgstr ""
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Connect your wallet to register a builder code"
 #~ msgstr ""
@@ -390,6 +420,10 @@ msgstr ""
 #: src/components/trade/header/user-menu.tsx
 msgid "Connecting..."
 msgstr "连接中..."
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Cooldown"
+msgstr ""
 
 #: src/hooks/ui/use-copy-to-clipboard.ts
 msgid "Copied to clipboard"
@@ -504,6 +538,7 @@ msgstr "显示移动端侧边栏。"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Done"
 msgstr ""
 
@@ -663,6 +698,16 @@ msgstr ""
 #: src/components/trade/order-entry/order-entry-panel.tsx
 #~ msgid "Failed to switch margin mode"
 #~ msgstr ""
+
+#: src/components/trade/header/top-nav.tsx
+#: src/components/trade/tradebox/account-panel.tsx
+#: src/components/trade/tradebox/account-panel.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Faucet"
+msgstr ""
 
 #: src/components/trade/positions/history-tab.tsx
 msgid "Fee"
@@ -1394,12 +1439,17 @@ msgstr ""
 msgid "Remove from favorites"
 msgstr "从收藏中移除"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Requirement"
+msgstr ""
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Requirements:"
 #~ msgstr ""
 
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
 msgid "Retry"
 msgstr ""
@@ -1515,6 +1565,10 @@ msgstr ""
 
 #: src/components/trade/tradebox/deposit-modal.tsx
 msgid "sent to Hyperliquid"
+msgstr ""
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "sent to your account"
 msgstr ""
 
 #: src/components/trade/tradebox/trade-form-fields.tsx
@@ -2051,6 +2105,10 @@ msgstr "实时更新"
 msgid "USD Value"
 msgstr "美元价值"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "USDH claimed!"
+msgstr ""
+
 #: src/components/trade/positions/positions-tab.tsx
 #~ msgid "Value"
 #~ msgstr "价值"
@@ -2058,6 +2116,10 @@ msgstr "美元价值"
 #: src/components/trade/header/top-nav.tsx
 #~ msgid "Vaults"
 #~ msgstr "金库"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Verifying captcha"
+msgstr ""
 
 #: src/lib/trade/use-button-content.ts
 msgid "Verifying..."
@@ -2092,6 +2154,7 @@ msgstr "等待成交记录..."
 #~ msgstr "钱包客户端未就绪"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Wallet not connected"
 msgstr "钱包未连接"
 

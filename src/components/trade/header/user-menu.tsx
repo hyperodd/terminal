@@ -46,7 +46,7 @@ function CopyAddressMenuItem({ address }: { address: string }) {
 
 export function UserMenu() {
 	const { address, isConnected, isConnecting } = useConnection();
-	const { authenticated } = usePrivy();
+	const { authenticated, ready } = usePrivy();
 	const { login } = useLogin();
 	const { logout } = useLogout();
 	const { disconnect } = useDisconnect();
@@ -65,7 +65,7 @@ export function UserMenu() {
 		}
 	}
 
-	if (!mounted || isConnecting) {
+	if (!mounted || !ready || isConnecting) {
 		return (
 			<Button variant="text" size="sm" className="h-7 gap-1.5 text-3xs uppercase tracking-wider" disabled>
 				<SpinnerGapIcon className="size-3 animate-spin" />
@@ -76,7 +76,7 @@ export function UserMenu() {
 
 	if (!isConnected) {
 		return (
-			<Button size="md" variant="outlined" onClick={login}>
+			<Button size="md" variant="outlined" onClick={() => !authenticated && login()}>
 				<WalletIcon className="size-4" />
 				<Trans>Connect Wallet</Trans>
 			</Button>

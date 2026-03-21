@@ -8,6 +8,7 @@ type GlobalModal =
 	| { type: "settings" }
 	| { type: "swap"; fromToken: string; toToken?: string }
 	| { type: "commandMenu" }
+	| { type: "faucet" }
 	| null;
 
 interface DepositActions {
@@ -31,12 +32,18 @@ interface CommandMenuActions {
 	close: () => void;
 }
 
+interface FaucetActions {
+	open: () => void;
+	close: () => void;
+}
+
 interface GlobalModalState {
 	modal: GlobalModal;
 	depositActions: DepositActions;
 	settingsActions: SettingsActions;
 	swapActions: SwapActions;
 	commandMenuActions: CommandMenuActions;
+	faucetActions: FaucetActions;
 }
 
 const useGlobalModalStore = create<GlobalModalState>((set) => {
@@ -61,6 +68,10 @@ const useGlobalModalStore = create<GlobalModalState>((set) => {
 			open: () => set({ modal: { type: "commandMenu" } }),
 			close,
 		},
+		faucetActions: {
+			open: () => set({ modal: { type: "faucet" } }),
+			close,
+		},
 	};
 });
 
@@ -81,3 +92,6 @@ export const useSwapModalActions = () => useGlobalModalStore((s) => s.swapAction
 
 export const useCommandMenuOpen = () => useGlobalModalStore((s) => s.modal?.type === "commandMenu");
 export const useCommandMenuActions = () => useGlobalModalStore((s) => s.commandMenuActions);
+
+export const useFaucetModalOpen = () => useGlobalModalStore((s) => s.modal?.type === "faucet");
+export const useFaucetModalActions = () => useGlobalModalStore((s) => s.faucetActions);

@@ -1,5 +1,5 @@
 import { t } from "@lingui/core/macro";
-import { DownloadSimpleIcon, UploadSimpleIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, DropIcon, UploadSimpleIcon } from "@phosphor-icons/react";
 import { useMemo, useState } from "react";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,9 @@ import { useAccountBalances } from "@/hooks/trade/use-account-balances";
 import { cn } from "@/lib/cn";
 import { formatPercent, formatToken, formatUSD } from "@/lib/format";
 import { getValueColorClass, toNumberOrZero } from "@/lib/trade/numbers";
-import { useDepositModalActions } from "@/stores/use-global-modal-store";
+import { useDepositModalActions, useFaucetModalActions } from "@/stores/use-global-modal-store";
+
+const isTestnet = import.meta.env.VITE_HYPERLIQUID_TESTNET === "true";
 
 type SummaryRow = {
 	label: string;
@@ -21,6 +23,7 @@ type SummaryRow = {
 export function AccountPanel() {
 	const [activeTab, setActiveTab] = useState("perps");
 	const { open: openDepositModal } = useDepositModalActions();
+	const { open: openFaucetModal } = useFaucetModalActions();
 
 	const { isConnected } = useConnection();
 	const { perpSummary, perpPositions, spotBalances } = useAccountBalances();
@@ -264,10 +267,17 @@ export function AccountPanel() {
 									<UploadSimpleIcon className="size-4" />
 									{t`Withdraw`}
 								</Button>
-								<Button variant="outlined" onClick={() => openDepositModal("deposit")} aria-label={t`Deposit`}>
-									<DownloadSimpleIcon className="size-4" />
-									{t`Deposit`}
-								</Button>
+								{isTestnet ? (
+									<Button variant="outlined" onClick={openFaucetModal} aria-label={t`Faucet`}>
+										<DropIcon className="size-4" />
+										{t`Faucet`}
+									</Button>
+								) : (
+									<Button variant="outlined" onClick={() => openDepositModal("deposit")} aria-label={t`Deposit`}>
+										<DownloadSimpleIcon className="size-4" />
+										{t`Deposit`}
+									</Button>
+								)}
 							</div>
 						)}
 					</div>

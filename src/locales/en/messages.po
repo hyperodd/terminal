@@ -17,6 +17,14 @@ msgstr ""
 msgid "% filled"
 msgstr "% filled"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "$5+ USDC balance"
+msgstr "$5+ USDC balance"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "24 hours"
+msgstr "24 hours"
+
 #: src/components/trade/market-overview.tsx
 msgid "24H"
 msgstr "24H"
@@ -107,6 +115,7 @@ msgstr "All cross positions share the same cross margin as collateral. In the ev
 #: src/components/trade/positions/send-dialog.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Amount"
 msgstr "Amount"
 
@@ -226,6 +235,7 @@ msgstr "Buy"
 #: src/components/trade/positions/twap-tab.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
 #: src/components/trade/tradebox/margin-mode-dialog.tsx
 msgid "Cancel"
@@ -276,6 +286,22 @@ msgstr "Change leverage"
 #: src/components/trade/components/global-settings-dialog.tsx
 msgid "Chart"
 msgstr "Chart"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Checking balance"
+msgstr "Checking balance"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claim 1,000 USDH"
+msgstr "Claim 1,000 USDH"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claim failed"
+msgstr "Claim failed"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claiming USDH"
+msgstr "Claiming USDH"
 
 #: src/components/trade/positions/position-actions-dropdown.tsx
 #: src/components/ui/dialog.tsx
@@ -335,6 +361,10 @@ msgstr "Connect Wallet"
 msgid "Connect wallet to view account"
 msgstr "Connect wallet to view account"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Connect your wallet to claim USDH"
+msgstr "Connect your wallet to claim USDH"
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Connect your wallet to register a builder code"
 #~ msgstr "Connect your wallet to register a builder code"
@@ -390,6 +420,10 @@ msgstr "Connecting"
 #: src/components/trade/header/user-menu.tsx
 msgid "Connecting..."
 msgstr "Connecting..."
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Cooldown"
+msgstr "Cooldown"
 
 #: src/hooks/ui/use-copy-to-clipboard.ts
 msgid "Copied to clipboard"
@@ -504,6 +538,7 @@ msgstr "Displays the mobile sidebar."
 
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Done"
 msgstr "Done"
 
@@ -663,6 +698,16 @@ msgstr "Failed to reverse position"
 #: src/components/trade/order-entry/order-entry-panel.tsx
 #~ msgid "Failed to switch margin mode"
 #~ msgstr "Failed to switch margin mode"
+
+#: src/components/trade/header/top-nav.tsx
+#: src/components/trade/tradebox/account-panel.tsx
+#: src/components/trade/tradebox/account-panel.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Faucet"
+msgstr "Faucet"
 
 #: src/components/trade/positions/history-tab.tsx
 msgid "Fee"
@@ -1398,12 +1443,17 @@ msgstr "Remove {displayName} from favorites"
 msgid "Remove from favorites"
 msgstr "Remove from favorites"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Requirement"
+msgstr "Requirement"
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Requirements:"
 #~ msgstr "Requirements:"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
 msgid "Retry"
 msgstr "Retry"
@@ -1520,6 +1570,10 @@ msgstr "Sending..."
 #: src/components/trade/tradebox/deposit-modal.tsx
 msgid "sent to Hyperliquid"
 msgstr "sent to Hyperliquid"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "sent to your account"
+msgstr "sent to your account"
 
 #: src/components/trade/tradebox/trade-form-fields.tsx
 #~ msgid "Set {p}%"
@@ -2059,6 +2113,10 @@ msgstr "Updated live"
 msgid "USD Value"
 msgstr "USD Value"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "USDH claimed!"
+msgstr "USDH claimed!"
+
 #: src/components/trade/positions/positions-tab.tsx
 #~ msgid "Value"
 #~ msgstr "Value"
@@ -2066,6 +2124,10 @@ msgstr "USD Value"
 #: src/components/trade/header/top-nav.tsx
 #~ msgid "Vaults"
 #~ msgstr "Vaults"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Verifying captcha"
+msgstr "Verifying captcha"
 
 #: src/lib/trade/use-button-content.ts
 msgid "Verifying..."
@@ -2100,6 +2162,7 @@ msgstr "Waiting for trades..."
 #~ msgstr "Wallet client not ready"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Wallet not connected"
 msgstr "Wallet not connected"
 

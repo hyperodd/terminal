@@ -1,4 +1,11 @@
-import { ArrowSquareOutIcon, CopyIcon, LightningIcon, SignOutIcon, WalletIcon } from "@phosphor-icons/react";
+import {
+	ArrowSquareOutIcon,
+	CopyIcon,
+	LightningIcon,
+	SignOutIcon,
+	SpinnerGapIcon,
+	WalletIcon,
+} from "@phosphor-icons/react";
 import { useLogin, useLogout, usePrivy } from "@privy-io/react-auth";
 import { useConnection, useDisconnect } from "wagmi";
 import { Badge } from "@/components/ui/badge";
@@ -21,7 +28,7 @@ interface MobileAccountViewProps {
 
 export function MobileAccountView({ className }: MobileAccountViewProps) {
 	const { address, isConnected } = useConnection();
-	const { authenticated } = usePrivy();
+	const { authenticated, ready } = usePrivy();
 	const { login } = useLogin();
 	const { logout } = useLogout();
 	const { disconnect } = useDisconnect();
@@ -57,6 +64,17 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 		return sum + (pnl ?? 0);
 	}, 0);
 
+	if (!ready) {
+		return (
+			<div className={cn("flex flex-col h-full min-h-0 bg-surface-execution/20", className)}>
+				<div className="flex-1 flex flex-col items-center justify-center gap-4 p-6">
+					<SpinnerGapIcon className="size-8 animate-spin text-text-600" />
+				</div>
+				<MobileBottomNavSpacer />
+			</div>
+		);
+	}
+
 	if (!isConnected) {
 		return (
 			<div className={cn("flex flex-col h-full min-h-0 bg-surface-execution/20", className)}>
@@ -73,7 +91,7 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 					<Button
 						variant="text"
 						size="none"
-						onClick={login}
+						onClick={() => !authenticated && login()}
 						className={cn(
 							"px-6 py-3 text-base font-semibold rounded-xs",
 							"bg-primary-default/20 border border-primary-default text-primary-default",

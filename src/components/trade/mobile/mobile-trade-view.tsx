@@ -1,5 +1,5 @@
 import { CaretDownIcon, SpinnerGapIcon, TrendDownIcon, TrendUpIcon } from "@phosphor-icons/react";
-import { useLogin } from "@privy-io/react-auth";
+import { useLogin, usePrivy } from "@privy-io/react-auth";
 import { useEffect, useMemo, useState } from "react";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -46,6 +46,7 @@ interface MobileTradeViewProps {
 export function MobileTradeView({ className }: MobileTradeViewProps) {
 	const { address, isConnected } = useConnection();
 	const { login } = useLogin();
+	const { authenticated } = usePrivy();
 
 	const { data: market } = useSelectedMarketInfo();
 	const { scope } = useExchangeScope();
@@ -276,7 +277,7 @@ export function MobileTradeView({ className }: MobileTradeViewProps) {
 		if (!isConnected)
 			return {
 				text: ORDER_TEXT.BUTTON_CONNECT,
-				action: login,
+				action: () => !authenticated && login(),
 				disabled: false,
 				variant: "cyan" as const,
 			};
