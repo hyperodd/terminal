@@ -145,6 +145,9 @@ const config = defineConfig({
         },
       },
       routeRules: {
+        '/api/faucet/**': {
+          proxy: 'https://usdh.com/api/faucet/**',
+        },
         '/assets/**': {
           headers: { 'cache-control': 'public, max-age=31536000, immutable' },
         },
