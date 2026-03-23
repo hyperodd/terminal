@@ -1,5 +1,9 @@
 import { walletLoadingValidator, walletNotConnectedValidator } from "../definitions/connection";
-import { type DepositContext, depositInsufficientBalanceValidator, depositMinAmountValidator } from "../definitions/deposit";
+import {
+	type DepositContext,
+	depositInsufficientBalanceValidator,
+	depositMinAmountValidator,
+} from "../definitions/deposit";
 import { runValidators, type Validator } from "../types";
 
 export interface DepositValidationContext extends DepositContext {

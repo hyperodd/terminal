@@ -1,14 +1,10 @@
 import { t } from "@lingui/core/macro";
 import { useMemo } from "react";
-import { ARBITRUM_CHAIN_ID } from "@/config/contracts";
 import type { RegistrationStatus } from "@/lib/hyperliquid/signing/types";
 import type { ButtonContent, Side, ValidationResult } from "@/lib/trade/types";
 
 interface ButtonContentInput {
 	isConnected: boolean;
-	needsChainSwitch: boolean;
-	isSwitchingChain: boolean;
-	switchChain: (chainId: number) => void;
 	availableBalance: number;
 	validation: ValidationResult;
 	isAgentLoading: boolean;
@@ -25,6 +21,7 @@ interface ButtonContentInput {
 function getRegisterText(isLoading: boolean, registerStatus: RegistrationStatus, canApprove: boolean): string {
 	if (isLoading) return t`Loading...`;
 	if (!canApprove) return t`Loading...`;
+	if (registerStatus === "switching_account_mode") return t`Sign in wallet...`;
 	if (registerStatus === "approving_fee" || registerStatus === "approving_agent") return t`Sign in wallet...`;
 	if (registerStatus === "verifying") return t`Verifying...`;
 	return t`Enable Trading`;
@@ -32,6 +29,7 @@ function getRegisterText(isLoading: boolean, registerStatus: RegistrationStatus,
 
 export function useButtonContent(input: ButtonContentInput): ButtonContent {
 	const isRegistering =
+		input.registerStatus === "switching_account_mode" ||
 		input.registerStatus === "approving_fee" ||
 		input.registerStatus === "approving_agent" ||
 		input.registerStatus === "verifying";
@@ -47,14 +45,6 @@ export function useButtonContent(input: ButtonContentInput): ButtonContent {
 				text: t`Connect Wallet`,
 				action: input.onConnectWallet,
 				disabled: false,
-				variant: "cyan",
-			};
-		}
-		if (input.needsChainSwitch) {
-			return {
-				text: input.isSwitchingChain ? t`Switching...` : t`Switch to Arbitrum`,
-				action: () => input.switchChain(ARBITRUM_CHAIN_ID),
-				disabled: input.isSwitchingChain,
 				variant: "cyan",
 			};
 		}
@@ -82,9 +72,6 @@ export function useButtonContent(input: ButtonContentInput): ButtonContent {
 		};
 	}, [
 		input.isConnected,
-		input.needsChainSwitch,
-		input.isSwitchingChain,
-		input.switchChain,
 		input.availableBalance,
 		input.validation.needsApproval,
 		input.validation.canSubmit,

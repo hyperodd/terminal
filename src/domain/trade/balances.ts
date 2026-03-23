@@ -1,5 +1,5 @@
 import Big from "big.js";
-import { DEFAULT_QUOTE_TOKEN } from "@/config/constants";
+import { DEFAULT_QUOTE_TOKEN, isUsdStablecoin } from "@/config/constants";
 import type { SpotBalance } from "@/hooks/trade/use-account-balances";
 import type { UnifiedMarketInfo } from "@/lib/hyperliquid/hooks/useMarketsInfo";
 import { toBig, toSafeBig } from "@/lib/trade/numbers";
@@ -57,6 +57,20 @@ export function getAvailableFromTotals(
 	const t = toSafeBig(total);
 	const h = toSafeBig(hold);
 	return Math.max(0, t.minus(h).toNumber());
+}
+
+/**
+ * Sum of available (total - hold) for all USD stablecoins (USDC, USDH).
+ * Used as unified-account collateral for main-dex perps when perp clearinghouse shows zero.
+ */
+export function getUnifiedStablecoinAvailable(spotBalances: SpotBalance[] | null | undefined): number {
+	if (!spotBalances?.length) return 0;
+	let sum = 0;
+	for (const b of spotBalances) {
+		if (!isUsdStablecoin(b.coin)) continue;
+		sum += getAvailableFromTotals(b.total, b.hold);
+	}
+	return sum;
 }
 
 export function getSpotBalanceData(
@@ -136,7 +150,7 @@ export function getBalanceRows(
 
 		const available = getAvailableFromTotals(balance.total, balance.hold);
 		const entryNtl = balance.entryNtl ?? "0";
-		const usdValue = balance.coin === DEFAULT_QUOTE_TOKEN ? balance.total : entryNtl;
+		const usdValue = isUsdStablecoin(balance.coin) ? balance.total : entryNtl;
 
 		rows.push({
 			asset: balance.coin,

@@ -1,0 +1,15 @@
+import type { PrivyClientConfig } from "@privy-io/react-auth";
+import { arbitrum, arbitrumSepolia } from "wagmi/chains";
+
+export const privyConfig: PrivyClientConfig = {
+	loginMethods: ["google", "wallet"],
+	embeddedWallets: {
+		ethereum: {
+			createOnLogin: "users-without-wallets",
+		},
+	},
+	appearance: {
+		showWalletLoginFirst: false,
+	},
+	supportedChains: [arbitrum, arbitrumSepolia],
+};

@@ -45,7 +45,7 @@ interface Props {
 	theme?: "light" | "dark";
 }
 
-export function KlineChart({ symbol = "", theme = "dark" }: Props) {
+export function KlineChart({ symbol = "", theme: _theme = "dark" }: Props) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const chartRef = useRef<Chart | null>(null);
 	const [activeInterval, setActiveInterval] = useState(DEFAULT_INTERVAL);
@@ -124,7 +124,7 @@ export function KlineChart({ symbol = "", theme = "dark" }: Props) {
 			chartRef.current = null;
 			dispose(container);
 		};
-	}, [symbol, theme, activeInterval, activeChartType]);
+	}, [symbol, activeInterval, activeChartType]);
 
 	const candleData = useSubCandle({ coin: symbol, interval: activeInterval.candleInterval }, { enabled: !!symbol });
 

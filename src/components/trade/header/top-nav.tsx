@@ -1,32 +1,25 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { DownloadSimpleIcon, GearIcon, TerminalIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, DropIcon, GearIcon, TerminalIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { useExchangeScope } from "@/providers/exchange-scope";
-import { useDepositModalActions, useSettingsDialogActions } from "@/stores/use-global-modal-store";
+import {
+	useDepositModalActions,
+	useFaucetModalActions,
+	useSettingsDialogActions,
+} from "@/stores/use-global-modal-store";
+
+const isTestnet = import.meta.env.VITE_HYPERLIQUID_TESTNET === "true";
+
 import { ThemeToggle } from "./theme-toggle";
 import { UserMenu } from "./user-menu";
 
 const SCOPE_NAV_ITEMS = [
 	{ scope: "all" as const, label: <Trans>All</Trans>, to: "/", activeClass: "text-text-950 font-medium" },
 	{ scope: "perp" as const, label: <Trans>Perp</Trans>, to: "/perp", activeClass: "text-scope-perp font-medium" },
-	{ scope: "spot" as const, label: <Trans>Spot</Trans>, to: "/spot", activeClass: "text-scope-spot font-medium" },
-	{
-		scope: "builders-perp" as const,
-		label: <Trans>Builders</Trans>,
-		to: "/builders-perp",
-		activeClass: "text-scope-builders font-medium",
-	},
-] as const;
-
-const STATIC_NAV_ITEMS = [
-	{ key: "vaults", label: <Trans>Vaults</Trans> },
-	{ key: "portfolio", label: <Trans>Portfolio</Trans> },
-	{ key: "staking", label: <Trans>Staking</Trans> },
-	{ key: "leaderboard", label: <Trans>Leaderboard</Trans> },
 ] as const;
 
 function getScopeAccentClass(scope: string): string {
@@ -44,6 +37,7 @@ function getScopeAccentClass(scope: string): string {
 
 export function TopNav() {
 	const { open: openDepositModal } = useDepositModalActions();
+	const { open: openFaucetModal } = useFaucetModalActions();
 	const { open: openSettingsDialog } = useSettingsDialogActions();
 	const { isConnected } = useConnection();
 	const { scope } = useExchangeScope();
@@ -81,32 +75,30 @@ export function TopNav() {
 							{item.label}
 						</Link>
 					))}
-					<div className="h-4 w-px bg-border-200 mx-1" />
-					{STATIC_NAV_ITEMS.map((item) => (
-						<button
-							key={item.key}
-							type="button"
-							disabled
-							className="px-2.5 py-1.5 text-text-950/40 cursor-not-allowed"
-							tabIndex={-1}
-						>
-							{item.label}
-						</button>
-					))}
 				</nav>
 			</div>
 
 			<div className="flex items-center gap-2">
-				{isConnected && (
-					<Button
-						variant="outlined"
-						onClick={() => openDepositModal("deposit")}
-						className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
-					>
-						<DownloadSimpleIcon className="size-4" />
-						<Trans>Deposit</Trans>
-					</Button>
-				)}
+				{isConnected &&
+					(isTestnet ? (
+						<Button
+							variant="outlined"
+							onClick={openFaucetModal}
+							className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
+						>
+							<DropIcon className="size-4" />
+							<Trans>Faucet</Trans>
+						</Button>
+					) : (
+						<Button
+							variant="outlined"
+							onClick={() => openDepositModal("deposit")}
+							className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
+						>
+							<DownloadSimpleIcon className="size-4" />
+							<Trans>Deposit</Trans>
+						</Button>
+					))}
 				<UserMenu />
 				<div className="flex items-center gap-1">
 					<ThemeToggle />

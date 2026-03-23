@@ -6,6 +6,7 @@ import { defineConfig, type PluginOption } from 'vite'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 import { lingui } from '@lingui/vite-plugin'
 import { visualizer } from 'rollup-plugin-visualizer'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 const isAnalyze = process.env.ANALYZE === 'true'
 
@@ -71,6 +72,23 @@ const browserOnlyModules: Record<string, string> = {
     export const mock = () => ({});
     export default {};
   `,
+  '@privy-io/react-auth': `
+    import { createElement } from 'react';
+    export const PrivyProvider = ({ children }) => children;
+    export const usePrivy = () => ({ ready: true, authenticated: false, user: null, login: () => {}, logout: async () => {} });
+    export const useLogin = () => ({ login: () => {} });
+    export const useLogout = () => ({ logout: async () => {} });
+    export const useWallets = () => ({ wallets: [], ready: true });
+    export const toViemAccount = async () => null;
+    export default {};
+  `,
+  '@privy-io/wagmi': `
+    import { createElement } from 'react';
+    export const WagmiProvider = ({ children }) => children;
+    export const createConfig = () => ({});
+    export const useSetActiveWallet = () => ({ setActiveWallet: async () => {} });
+    export default {};
+  `,
 }
 
 const ssrStubPlugin = {
@@ -90,7 +108,7 @@ function createManualChunks(id: string) {
     if (id.includes('@radix-ui')) return 'vendor-radix'
     if (id.includes('@tanstack/react-query') || id.includes('@tanstack/react-table') || id.includes('@tanstack/react-virtual')) return 'vendor-tanstack'
     if (id.includes('recharts') || id.includes('d3-')) return 'vendor-charts'
-    if (id.includes('viem') || id.includes('wagmi') || id.includes('@wagmi')) return 'vendor-web3'
+    if (id.includes('viem') || id.includes('wagmi') || id.includes('@wagmi') || id.includes('@privy-io')) return 'vendor-web3'
     if (id.includes('klinecharts')) return 'vendor-klinecharts'
   }
 }
@@ -114,6 +132,7 @@ const config = defineConfig({
     },
   },
   plugins: [
+    nodePolyfills({ include: ['buffer'], globals: { Buffer: true } }),
     ssrStubPlugin,
     nitro({
       compressPublicAssets: true,
@@ -126,6 +145,9 @@ const config = defineConfig({
         },
       },
       routeRules: {
+        '/api/faucet/**': {
+          proxy: 'https://usdh.com/api/faucet/**',
+        },
         '/assets/**': {
           headers: { 'cache-control': 'public, max-age=31536000, immutable' },
         },

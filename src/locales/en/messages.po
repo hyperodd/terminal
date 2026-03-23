@@ -17,6 +17,14 @@ msgstr ""
 msgid "% filled"
 msgstr "% filled"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "$5+ USDC balance"
+msgstr "$5+ USDC balance"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "24 hours"
+msgstr "24 hours"
+
 #: src/components/trade/market-overview.tsx
 msgid "24H"
 msgstr "24H"
@@ -30,8 +38,8 @@ msgstr "24h Change"
 #~ msgstr "24h Price"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "A crypto wallet lets you store and manage your digital assets securely."
-msgstr "A crypto wallet lets you store and manage your digital assets securely."
+#~ msgid "A crypto wallet lets you store and manage your digital assets securely."
+#~ msgstr "A crypto wallet lets you store and manage your digital assets securely."
 
 #: src/components/pages/builder-page.tsx
 #~ msgid "About Builder Codes"
@@ -107,6 +115,7 @@ msgstr "All cross positions share the same cross margin as collateral. In the ev
 #: src/components/trade/positions/send-dialog.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Amount"
 msgstr "Amount"
 
@@ -205,8 +214,8 @@ msgstr "Builder Fee"
 #~ msgstr "Builder must have at least 100 USDC in perps account value"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Builders"
-msgstr "Builders"
+#~ msgid "Builders"
+#~ msgstr "Builders"
 
 #: src/components/trade/positions/twap-tab.tsx
 msgid "buy"
@@ -226,6 +235,7 @@ msgstr "Buy"
 #: src/components/trade/positions/twap-tab.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
 #: src/components/trade/tradebox/margin-mode-dialog.tsx
 msgid "Cancel"
@@ -277,6 +287,22 @@ msgstr "Change leverage"
 msgid "Chart"
 msgstr "Chart"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Checking balance"
+msgstr "Checking balance"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claim 1,000 USDH"
+msgstr "Claim 1,000 USDH"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claim failed"
+msgstr "Claim failed"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claiming USDH"
+msgstr "Claiming USDH"
+
 #: src/components/trade/positions/position-actions-dropdown.tsx
 #: src/components/ui/dialog.tsx
 #: src/components/ui/sheet.tsx
@@ -315,8 +341,8 @@ msgid "Confirm in wallet"
 msgstr "Confirm in wallet"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Connect"
-msgstr "Connect"
+#~ msgid "Connect"
+#~ msgstr "Connect"
 
 #: src/components/trade/positions/orders-tab.tsx
 #~ msgid "Connect a wallet to manage orders."
@@ -326,7 +352,6 @@ msgstr "Connect"
 #~ msgid "Connect a wallet to manage positions."
 #~ msgstr "Connect a wallet to manage positions."
 
-#: src/components/trade/components/wallet-dialog.tsx
 #: src/components/trade/header/user-menu.tsx
 #: src/lib/trade/use-button-content.ts
 msgid "Connect Wallet"
@@ -336,13 +361,17 @@ msgstr "Connect Wallet"
 msgid "Connect wallet to view account"
 msgstr "Connect wallet to view account"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Connect your wallet to claim USDH"
+msgstr "Connect your wallet to claim USDH"
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Connect your wallet to register a builder code"
 #~ msgstr "Connect your wallet to register a builder code"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Connect your wallet to start trading on Hyperliquid"
-msgstr "Connect your wallet to start trading on Hyperliquid"
+#~ msgid "Connect your wallet to start trading on Hyperliquid"
+#~ msgstr "Connect your wallet to start trading on Hyperliquid"
 
 #: src/components/trade/positions/balances-tab.tsx
 msgid "Connect your wallet to view balances."
@@ -391,6 +420,10 @@ msgstr "Connecting"
 #: src/components/trade/header/user-menu.tsx
 msgid "Connecting..."
 msgstr "Connecting..."
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Cooldown"
+msgstr "Cooldown"
 
 #: src/hooks/ui/use-copy-to-clipboard.ts
 msgid "Copied to clipboard"
@@ -505,6 +538,7 @@ msgstr "Displays the mobile sidebar."
 
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Done"
 msgstr "Done"
 
@@ -665,6 +699,16 @@ msgstr "Failed to reverse position"
 #~ msgid "Failed to switch margin mode"
 #~ msgstr "Failed to switch margin mode"
 
+#: src/components/trade/header/top-nav.tsx
+#: src/components/trade/tradebox/account-panel.tsx
+#: src/components/trade/tradebox/account-panel.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Faucet"
+msgstr "Faucet"
+
 #: src/components/trade/positions/history-tab.tsx
 msgid "Fee"
 msgstr "Fee"
@@ -742,8 +786,8 @@ msgstr "In Orders"
 #~ msgstr "In Use"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Install a wallet extension to continue"
-msgstr "Install a wallet extension to continue"
+#~ msgid "Install a wallet extension to continue"
+#~ msgstr "Install a wallet extension to continue"
 
 #. placeholder {0}: ctx.baseToken
 #. placeholder {0}: ctx.quoteToken
@@ -798,12 +842,12 @@ msgstr "Isolated"
 #~ msgstr "Latency:"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Leaderboard"
-msgstr "Leaderboard"
+#~ msgid "Leaderboard"
+#~ msgstr "Leaderboard"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Learn more"
-msgstr "Learn more"
+#~ msgid "Learn more"
+#~ msgstr "Learn more"
 
 #: src/components/trade/tradebox/leverage-control.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
@@ -1034,8 +1078,8 @@ msgid "Minimum withdrawal is ${MIN_WITHDRAW_USD}"
 msgstr "Minimum withdrawal is ${MIN_WITHDRAW_USD}"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Mock Wallet (Testing)"
-msgstr "Mock Wallet (Testing)"
+#~ msgid "Mock Wallet (Testing)"
+#~ msgstr "Mock Wallet (Testing)"
 
 #: src/components/trade/header/top-nav.tsx
 #~ msgid "More"
@@ -1070,8 +1114,8 @@ msgid "NEW"
 msgstr "NEW"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "New to wallets?"
-msgstr "New to wallets?"
+#~ msgid "New to wallets?"
+#~ msgstr "New to wallets?"
 
 #: src/components/ui/pagination.tsx
 #~ msgid "Next"
@@ -1159,8 +1203,8 @@ msgstr "No trading pair available for <0/>/<1/>"
 #~ msgstr "No user address"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "No wallets found"
-msgstr "No wallets found"
+#~ msgid "No wallets found"
+#~ msgstr "No wallets found"
 
 #: src/lib/errors/definitions/connection.ts
 msgid "Not connected"
@@ -1187,8 +1231,8 @@ msgid "OI"
 msgstr "OI"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Only you control your funds. No email or password required."
-msgstr "Only you control your funds. No email or password required."
+#~ msgid "Only you control your funds. No email or password required."
+#~ msgstr "Only you control your funds. No email or password required."
 
 #: src/components/trade/positions/orders-tab.tsx
 #~ msgid "open"
@@ -1238,8 +1282,8 @@ msgid "Other"
 msgstr "Other"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Other Options"
-msgstr "Other Options"
+#~ msgid "Other Options"
+#~ msgstr "Other Options"
 
 #: src/components/trade/positions/position-tpsl-modal.tsx
 #~ msgid "P&L"
@@ -1299,12 +1343,12 @@ msgid "PNL"
 msgstr "PNL"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Popular"
-msgstr "Popular"
+#~ msgid "Popular"
+#~ msgstr "Popular"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Portfolio"
-msgstr "Portfolio"
+#~ msgid "Portfolio"
+#~ msgstr "Portfolio"
 
 #: src/components/trade/positions/funding-tab.tsx
 #: src/components/trade/tradebox/trade-form-fields.tsx
@@ -1399,12 +1443,17 @@ msgstr "Remove {displayName} from favorites"
 msgid "Remove from favorites"
 msgstr "Remove from favorites"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Requirement"
+msgstr "Requirement"
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Requirements:"
 #~ msgstr "Requirements:"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
 msgid "Retry"
 msgstr "Retry"
@@ -1438,8 +1487,8 @@ msgid "Search markets..."
 msgstr "Search markets..."
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "Secure & Private"
-msgstr "Secure & Private"
+#~ msgid "Secure & Private"
+#~ msgstr "Secure & Private"
 
 #: src/components/trade/header/favorites-strip.tsx
 #~ msgid "Select {coin} market"
@@ -1522,6 +1571,10 @@ msgstr "Sending..."
 msgid "sent to Hyperliquid"
 msgstr "sent to Hyperliquid"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "sent to your account"
+msgstr "sent to your account"
+
 #: src/components/trade/tradebox/trade-form-fields.tsx
 #~ msgid "Set {p}%"
 #~ msgstr "Set {p}%"
@@ -1601,6 +1654,7 @@ msgstr "Show Values in Quote Asset"
 msgid "Sidebar"
 msgstr "Sidebar"
 
+#: src/lib/trade/use-button-content.ts
 #: src/lib/trade/use-button-content.ts
 msgid "Sign in wallet..."
 msgstr "Sign in wallet..."
@@ -1684,7 +1738,6 @@ msgstr "Sorted by {0}"
 #~ msgid "spot"
 #~ msgstr "spot"
 
-#: src/components/trade/header/top-nav.tsx
 #: src/components/trade/positions/balances-tab.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
@@ -1705,8 +1758,8 @@ msgid "Spread"
 msgstr "Spread"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Staking"
-msgstr "Staking"
+#~ msgid "Staking"
+#~ msgstr "Staking"
 
 #: src/lib/errors/definitions/scale.ts
 msgid "Start and end must differ"
@@ -1796,7 +1849,6 @@ msgid "Switch to {displayName} market"
 msgstr "Switch to {displayName} market"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switch to Arbitrum"
 msgstr "Switch to Arbitrum"
 
@@ -1813,7 +1865,6 @@ msgid "Switch to light mode"
 msgstr "Switch to light mode"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
-#: src/lib/trade/use-button-content.ts
 msgid "Switching..."
 msgstr "Switching..."
 
@@ -2062,13 +2113,21 @@ msgstr "Updated live"
 msgid "USD Value"
 msgstr "USD Value"
 
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "USDH claimed!"
+msgstr "USDH claimed!"
+
 #: src/components/trade/positions/positions-tab.tsx
 #~ msgid "Value"
 #~ msgstr "Value"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Vaults"
-msgstr "Vaults"
+#~ msgid "Vaults"
+#~ msgstr "Vaults"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Verifying captcha"
+msgstr "Verifying captcha"
 
 #: src/lib/trade/use-button-content.ts
 msgid "Verifying..."
@@ -2103,6 +2162,7 @@ msgstr "Waiting for trades..."
 #~ msgstr "Wallet client not ready"
 
 #: src/components/trade/tradebox/deposit-modal.tsx
+#: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Wallet not connected"
 msgstr "Wallet not connected"
 
@@ -2111,8 +2171,8 @@ msgstr "Wallet not connected"
 #~ msgstr "WebSocket error"
 
 #: src/components/trade/components/wallet-dialog.tsx
-msgid "What is a wallet?"
-msgstr "What is a wallet?"
+#~ msgid "What is a wallet?"
+#~ msgstr "What is a wallet?"
 
 #: src/components/trade/order-entry/deposit-modal.tsx
 #~ msgid "will arrive in ~3 min"

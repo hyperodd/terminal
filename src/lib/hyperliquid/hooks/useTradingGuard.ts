@@ -23,7 +23,10 @@ export function useTradingGuard(): UseTradingGuardResult {
 	const [localError, setLocalError] = useState<Error | null>(null);
 
 	const isEnabling =
-		registerStatus === "approving_fee" || registerStatus === "approving_agent" || registerStatus === "verifying";
+		registerStatus === "switching_account_mode" ||
+		registerStatus === "approving_fee" ||
+		registerStatus === "approving_agent" ||
+		registerStatus === "verifying";
 	const needsTrading = !isLoading && signaturesRequired > 0;
 
 	useEffect(() => {

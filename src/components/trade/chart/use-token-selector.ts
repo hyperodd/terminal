@@ -262,7 +262,7 @@ export function useTokenSelector({ value, onValueChange }: UseTokenSelectorOptio
 		if (open && hasInitializedRef.current) {
 			setHighlightedIndex(0);
 		}
-	}, [deferredSearch, scope, subcategory]);
+	}, [open]);
 
 	function handleKeyDown(e: React.KeyboardEvent) {
 		if (rows.length === 0) return;

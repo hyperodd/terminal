@@ -16,30 +16,30 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 9.15.0
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install
 
       - name: Extract translations
         run: pnpm i18n:extract
 
       - name: Check for uncommitted changes
         run: |
-          if ! git diff --quiet src/locales/**/*.po; then
+          if ! git diff --quiet -- src/locales/; then
             echo "::error::Translation catalogs are out of date."
             echo ""
             echo "Run 'pnpm i18n:extract' locally and commit the changes."
             echo ""
             echo "Changed files:"
-            git diff --name-only src/locales/**/*.po
+            git diff --name-only -- src/locales/
             echo ""
             echo "Diff:"
-            git diff src/locales/**/*.po
+            git diff -- src/locales/
             exit 1
           fi
           echo "Translation catalogs are up to date."

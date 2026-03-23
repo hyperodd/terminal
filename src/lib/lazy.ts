@@ -14,7 +14,7 @@ import { lazyRouteComponent } from "@tanstack/react-router";
  * // Preload on hover
  * <button onMouseEnter={() => Chart.preload()}>Show Chart</button>
  */
-export function createLazyComponent<T extends Record<string, any>, K extends keyof T>(
+export function createLazyComponent<T extends Record<string, unknown>, K extends keyof T>(
 	importer: () => Promise<T>,
 	exportName: K,
 ) {

@@ -39,6 +39,7 @@ export interface OrderEntryDerived {
 
 function getAvailableBalance(
 	isSpotMarket: boolean,
+	isBuilderPerpMarket: boolean,
 	isBuy: boolean,
 	spotBalance: SpotBalanceData,
 	availableLong: number,
@@ -47,11 +48,16 @@ function getAvailableBalance(
 	if (isSpotMarket) {
 		return isBuy ? spotBalance.quoteAvailable : spotBalance.baseAvailable;
 	}
+	// Builder perps use spot collateral (USDH/USDC) as margin; quote balance is the source of truth.
+	if (isBuilderPerpMarket) {
+		return spotBalance.quoteAvailable;
+	}
 	return isBuy ? availableLong : availableShort;
 }
 
 export function deriveOrderEntry(inputs: OrderEntryInputs): OrderEntryDerived {
 	const isSpotMarket = inputs.market?.kind === "spot";
+	const isBuilderPerpMarket = inputs.market?.kind === "builderPerp";
 	const isBuy = inputs.side === "buy";
 	const capabilities = getMarketCapabilities(inputs.market);
 	const szDecimals = inputs.market?.szDecimals ?? 0;
@@ -63,11 +69,19 @@ export function deriveOrderEntry(inputs: OrderEntryInputs): OrderEntryDerived {
 	const availableBalanceToken = getAvailableBalanceToken(inputs.market, inputs.side);
 
 	const [availableLong, availableShort] = inputs.availableToTrade ?? [0, 0];
-	const availableBalance = getAvailableBalance(isSpotMarket, isBuy, spotBalance, availableLong, availableShort);
+	const availableBalance = getAvailableBalance(
+		isSpotMarket,
+		isBuilderPerpMarket,
+		isBuy,
+		spotBalance,
+		availableLong,
+		availableShort,
+	);
 
 	const maxSize = getMaxSizeForOrderEntry({
 		isConnected: inputs.isConnected,
 		isSpotMarket,
+		isBuilderPerpMarket,
 		side: inputs.side,
 		price: inputs.conversionPrice,
 		spotBalance,

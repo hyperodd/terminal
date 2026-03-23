@@ -87,10 +87,7 @@ export function useUserPositions(): UserPositions {
 	const { address, isConnected } = useConnection();
 	const enabled = isConnected && !!address;
 
-	const { data, status } = useSubAllDexsClearinghouseState(
-		{ user: address ?? "" },
-		{ enabled },
-	);
+	const { data, status } = useSubAllDexsClearinghouseState({ user: address ?? "" }, { enabled });
 
 	const isLoading = enabled && (status === "subscribing" || status === "idle");
 	const hasError = status === "error";

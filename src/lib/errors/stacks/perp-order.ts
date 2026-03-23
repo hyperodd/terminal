@@ -1,5 +1,5 @@
 import { noBalanceValidator } from "../definitions/balance";
-import { signerNotReadyValidator, walletLoadingValidator, walletNotConnectedValidator } from "../definitions/connection";
+import { signerNotReadyValidator, walletNotConnectedValidator } from "../definitions/connection";
 import { marketNotReadyValidator, noMarketValidator, noMarkPriceValidator } from "../definitions/market";
 import {
 	enterLimitPriceValidator,
@@ -29,7 +29,6 @@ import { runValidators, type ValidationError, type Validator } from "../types";
 
 export interface PerpOrderContext extends OrderInputContext, TpSlContext, TriggerContext, ScaleContext, TwapContext {
 	isConnected: boolean;
-	isWalletLoading: boolean;
 	isReadyToTrade: boolean;
 	needsAgentApproval: boolean;
 	availableBalance: number;
@@ -47,7 +46,6 @@ export interface PerpOrderValidationResult {
 
 const perpOrderValidators: Validator<PerpOrderContext>[] = [
 	walletNotConnectedValidator,
-	walletLoadingValidator,
 	noBalanceValidator,
 	noMarketValidator,
 	marketNotReadyValidator,

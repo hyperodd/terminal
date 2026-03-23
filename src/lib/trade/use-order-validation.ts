@@ -4,7 +4,6 @@ import type { Side, ValidationResult } from "@/lib/trade/types";
 
 export interface BaseOrderInput {
 	isConnected: boolean;
-	isWalletLoading: boolean;
 	availableBalance: number;
 	hasMarket: boolean;
 	hasAssetIndex: boolean;
@@ -56,7 +55,12 @@ export function perpInput(base: BaseOrderInput, perp: PerpOrderFields): PerpVali
 	return { ...base, ...perp, isSpotMarket: false };
 }
 
-function toResult(result: { valid: boolean; errors: { message: string }[]; canSubmit: boolean; needsApproval: boolean }): ValidationResult {
+function toResult(result: {
+	valid: boolean;
+	errors: { message: string }[];
+	canSubmit: boolean;
+	needsApproval: boolean;
+}): ValidationResult {
 	return {
 		valid: result.valid,
 		errors: result.errors.map((e) => e.message),
