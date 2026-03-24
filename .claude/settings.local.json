@@ -3,7 +3,8 @@
     "allow": [
       "Bash(find node_modules/.pnpm -path */start-plugin-core/dist/esm/index.d.ts)",
       "Bash(find node_modules/.pnpm -path */start-plugin-core/dist/esm/*.d.ts)",
-      "Bash(NITRO_PRESET=cloudflare-pages pnpm build)"
+      "Bash(NITRO_PRESET=cloudflare-pages pnpm build)",
+      "Bash(timeout 12 npx wrangler pages dev .)"
     ]
   }
 }
