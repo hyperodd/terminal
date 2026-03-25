@@ -9,6 +9,7 @@ type GlobalModal =
 	| { type: "swap"; fromToken: string; toToken?: string }
 	| { type: "commandMenu" }
 	| { type: "faucet" }
+	| { type: "points" }
 	| null;
 
 interface DepositActions {
@@ -37,6 +38,11 @@ interface FaucetActions {
 	close: () => void;
 }
 
+interface PointsActions {
+	open: () => void;
+	close: () => void;
+}
+
 interface GlobalModalState {
 	modal: GlobalModal;
 	depositActions: DepositActions;
@@ -44,6 +50,7 @@ interface GlobalModalState {
 	swapActions: SwapActions;
 	commandMenuActions: CommandMenuActions;
 	faucetActions: FaucetActions;
+	pointsActions: PointsActions;
 }
 
 const useGlobalModalStore = create<GlobalModalState>((set) => {
@@ -72,6 +79,10 @@ const useGlobalModalStore = create<GlobalModalState>((set) => {
 			open: () => set({ modal: { type: "faucet" } }),
 			close,
 		},
+		pointsActions: {
+			open: () => set({ modal: { type: "points" } }),
+			close,
+		},
 	};
 });
 
@@ -95,3 +106,6 @@ export const useCommandMenuActions = () => useGlobalModalStore((s) => s.commandM
 
 export const useFaucetModalOpen = () => useGlobalModalStore((s) => s.modal?.type === "faucet");
 export const useFaucetModalActions = () => useGlobalModalStore((s) => s.faucetActions);
+
+export const usePointsModalOpen = () => useGlobalModalStore((s) => s.modal?.type === "points");
+export const usePointsModalActions = () => useGlobalModalStore((s) => s.pointsActions);
