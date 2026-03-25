@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\(''''pnpm'''',{}\\), indent=2\\)\\)\")",
+      "Bash(find /Users/priom/Desktop/work/hyperodd/terminal -name wrangler*.toml -o -name *.wrangler.*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''pnpm section:'''', json.dumps\\(d.get\\(''''pnpm'''',{}\\), indent=2\\)\\); print\\(''''zod:'''', d.get\\(''''dependencies'''',{}\\).get\\(''''zod''''\\)\\)\")"
+    ]
+  }
+}
