@@ -106,6 +106,14 @@ const ssrStubPlugin = {
   },
 }
 
+const eventsPolyfillPlugin = {
+  name: 'polyfill-events-for-browser',
+  enforce: 'pre' as const,
+  resolveId(id: string, _: string | undefined, options: { ssr?: boolean } | undefined) {
+    if (!options?.ssr && (id === 'events' || id === 'node:events')) return eventsPolyfill
+  },
+}
+
 function createManualChunks(id: string) {
   if (id.includes('node_modules')) {
     if (id.includes('@radix-ui')) return 'vendor-radix'
@@ -117,12 +125,6 @@ function createManualChunks(id: string) {
 }
 
 const config = defineConfig({
-  resolve: {
-    alias: {
-      events: eventsPolyfill,
-      'node:events': eventsPolyfill,
-    },
-  },
   server: {
     strictPort: false,
   },
@@ -131,12 +133,6 @@ const config = defineConfig({
   },
   environments: {
     client: {
-      resolve: {
-        alias: {
-          events: eventsPolyfill,
-          'node:events': eventsPolyfill,
-        },
-      },
       build: {
         rollupOptions: {
           output: {
@@ -147,6 +143,7 @@ const config = defineConfig({
     },
   },
   plugins: [
+    eventsPolyfillPlugin,
     nodePolyfills({ include: ['buffer'], globals: { Buffer: true } }),
     ssrStubPlugin,
     nitro({
