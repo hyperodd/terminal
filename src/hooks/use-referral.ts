@@ -37,16 +37,18 @@ export function useAutoRegisterReferral() {
 	const registeredRef = useRef(false);
 
 	useEffect(() => {
-		if (!isConnected || !address || registeredRef.current) return;
+		async function autoRegister() {
+			if (!isConnected || !address || registeredRef.current) return;
 
-		registeredRef.current = true;
+			registeredRef.current = true;
 
-		fetch(`${API_URL}/user_points?user_address=${address}`)
-			.then((res) => {
+			try {
+				const res = await fetch(`${API_URL}/user_points?user_address=${address}`);
 				if (res.ok) {
 					clearStoredReferral();
 					return;
 				}
+
 				if (res.status === 404) {
 					const referral = getStoredReferral();
 					const body: Record<string, string> = { walletAddress: address };
@@ -56,18 +58,20 @@ export function useAutoRegisterReferral() {
 					if (user?.id) {
 						body.privyUserId = user.id;
 					}
-					return fetch(`${API_URL}/users`, {
+					await fetch(`${API_URL}/users`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify(body),
-					}).then(() => {
-						clearStoredReferral();
 					});
+					clearStoredReferral();
 				}
-			})
-			.catch(() => {
+			} catch (error) {
+				console.error("Auto-registration failed:", error);
 				registeredRef.current = false;
-			});
+			}
+		}
+
+		autoRegister();
 	}, [isConnected, address, user?.id]);
 }
 
