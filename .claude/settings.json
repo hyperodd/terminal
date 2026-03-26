@@ -7,7 +7,10 @@
       "Bash(pnpm run:*)",
       "Bash(ls /Users/priom/Desktop/work/hyperodd/terminal/vite.config.*)",
       "Bash(pnpm install:*)",
-      "Bash(pnpm why:*)"
+      "Bash(pnpm why:*)",
+      "Bash(npx rollup:*)",
+      "Bash(node_modules/.bin/rollup --version)",
+      "Bash(NITRO_PRESET=cloudflare-pages pnpm run build)"
     ]
   }
 }
