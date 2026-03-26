@@ -7,8 +7,11 @@ import viteTsConfigPaths from 'vite-tsconfig-paths'
 import { lingui } from '@lingui/vite-plugin'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const isAnalyze = process.env.ANALYZE === 'true'
+const eventsPolyfill = resolve(dirname(fileURLToPath(import.meta.url)), 'node_modules/events/events.js')
 
 const browserOnlyModules: Record<string, string> = {
   klinecharts: `
@@ -103,6 +106,14 @@ const ssrStubPlugin = {
   },
 }
 
+const eventsPolyfillPlugin = {
+  name: 'polyfill-events-for-browser',
+  enforce: 'pre' as const,
+  resolveId(id: string, _: string | undefined, options: { ssr?: boolean } | undefined) {
+    if (!options?.ssr && (id === 'events' || id === 'node:events')) return eventsPolyfill
+  },
+}
+
 function createManualChunks(id: string) {
   if (id.includes('node_modules')) {
     if (id.includes('@radix-ui')) return 'vendor-radix'
@@ -132,6 +143,7 @@ const config = defineConfig({
     },
   },
   plugins: [
+    eventsPolyfillPlugin,
     nodePolyfills({ include: ['buffer'], globals: { Buffer: true } }),
     ssrStubPlugin,
     nitro({
