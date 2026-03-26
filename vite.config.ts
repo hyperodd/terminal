@@ -114,6 +114,12 @@ function createManualChunks(id: string) {
 }
 
 const config = defineConfig({
+  resolve: {
+    alias: {
+      events: 'events',
+      'node:events': 'events',
+    },
+  },
   server: {
     strictPort: false,
   },
@@ -132,7 +138,7 @@ const config = defineConfig({
     },
   },
   plugins: [
-    nodePolyfills({ include: ['buffer', 'events'], globals: { Buffer: true }, protocolImports: true }),
+    nodePolyfills({ include: ['buffer'], globals: { Buffer: true } }),
     ssrStubPlugin,
     nitro({
       compressPublicAssets: true,
