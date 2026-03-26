@@ -10,7 +10,7 @@ import {
 	WarningCircleIcon,
 } from "@phosphor-icons/react";
 import { usePrivy } from "@privy-io/react-auth";
-import { useEffect, useId, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -103,7 +103,7 @@ export function PointsModal() {
 	const [submitting, setSubmitting] = useState(false);
 	const referralInputId = useId();
 
-	function fetchPoints() {
+	const fetchPoints = useCallback(() => {
 		if (!address) return;
 		setView("loading");
 		setError(null);
@@ -123,17 +123,17 @@ export function PointsModal() {
 					setView("signup");
 				}
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.error("Failed to fetch points:", error);
 				setError("Unable to connect to points service");
 				setView("error");
 			});
-	}
+	}, [address]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: fetchPoints is intentionally excluded to avoid re-creating on every render
 	useEffect(() => {
 		if (!open || !address) return;
 		fetchPoints();
-	}, [open, address]);
+	}, [open, address, fetchPoints]);
 
 	function handleClose() {
 		close();
@@ -180,6 +180,7 @@ export function PointsModal() {
 			});
 			setView("summary");
 		} catch (err) {
+			console.error("Signup failed:", err);
 			setError(err instanceof Error ? err.message : "Signup failed");
 		} finally {
 			setSubmitting(false);
