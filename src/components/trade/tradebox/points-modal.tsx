@@ -10,13 +10,14 @@ import {
 	WarningCircleIcon,
 } from "@phosphor-icons/react";
 import { usePrivy } from "@privy-io/react-auth";
-import { useEffect, useId, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { InfoRow } from "@/components/ui/info-row";
 import { Input } from "@/components/ui/input";
 import { useCopyToClipboard } from "@/hooks/ui/use-copy-to-clipboard";
+import { getStoredReferral } from "@/hooks/use-referral";
 import { usePointsModalActions, usePointsModalOpen } from "@/stores/use-global-modal-store";
 
 const API_URL = import.meta.env.VITE_HYPERMILES_API_URL;
@@ -97,12 +98,12 @@ export function PointsModal() {
 
 	const [view, setView] = useState<ModalView>("loading");
 	const [userPoints, setUserPoints] = useState<UserPoints | null>(null);
-	const [referralCode, setReferralCode] = useState("");
+	const [referralCode, setReferralCode] = useState(() => getStoredReferral() ?? "");
 	const [error, setError] = useState<string | null>(null);
 	const [submitting, setSubmitting] = useState(false);
 	const referralInputId = useId();
 
-	function fetchPoints() {
+	const fetchPoints = useCallback(() => {
 		if (!address) return;
 		setView("loading");
 		setError(null);
@@ -122,17 +123,17 @@ export function PointsModal() {
 					setView("signup");
 				}
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.error("Failed to fetch points:", error);
 				setError("Unable to connect to points service");
 				setView("error");
 			});
-	}
+	}, [address]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: fetchPoints is intentionally excluded to avoid re-creating on every render
 	useEffect(() => {
 		if (!open || !address) return;
 		fetchPoints();
-	}, [open, address]);
+	}, [open, address, fetchPoints]);
 
 	function handleClose() {
 		close();
@@ -179,6 +180,7 @@ export function PointsModal() {
 			});
 			setView("summary");
 		} catch (err) {
+			console.error("Signup failed:", err);
 			setError(err instanceof Error ? err.message : "Signup failed");
 		} finally {
 			setSubmitting(false);
@@ -217,8 +219,8 @@ export function PointsModal() {
 							<InfoRow
 								className="p-0"
 								labelClassName="flex items-center gap-1.5 text-text-500"
-								label={<Trans>Your Referral Code</Trans>}
-								value={<CopyableCode code={userPoints.referralCode} />}
+								label={<Trans>Your Referral Link</Trans>}
+								value={<CopyableCode code={`${window.location.origin}/?referral=${userPoints.referralCode}`} />}
 							/>
 						</div>
 

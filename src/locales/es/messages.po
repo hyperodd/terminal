@@ -2256,5 +2256,9 @@ msgstr ""
 #~ msgstr ""
 
 #: src/components/trade/tradebox/points-modal.tsx
-msgid "Your Referral Code"
+#~ msgid "Your Referral Code"
+#~ msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Your Referral Link"
 msgstr ""
