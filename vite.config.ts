@@ -7,10 +7,11 @@ import viteTsConfigPaths from 'vite-tsconfig-paths'
 import { lingui } from '@lingui/vite-plugin'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const isAnalyze = process.env.ANALYZE === 'true'
-const eventsPolyfill = fileURLToPath(import.meta.resolve('events/'))
+const eventsPolyfill = resolve(dirname(fileURLToPath(import.meta.url)), 'node_modules/events/events.js')
 
 const browserOnlyModules: Record<string, string> = {
   klinecharts: `
@@ -130,6 +131,12 @@ const config = defineConfig({
   },
   environments: {
     client: {
+      resolve: {
+        alias: {
+          events: eventsPolyfill,
+          'node:events': eventsPolyfill,
+        },
+      },
       build: {
         rollupOptions: {
           output: {
