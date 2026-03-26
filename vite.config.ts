@@ -132,7 +132,7 @@ const config = defineConfig({
     },
   },
   plugins: [
-    nodePolyfills({ include: ['buffer', 'events'], globals: { Buffer: true } }),
+    nodePolyfills({ include: ['buffer', 'events'], globals: { Buffer: true }, protocolImports: true }),
     ssrStubPlugin,
     nitro({
       compressPublicAssets: true,
