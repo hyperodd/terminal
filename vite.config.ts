@@ -7,8 +7,10 @@ import viteTsConfigPaths from 'vite-tsconfig-paths'
 import { lingui } from '@lingui/vite-plugin'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import { fileURLToPath } from 'node:url'
 
 const isAnalyze = process.env.ANALYZE === 'true'
+const eventsPolyfill = fileURLToPath(import.meta.resolve('events/'))
 
 const browserOnlyModules: Record<string, string> = {
   klinecharts: `
@@ -116,8 +118,8 @@ function createManualChunks(id: string) {
 const config = defineConfig({
   resolve: {
     alias: {
-      events: 'events',
-      'node:events': 'events',
+      events: eventsPolyfill,
+      'node:events': eventsPolyfill,
     },
   },
   server: {
