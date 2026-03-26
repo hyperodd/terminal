@@ -304,6 +304,7 @@ msgid "Claiming USDH"
 msgstr ""
 
 #: src/components/trade/positions/position-actions-dropdown.tsx
+#: src/components/trade/tradebox/points-modal.tsx
 #: src/components/ui/dialog.tsx
 #: src/components/ui/sheet.tsx
 msgid "Close"
@@ -340,7 +341,6 @@ msgstr ""
 msgid "Confirm in wallet"
 msgstr ""
 
-#: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Connect"
 #~ msgstr ""
 
@@ -544,6 +544,14 @@ msgstr ""
 
 #: src/components/trade/tradebox/trade-form-fields.tsx
 msgid "Duration (Minutes)"
+msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Earn points every time you trade on Hyperliquid. Refer friends to earn even more."
+msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Earn points for every trade you execute on Hyperliquid"
 msgstr ""
 
 #: src/components/trade/positions/positions-tab.tsx
@@ -760,6 +768,10 @@ msgstr ""
 #~ msgid "Gas:"
 #~ msgstr "Gas :"
 
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Get Started"
+msgstr ""
+
 #: src/components/ui/pagination.tsx
 #~ msgid "Go to next page"
 #~ msgstr "Aller à la page suivante"
@@ -777,6 +789,16 @@ msgstr "Aller au terminal de trading"
 msgid "Hide small"
 msgstr ""
 
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "How to earn"
+msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+#: src/components/trade/tradebox/points-modal.tsx
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Hypermiles"
+msgstr ""
+
 #: src/components/trade/tradebox/account-panel.tsx
 msgid "In Orders"
 msgstr ""
@@ -785,7 +807,6 @@ msgstr ""
 #~ msgid "In Use"
 #~ msgstr "En cours d'utilisation"
 
-#: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Install a wallet extension to continue"
 #~ msgstr ""
 
@@ -832,6 +853,10 @@ msgstr ""
 #: src/components/trade/tradebox/margin-mode-dialog.tsx
 msgid "Isolated"
 msgstr "Isolé"
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Join Hypermiles"
+msgstr ""
 
 #: src/components/trade/footer/footer-bar.tsx
 #~ msgid "Latency:"
@@ -917,6 +942,10 @@ msgstr "Chargement des ordres ouverts..."
 
 #: src/components/trade/positions/orders-history-tab.tsx
 msgid "Loading order history..."
+msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Loading points..."
 msgstr ""
 
 #: src/components/trade/positions/positions-tab.tsx
@@ -1073,7 +1102,6 @@ msgstr ""
 msgid "Minimum withdrawal is ${MIN_WITHDRAW_USD}"
 msgstr ""
 
-#: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Mock Wallet (Testing)"
 #~ msgstr ""
 
@@ -1198,7 +1226,6 @@ msgstr ""
 #~ msgid "No user address"
 #~ msgstr ""
 
-#: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "No wallets found"
 #~ msgstr "Aucun portefeuille trouvé"
 
@@ -1206,7 +1233,6 @@ msgstr ""
 msgid "Not connected"
 msgstr "Non connecté"
 
-#: src/components/trade/header/top-nav.tsx
 #~ msgid "Notifications"
 #~ msgstr "Notifications"
 
@@ -1338,6 +1364,10 @@ msgstr ""
 msgid "PNL"
 msgstr "PNL"
 
+#: src/components/trade/header/top-nav.tsx
+msgid "Points"
+msgstr ""
+
 #: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Popular"
 #~ msgstr ""
@@ -1422,6 +1452,14 @@ msgstr ""
 msgid "Reduce Only"
 msgstr "Réduction uniquement"
 
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Refer friends"
+msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Referral Code (optional)"
+msgstr ""
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Register Another"
 #~ msgstr ""
@@ -1451,6 +1489,7 @@ msgstr ""
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/faucet-modal.tsx
 #: src/components/trade/tradebox/leverage-control.tsx
+#: src/components/trade/tradebox/points-modal.tsx
 msgid "Retry"
 msgstr ""
 
@@ -1600,6 +1639,10 @@ msgstr ""
 msgid "Settings"
 msgstr "Paramètres"
 
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Share your referral code and earn bonus points when they trade"
+msgstr ""
+
 #: src/components/trade/positions/position-limit-close-modal.tsx
 #: src/components/trade/positions/position-tpsl-modal.tsx
 #: src/components/trade/positions/positions-tab.tsx
@@ -1680,6 +1723,10 @@ msgstr "Taille"
 
 #: src/components/trade/positions/position-limit-close-modal.tsx
 msgid "Size exceeds position"
+msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Skip referral"
 msgstr ""
 
 #: src/components/trade/positions/orders-tab.tsx
@@ -1945,6 +1992,10 @@ msgstr "Basculer le mode de taille"
 msgid "Total"
 msgstr "Total"
 
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Total Points"
+msgstr ""
+
 #: src/components/trade/positions/twap-tab.tsx
 #~ msgid "Total Size"
 #~ msgstr "Taille totale"
@@ -1980,9 +2031,9 @@ msgstr ""
 msgid "TP/SL"
 msgstr "TP/SL"
 
-#: src/components/trade/header/top-nav.tsx
-#~ msgid "Trade"
-#~ msgstr "Trader"
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Trade"
+msgstr "Trader"
 
 #: src/components/trade/positions/history-tab.tsx
 #~ msgid "Trade ClockCounterClockwise"
@@ -2203,3 +2254,11 @@ msgstr ""
 #: src/components/pages/builder-page.tsx
 #~ msgid "You can revoke permissions at any time by registering a new approval with 0% fee rate. Builder codes are processed entirely onchain as part of the fee logic."
 #~ msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+#~ msgid "Your Referral Code"
+#~ msgstr ""
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Your Referral Link"
+msgstr ""

@@ -1,6 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { DownloadSimpleIcon, DropIcon, GearIcon, TerminalIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, DropIcon, GearIcon, TerminalIcon, TrophyIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { useExchangeScope } from "@/providers/exchange-scope";
 import {
 	useDepositModalActions,
 	useFaucetModalActions,
+	usePointsModalActions,
 	useSettingsDialogActions,
 } from "@/stores/use-global-modal-store";
 
@@ -38,6 +39,7 @@ function getScopeAccentClass(scope: string): string {
 export function TopNav() {
 	const { open: openDepositModal } = useDepositModalActions();
 	const { open: openFaucetModal } = useFaucetModalActions();
+	const { open: openPointsModal } = usePointsModalActions();
 	const { open: openSettingsDialog } = useSettingsDialogActions();
 	const { isConnected } = useConnection();
 	const { scope } = useExchangeScope();
@@ -79,26 +81,37 @@ export function TopNav() {
 			</div>
 
 			<div className="flex items-center gap-2">
-				{isConnected &&
-					(isTestnet ? (
+				{isConnected && (
+					<>
 						<Button
 							variant="outlined"
-							onClick={openFaucetModal}
+							onClick={openPointsModal}
 							className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
 						>
-							<DropIcon className="size-4" />
-							<Trans>Faucet</Trans>
+							<TrophyIcon className="size-4" />
+							<Trans>Points</Trans>
 						</Button>
-					) : (
-						<Button
-							variant="outlined"
-							onClick={() => openDepositModal("deposit")}
-							className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
-						>
-							<DownloadSimpleIcon className="size-4" />
-							<Trans>Deposit</Trans>
-						</Button>
-					))}
+						{isTestnet ? (
+							<Button
+								variant="outlined"
+								onClick={openFaucetModal}
+								className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
+							>
+								<DropIcon className="size-4" />
+								<Trans>Faucet</Trans>
+							</Button>
+						) : (
+							<Button
+								variant="outlined"
+								onClick={() => openDepositModal("deposit")}
+								className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
+							>
+								<DownloadSimpleIcon className="size-4" />
+								<Trans>Deposit</Trans>
+							</Button>
+						)}
+					</>
+				)}
 				<UserMenu />
 				<div className="flex items-center gap-1">
 					<ThemeToggle />

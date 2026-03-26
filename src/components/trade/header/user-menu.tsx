@@ -20,6 +20,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useCopyToClipboard } from "@/hooks/ui/use-copy-to-clipboard";
+import { useAutoRegisterReferral } from "@/hooks/use-referral";
 import { shortenAddress } from "@/lib/format";
 
 function CopyAddressMenuItem({ address }: { address: string }) {
@@ -52,6 +53,8 @@ export function UserMenu() {
 	const { disconnect } = useDisconnect();
 	const { data: ensName } = useEnsName({ address });
 	const [mounted, setMounted] = useState(false);
+
+	useAutoRegisterReferral();
 
 	useEffect(() => {
 		setMounted(true);

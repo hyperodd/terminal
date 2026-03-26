@@ -6,6 +6,7 @@ const FaucetModal = createLazyComponent(() => import("../tradebox/faucet-modal")
 const GlobalSettingsDialog = createLazyComponent(() => import("./global-settings-dialog"), "GlobalSettingsDialog");
 const SpotSwapModal = createLazyComponent(() => import("./spot-swap-modal"), "SpotSwapModal");
 const CommandMenu = createLazyComponent(() => import("./command-menu"), "CommandMenu");
+const PointsModal = createLazyComponent(() => import("../tradebox/points-modal"), "PointsModal");
 
 export function GlobalModals() {
 	return (
@@ -15,6 +16,7 @@ export function GlobalModals() {
 			<GlobalSettingsDialog />
 			<SpotSwapModal />
 			<CommandMenu />
+			<PointsModal />
 		</Suspense>
 	);
 }
