@@ -17,6 +17,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { InfoRow } from "@/components/ui/info-row";
 import { Input } from "@/components/ui/input";
 import { useCopyToClipboard } from "@/hooks/ui/use-copy-to-clipboard";
+import { getStoredReferral } from "@/hooks/use-referral";
 import { usePointsModalActions, usePointsModalOpen } from "@/stores/use-global-modal-store";
 
 const API_URL = import.meta.env.VITE_HYPERMILES_API_URL;
@@ -97,7 +98,7 @@ export function PointsModal() {
 
 	const [view, setView] = useState<ModalView>("loading");
 	const [userPoints, setUserPoints] = useState<UserPoints | null>(null);
-	const [referralCode, setReferralCode] = useState("");
+	const [referralCode, setReferralCode] = useState(() => getStoredReferral() ?? "");
 	const [error, setError] = useState<string | null>(null);
 	const [submitting, setSubmitting] = useState(false);
 	const referralInputId = useId();
@@ -217,8 +218,8 @@ export function PointsModal() {
 							<InfoRow
 								className="p-0"
 								labelClassName="flex items-center gap-1.5 text-text-500"
-								label={<Trans>Your Referral Code</Trans>}
-								value={<CopyableCode code={userPoints.referralCode} />}
+								label={<Trans>Your Referral Link</Trans>}
+								value={<CopyableCode code={`${window.location.origin}/?referral=${userPoints.referralCode}`} />}
 							/>
 						</div>
 

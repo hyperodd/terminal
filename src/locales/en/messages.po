@@ -2269,5 +2269,9 @@ msgstr "Yes"
 #~ msgstr "You can revoke permissions at any time by registering a new approval with 0% fee rate. Builder codes are processed entirely onchain as part of the fee logic."
 
 #: src/components/trade/tradebox/points-modal.tsx
-msgid "Your Referral Code"
-msgstr "Your Referral Code"
+#~ msgid "Your Referral Code"
+#~ msgstr "Your Referral Code"
+
+#: src/components/trade/tradebox/points-modal.tsx
+msgid "Your Referral Link"
+msgstr "Your Referral Link"
