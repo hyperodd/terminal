@@ -119,7 +119,6 @@ function createManualChunks(id: string) {
     if (id.includes('@radix-ui')) return 'vendor-radix'
     if (id.includes('@tanstack/react-query') || id.includes('@tanstack/react-table') || id.includes('@tanstack/react-virtual')) return 'vendor-tanstack'
     if (id.includes('recharts') || id.includes('d3-')) return 'vendor-charts'
-    if (id.includes('viem') || id.includes('wagmi') || id.includes('@wagmi') || id.includes('@privy-io')) return 'vendor-web3'
     if (id.includes('klinecharts')) return 'vendor-klinecharts'
   }
 }
@@ -144,7 +143,7 @@ const config = defineConfig({
   },
   plugins: [
     eventsPolyfillPlugin,
-    nodePolyfills({ include: ['buffer'], globals: { Buffer: true } }),
+    nodePolyfills({ include: ['buffer'], globals: { Buffer: true, global: true } }),
     ssrStubPlugin,
     nitro({
       preset: 'cloudflare-pages',
