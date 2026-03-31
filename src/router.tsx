@@ -1,5 +1,4 @@
 import { createRouter } from "@tanstack/react-router";
-import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 import { getRootProviderContext, RootProvider } from "@/providers/root";
 import { routeTree } from "./routeTree.gen";
 
@@ -14,8 +13,6 @@ export const getRouter = () => {
 			return <RootProvider {...rqContext}>{props.children}</RootProvider>;
 		},
 	});
-
-	setupRouterSsrQueryIntegration({ router, queryClient: rqContext.queryClient });
 
 	return router;
 };
