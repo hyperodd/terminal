@@ -147,6 +147,7 @@ const config = defineConfig({
     nodePolyfills({ include: ['buffer'], globals: { Buffer: true } }),
     ssrStubPlugin,
     nitro({
+      preset: 'cloudflare-pages',
       compressPublicAssets: true,
       minify: true,
       rollupConfig: {
@@ -160,9 +161,6 @@ const config = defineConfig({
         },
       },
       routeRules: {
-        '/api/faucet/**': {
-          proxy: 'https://usdh.com/api/faucet/**',
-        },
         '/assets/**': {
           headers: { 'cache-control': 'public, max-age=31536000, immutable' },
         },
