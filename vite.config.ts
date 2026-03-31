@@ -144,7 +144,7 @@ const config = defineConfig({
   },
   plugins: [
     eventsPolyfillPlugin,
-    nodePolyfills({ include: ['buffer'], globals: { Buffer: true } }),
+    nodePolyfills({ include: ['buffer'], globals: { Buffer: true, global: true } }),
     ssrStubPlugin,
     nitro({
       preset: 'cloudflare-pages',
