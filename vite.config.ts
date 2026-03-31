@@ -119,9 +119,6 @@ function createManualChunks(id: string) {
     if (id.includes('@radix-ui')) return 'vendor-radix'
     if (id.includes('@tanstack/react-query') || id.includes('@tanstack/react-table') || id.includes('@tanstack/react-virtual')) return 'vendor-tanstack'
     if (id.includes('recharts') || id.includes('d3-')) return 'vendor-charts'
-    if (id.includes('viem')) return 'vendor-viem'
-    if (id.includes('@privy-io')) return 'vendor-privy'
-    if (id.includes('wagmi') || id.includes('@wagmi')) return 'vendor-wagmi'
     if (id.includes('klinecharts')) return 'vendor-klinecharts'
   }
 }
