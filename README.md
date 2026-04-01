@@ -1,4 +1,4 @@
-# HypeTerminal
+# HyperTerminal
 
 A modern, high-performance trading terminal for [Hyperliquid](https://hyperliquid.xyz) - the decentralized perpetual exchange.
 
