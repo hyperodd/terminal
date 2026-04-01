@@ -131,19 +131,14 @@ export function SendDialog({
 
 		setError(null);
 		try {
-			console.log("[SendDialog] sending", { tokenId, destination, amount, isUnifiedAccount });
 			if (isUnifiedAccount) {
-				// Unified accounts block usdSend and spotSend.
-				// USDC (collateral) can land in recipient's perp DEX (destinationDex:"").
-				// Other spot tokens must target recipient's spot (destinationDex:"spot").
-				const result = await sendAsset({
+				await sendAsset({
 					destination,
 					sourceDex: "spot",
 					destinationDex: selectedToken === DEFAULT_QUOTE_TOKEN ? "" : "spot",
 					token: tokenId,
 					amount,
 				});
-				console.log("[SendDialog] sendAsset result", result);
 			} else if (effectiveAccountType === "perp") {
 				await sendAsset({
 					destination,
