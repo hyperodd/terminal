@@ -1,7 +1,8 @@
 import { t } from "@lingui/core/macro";
 import { PaperPlaneTiltIcon, SpinnerGapIcon, WarningCircleIcon } from "@phosphor-icons/react";
 import { useCallback, useMemo, useState } from "react";
-import { isAddress } from "viem";
+import { type Address, isAddress } from "viem";
+import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/cn";
 import { formatToken } from "@/lib/format";
 import { useExchangeSendAsset } from "@/lib/hyperliquid/hooks/exchange";
 import { useExchangeSpotSend } from "@/lib/hyperliquid/hooks/exchange/useExchangeSpotSend";
+import { useInfoUserAbstraction } from "@/lib/hyperliquid/hooks/info/useInfoUserAbstraction";
 import { useSpotTokens } from "@/lib/hyperliquid/markets/use-spot-tokens";
 import { floorToString, limitDecimalInput } from "@/lib/trade/numbers";
 import { AssetDisplay } from "../components/asset-display";
@@ -40,10 +42,17 @@ export function SendDialog({
 	const [amount, setAmount] = useState("");
 	const [error, setError] = useState<string | null>(null);
 
+	const { address } = useConnection();
 	const { getToken } = useSpotTokens();
 	const { mutateAsync: sendAsset, isPending: isSendAssetPending } = useExchangeSendAsset();
 	const { mutateAsync: spotSend, isPending: isSpotSendPending } = useExchangeSpotSend();
+	const { data: abstractionMode, isLoading: isAbstractionLoading } = useInfoUserAbstraction(
+		address as Address | undefined,
+	);
 	const { perpSummary, spotBalances } = useAccountBalances();
+
+	const isUnifiedAccount = abstractionMode !== "default" && abstractionMode !== undefined;
+	const effectiveAccountType = isUnifiedAccount ? "spot" : accountType;
 
 	const isPending = isSendAssetPending || isSpotSendPending;
 
@@ -66,11 +75,11 @@ export function SendDialog({
 	}, [spotBalances]);
 
 	const tokenOptions = useMemo(() => {
-		if (accountType === "perp") {
+		if (effectiveAccountType === "perp") {
 			return [DEFAULT_QUOTE_TOKEN];
 		}
 		return availableSpotTokens.map((b) => b.asset);
-	}, [accountType, availableSpotTokens]);
+	}, [effectiveAccountType, availableSpotTokens]);
 
 	const tokenInfo = useMemo(() => getToken(selectedToken), [getToken, selectedToken]);
 	const tokenId = useMemo(() => {
@@ -81,18 +90,18 @@ export function SendDialog({
 	const decimals = useMemo(() => getToken(selectedToken)?.transferDecimals ?? 2, [getToken, selectedToken]);
 
 	const availableBalance = useMemo(() => {
-		if (accountType === "perp") {
+		if (effectiveAccountType === "perp") {
 			return getPerpAvailable(perpSummary?.accountValue, perpSummary?.totalMarginUsed);
 		}
 		const balance = spotBalances?.find((b) => b.coin === selectedToken);
 		return getAvailableFromTotals(balance?.total, balance?.hold);
-	}, [accountType, perpSummary, spotBalances, selectedToken]);
+	}, [effectiveAccountType, perpSummary, spotBalances, selectedToken]);
 
 	const availableBalanceStr = useMemo(() => floorToString(availableBalance, decimals), [availableBalance, decimals]);
 
 	const isValidDestination = isAddress(destination);
 	const isValidAmount = isAmountWithinBalance(amount, availableBalance);
-	const canSend = isValidDestination && isValidAmount && !!tokenId && !isPending;
+	const canSend = isValidDestination && isValidAmount && !!tokenId && !isPending && !isAbstractionLoading;
 
 	function handleAccountTypeChange(value: AccountType) {
 		setAccountType(value);
@@ -122,7 +131,15 @@ export function SendDialog({
 
 		setError(null);
 		try {
-			if (accountType === "perp") {
+			if (isUnifiedAccount) {
+				await sendAsset({
+					destination,
+					sourceDex: "spot",
+					destinationDex: selectedToken === DEFAULT_QUOTE_TOKEN ? "" : "spot",
+					token: tokenId,
+					amount,
+				});
+			} else if (effectiveAccountType === "perp") {
 				await sendAsset({
 					destination,
 					sourceDex: "",
@@ -144,7 +161,18 @@ export function SendDialog({
 			const message = err instanceof Error ? err.message : t`Send failed`;
 			setError(message);
 		}
-	}, [accountType, amount, canSend, destination, onOpenChange, sendAsset, spotSend, tokenId]);
+	}, [
+		effectiveAccountType,
+		amount,
+		canSend,
+		destination,
+		isUnifiedAccount,
+		onOpenChange,
+		selectedToken,
+		sendAsset,
+		spotSend,
+		tokenId,
+	]);
 
 	function handleOpenChange(newOpen: boolean) {
 		if (!newOpen) {
@@ -178,15 +206,17 @@ export function SendDialog({
 					</div>
 
 					<div className="flex gap-2">
-						<Select value={accountType} onValueChange={(v) => handleAccountTypeChange(v as AccountType)}>
-							<SelectTrigger className="flex-1 h-10 bg-surface-base/50 border-border-200/60">
-								<SelectValue />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="perp">{t`Perps Account`}</SelectItem>
-								<SelectItem value="spot">{t`Spot Account`}</SelectItem>
-							</SelectContent>
-						</Select>
+						{!isUnifiedAccount && (
+							<Select value={accountType} onValueChange={(v) => handleAccountTypeChange(v as AccountType)}>
+								<SelectTrigger className="flex-1 h-10 bg-surface-base/50 border-border-200/60">
+									<SelectValue />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="perp">{t`Perps Account`}</SelectItem>
+									<SelectItem value="spot">{t`Spot Account`}</SelectItem>
+								</SelectContent>
+							</Select>
+						)}
 
 						<Select value={selectedToken} onValueChange={handleTokenChange}>
 							<SelectTrigger className="flex-1 h-10 bg-surface-base/50 border-border-200/60">

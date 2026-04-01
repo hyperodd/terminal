@@ -111,9 +111,8 @@ export function buildPageHead(options: PageSeoOptions = {}): HeadOutput {
 
 	const links: LinkTag[] = [
 		{ rel: "canonical", href: canonicalUrl },
-		{ rel: "icon", href: "/favicon.ico", sizes: "32x32" },
-		{ rel: "icon", href: "/icon.svg", type: "image/svg+xml" },
-		{ rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+		{ rel: "icon", href: "/hyperodd_icon.png", type: "image/png" },
+		{ rel: "apple-touch-icon", href: "/hyperodd_icon.png" },
 		{ rel: "manifest", href: "/manifest.json" },
 		{ rel: "preconnect", href: "https://app.hyperliquid.xyz" },
 		{ rel: "dns-prefetch", href: "https://app.hyperliquid.xyz" },
