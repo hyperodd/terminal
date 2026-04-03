@@ -1,6 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { DownloadSimpleIcon, DropIcon, GearIcon, TerminalIcon, TrophyIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon, DropIcon, GearIcon, TrophyIcon } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
@@ -55,12 +55,11 @@ export function TopNav() {
 		>
 			<div className="flex items-center gap-3 min-w-0">
 				<div className="flex items-center gap-1.5">
-					<div className="size-5 rounded bg-primary-default/10 border border-primary-default/30 flex items-center justify-center">
-						<TerminalIcon className="size-3 text-primary-default" />
-					</div>
+					<img src="/hyperodd_icon.png" alt="Hyperodd" className="size-5 dark:hidden" />
+					<img src="/Icon_only_cyan.png" alt="Hyperodd" className="size-5 hidden dark:block" />
 					<span className="text-xs font-bold tracking-tight">
-						<span className="text-primary-default">HyperOdd</span>
-						<span className="text-text-950">Terminal</span>
+						<span className="text-primary-default">Hyperodd</span>
+						<span className="text-text-950"> Terminal</span>
 					</span>
 				</div>
 				<div className="h-4 w-px bg-border-200 hidden md:block" />

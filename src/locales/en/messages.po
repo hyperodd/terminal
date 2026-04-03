@@ -18,8 +18,8 @@ msgid "% filled"
 msgstr "% filled"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
-msgid "$5+ USDC balance"
-msgstr "$5+ USDC balance"
+#~ msgid "$5+ USDC balance"
+#~ msgstr "$5+ USDC balance"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
 msgid "24 hours"
@@ -288,20 +288,28 @@ msgid "Chart"
 msgstr "Chart"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
-msgid "Checking balance"
-msgstr "Checking balance"
+#~ msgid "Checking balance"
+#~ msgstr "Checking balance"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
-msgid "Claim 1,000 USDH"
-msgstr "Claim 1,000 USDH"
+#~ msgid "Claim 1,000 USDH"
+#~ msgstr "Claim 1,000 USDH"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claim 50 USDH"
+msgstr "Claim 50 USDH"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Claim failed"
 msgstr "Claim failed"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
-msgid "Claiming USDH"
-msgstr "Claiming USDH"
+#~ msgid "Claiming USDH"
+#~ msgstr "Claiming USDH"
+
+#: src/components/trade/tradebox/faucet-modal.tsx
+msgid "Claiming USDH..."
+msgstr "Claiming USDH..."
 
 #: src/components/trade/positions/position-actions-dropdown.tsx
 #: src/components/trade/tradebox/points-modal.tsx
@@ -1487,8 +1495,8 @@ msgid "Remove from favorites"
 msgstr "Remove from favorites"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
-msgid "Requirement"
-msgstr "Requirement"
+#~ msgid "Requirement"
+#~ msgstr "Requirement"
 
 #: src/components/pages/builder-page.tsx
 #~ msgid "Requirements:"
@@ -2182,8 +2190,8 @@ msgstr "USDH claimed!"
 #~ msgstr "Vaults"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
-msgid "Verifying captcha"
-msgstr "Verifying captcha"
+#~ msgid "Verifying captcha"
+#~ msgstr "Verifying captcha"
 
 #: src/lib/trade/use-button-content.ts
 msgid "Verifying..."

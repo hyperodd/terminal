@@ -1,27 +1,20 @@
 import { useState } from "react";
 
-type FaucetStatus = "idle" | "verifying-captcha" | "verifying-balance" | "claiming" | "success" | "error";
+const API_URL = import.meta.env.VITE_HYPERMILES_API_URL;
+
+type FaucetStatus = "idle" | "claiming" | "success" | "error";
 
 interface FaucetResult {
-	amount: string;
-	txHash?: string;
+	amount: number;
+	walletAddress: string;
 }
 
 interface UseFaucetClaimReturn {
 	status: FaucetStatus;
 	error: string | null;
 	result: FaucetResult | null;
-	claim: (turnstileToken: string, address: string) => Promise<void>;
+	claim: (address: string, getAccessToken: () => Promise<string | null>) => Promise<void>;
 	reset: () => void;
-}
-
-async function postFaucet<T>(path: string, body: Record<string, string>): Promise<T> {
-	const res = await fetch(`/api/faucet/${path}`, {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(body),
-	});
-	return res.json();
 }
 
 export function useFaucetClaim(): UseFaucetClaimReturn {
@@ -29,54 +22,31 @@ export function useFaucetClaim(): UseFaucetClaimReturn {
 	const [error, setError] = useState<string | null>(null);
 	const [result, setResult] = useState<FaucetResult | null>(null);
 
-	async function claim(turnstileToken: string, address: string) {
-		setStatus("verifying-captcha");
+	async function claim(address: string, getAccessToken: () => Promise<string | null>) {
+		setStatus("claiming");
 		setError(null);
 		setResult(null);
 
 		try {
-			const turnstileData = await postFaucet<{ success: boolean; sessionToken?: string; error?: string }>(
-				"verify-turnstile",
-				{ token: turnstileToken },
-			);
-			if (!turnstileData.success || !turnstileData.sessionToken)
-				throw new Error(turnstileData.error || "Captcha verification failed");
-			const sessionToken = turnstileData.sessionToken;
+			const token = await getAccessToken();
+			if (!token) throw new Error("Not authenticated");
 
-			setStatus("verifying-balance");
-			const balanceData = await postFaucet<{
-				success: boolean;
-				hasMinimumBalance?: boolean;
-				totalBalance?: string;
-				required?: string;
-				error?: string;
-			}>("verify-balance", { address, sessionToken });
-			if (!balanceData.success) throw new Error(balanceData.error || "Balance check failed");
-			if (!balanceData.hasMinimumBalance)
-				throw new Error(`Insufficient balance: $${balanceData.totalBalance} (need $${balanceData.required})`);
-
-			setStatus("claiming");
-			const claimData = await postFaucet<{
-				success: boolean;
-				amount?: string;
-				txHash?: string;
-				error?: string;
-				nextClaimTime?: number;
-			}>("claim", {
-				recipientAddress: address,
-				sessionToken,
-				authMethod: "wallet",
-				walletAddress: address,
+			const res = await fetch(`${API_URL}/faucet`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify({ walletAddress: address }),
 			});
-			if (!claimData.success) {
-				if (claimData.nextClaimTime) {
-					const hours = Math.max(1, Math.ceil((claimData.nextClaimTime * 1000 - Date.now()) / (1000 * 60 * 60)));
-					throw new Error(`Cooldown active. Try again in ~${hours}h`);
-				}
-				throw new Error(claimData.error || "Claim failed");
+
+			const data = await res.json();
+
+			if (!res.ok) {
+				throw new Error(data.error || `Claim failed (${res.status})`);
 			}
 
-			setResult({ amount: claimData.amount || "1,000", txHash: claimData.txHash });
+			setResult({ amount: data.amount, walletAddress: data.walletAddress });
 			setStatus("success");
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Something went wrong");
