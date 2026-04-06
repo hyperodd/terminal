@@ -1,94 +1,36 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import {
 	CheckCircleIcon,
 	ClockIcon,
-	CurrencyDollarIcon,
 	DropIcon,
 	SpinnerGapIcon,
 	WalletIcon,
 	WarningCircleIcon,
 } from "@phosphor-icons/react";
-import { useRef, useState } from "react";
+import { usePrivy } from "@privy-io/react-auth";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { InfoRow } from "@/components/ui/info-row";
-import { cn } from "@/lib/cn";
 import { useFaucetClaim } from "@/lib/faucet/use-faucet-claim";
 import { useFaucetModalActions, useFaucetModalOpen } from "@/stores/use-global-modal-store";
-
-const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
-
-interface StepProps {
-	label: string;
-	active: boolean;
-	done: boolean;
-}
-
-function Step({ label, active, done }: StepProps) {
-	return (
-		<div
-			className={cn(
-				"flex items-center gap-2 text-3xs py-1",
-				done ? "text-market-up-600" : active ? "text-primary-default" : "text-text-500",
-			)}
-		>
-			{done ? (
-				<CheckCircleIcon className="size-3.5" />
-			) : active ? (
-				<SpinnerGapIcon className="size-3.5 animate-spin" />
-			) : (
-				<div className="size-3.5 rounded-full border border-current opacity-40" />
-			)}
-			<span>{label}</span>
-		</div>
-	);
-}
-
-function ClaimProgress({ status }: { status: string }) {
-	const steps = [
-		{ key: "verifying-captcha", label: t`Verifying captcha` },
-		{ key: "verifying-balance", label: t`Checking balance` },
-		{ key: "claiming", label: t`Claiming USDH` },
-	];
-	const activeIdx = steps.findIndex((s) => s.key === status);
-
-	return (
-		<div className="space-y-0.5">
-			{steps.map((step, i) => (
-				<Step key={step.key} label={step.label} active={i === activeIdx} done={i < activeIdx} />
-			))}
-		</div>
-	);
-}
 
 export function FaucetModal() {
 	const open = useFaucetModalOpen();
 	const { close } = useFaucetModalActions();
 	const { address } = useConnection();
+	const { authenticated, getAccessToken } = usePrivy();
 	const { status, error, result, claim, reset } = useFaucetClaim();
-	const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-	const turnstileRef = useRef<TurnstileInstance>(null);
-
-	const isProcessing = status === "verifying-captcha" || status === "verifying-balance" || status === "claiming";
 
 	function handleClose() {
 		reset();
-		setTurnstileToken(null);
 		close();
 	}
 
 	function handleClaim() {
-		if (!turnstileToken || !address) return;
-		claim(turnstileToken, address);
-	}
-
-	function handleRetry() {
-		reset();
-		setTurnstileToken(null);
-		turnstileRef.current?.reset();
+		if (!address) return;
+		claim(address, getAccessToken);
 	}
 
 	if (status === "success") {
@@ -145,7 +87,7 @@ export function FaucetModal() {
 							<Button variant="outlined" onClick={handleClose} className="flex-1">
 								<Trans>Cancel</Trans>
 							</Button>
-							<Button onClick={handleRetry} className="flex-1">
+							<Button onClick={reset} className="flex-1">
 								<Trans>Retry</Trans>
 							</Button>
 						</div>
@@ -155,7 +97,7 @@ export function FaucetModal() {
 		);
 	}
 
-	if (isProcessing) {
+	if (status === "claiming") {
 		return (
 			<Dialog open onOpenChange={() => {}}>
 				<DialogContent className="sm:max-w-md" showCloseButton={false}>
@@ -171,7 +113,9 @@ export function FaucetModal() {
 								<SpinnerGapIcon className="size-7 animate-spin text-primary-default" />
 							</div>
 						</div>
-						<ClaimProgress status={status} />
+						<p className="text-3xs text-primary-default">
+							<Trans>Claiming USDH...</Trans>
+						</p>
 					</div>
 				</DialogContent>
 			</Dialog>
@@ -214,19 +158,8 @@ export function FaucetModal() {
 											<Trans>Amount</Trans>
 										</>
 									}
-									value="1,000 USDH"
+									value="50 USDH"
 									valueClassName="font-medium"
-								/>
-								<InfoRow
-									className="p-0"
-									labelClassName="flex items-center gap-1.5 text-text-950"
-									label={
-										<>
-											<CurrencyDollarIcon className="size-3" />
-											<Trans>Requirement</Trans>
-										</>
-									}
-									value={t`$5+ USDC balance`}
 								/>
 								<InfoRow
 									className="p-0"
@@ -241,20 +174,9 @@ export function FaucetModal() {
 								/>
 							</div>
 
-							<div className="flex justify-center">
-								<Turnstile
-									ref={turnstileRef}
-									siteKey={TURNSTILE_SITE_KEY}
-									options={{ theme: "dark", size: "normal" }}
-									onSuccess={setTurnstileToken}
-									onExpire={() => setTurnstileToken(null)}
-									onError={() => setTurnstileToken(null)}
-								/>
-							</div>
-
-							<Button variant="contained" onClick={handleClaim} disabled={!turnstileToken} className="w-full">
+							<Button variant="contained" onClick={handleClaim} disabled={!authenticated} className="w-full">
 								<DropIcon className="size-4" />
-								<Trans>Claim 1,000 USDH</Trans>
+								<Trans>Claim 50 USDH</Trans>
 							</Button>
 						</>
 					)}
