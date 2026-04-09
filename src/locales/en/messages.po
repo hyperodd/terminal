@@ -105,8 +105,8 @@ msgstr "Advanced order types"
 #~ msgstr "Agent verification failed"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "All"
-msgstr "All"
+#~ msgid "All"
+#~ msgstr "All"
 
 #: src/components/trade/tradebox/margin-mode-dialog.tsx
 msgid "All cross positions share the same cross margin as collateral. In the event of liquidation, your cross margin balance and any remaining open positions under assets in this mode may be forfeited."
@@ -1348,7 +1348,6 @@ msgstr "pending"
 #~ msgid "perp"
 #~ msgstr "perp"
 
-#: src/components/trade/header/top-nav.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
 #: src/components/trade/positions/transfer-dialog.tsx
 msgid "Perp"

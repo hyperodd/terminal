@@ -25,7 +25,7 @@ export function buildKlineStyles(candleType: CandleType): DeepPartial<Styles> {
 
 	const crosshairAxis = {
 		show: true,
-		line: { show: true, style: LineType.Dashed, dashedValue: [4, 2], size: 1, color: accent },
+		line: { show: true, style: LineType.Dashed, dashedValue: [4, 2], size: 1, color: scaleLineColor },
 		text: {
 			show: true,
 			color: overlayTextColor,
@@ -35,7 +35,7 @@ export function buildKlineStyles(candleType: CandleType): DeepPartial<Styles> {
 			paddingTop: 2,
 			paddingBottom: 2,
 			borderRadius: 2,
-			backgroundColor: accent,
+			backgroundColor: colorToHex(colors.surface),
 			borderSize: 0,
 			borderColor: "transparent",
 		},

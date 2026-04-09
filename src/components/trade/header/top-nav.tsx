@@ -1,7 +1,6 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { DownloadSimpleIcon, DropIcon, GearIcon, TrophyIcon } from "@phosphor-icons/react";
-import { Link } from "@tanstack/react-router";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
@@ -17,11 +16,6 @@ const isTestnet = import.meta.env.VITE_HYPERLIQUID_TESTNET === "true";
 
 import { ThemeToggle } from "./theme-toggle";
 import { UserMenu } from "./user-menu";
-
-const SCOPE_NAV_ITEMS = [
-	{ scope: "all" as const, label: <Trans>All</Trans>, to: "/", activeClass: "text-text-950 font-medium" },
-	{ scope: "perp" as const, label: <Trans>Perp</Trans>, to: "/perp", activeClass: "text-scope-perp font-medium" },
-] as const;
 
 function getScopeAccentClass(scope: string): string {
 	switch (scope) {
@@ -62,21 +56,6 @@ export function TopNav() {
 						<span className="text-text-950"> Terminal</span>
 					</span>
 				</div>
-				<div className="h-4 w-px bg-border-200 hidden md:block" />
-				<nav className="hidden lg:flex items-center text-nav tracking-wide">
-					{SCOPE_NAV_ITEMS.map((item) => (
-						<Link
-							key={item.scope}
-							to={item.to}
-							className={cn(
-								"px-2.5 py-1.5 transition-colors duration-150",
-								scope === item.scope ? item.activeClass : "text-text-950 hover:text-text-600",
-							)}
-						>
-							{item.label}
-						</Link>
-					))}
-				</nav>
 			</div>
 
 			<div className="flex items-center gap-2">
