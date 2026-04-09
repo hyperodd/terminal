@@ -40,7 +40,6 @@ export function useFaucetClaim(): UseFaucetClaimReturn {
 				body: JSON.stringify({ walletAddress: address }),
 			});
 
-<<<<<<< HEAD
 			if (!res.ok) {
 				const text = await res.text();
 				let message = `Claim failed (${res.status})`;
@@ -53,14 +52,6 @@ export function useFaucetClaim(): UseFaucetClaimReturn {
 
 			const data = await res.json();
 
-=======
-			const data = await res.json();
-
-			if (!res.ok) {
-				throw new Error(data.error || `Claim failed (${res.status})`);
-			}
-
->>>>>>> a16fd33 (feat: update faucet)
 			setResult({ amount: data.amount, walletAddress: data.walletAddress });
 			setStatus("success");
 		} catch (err) {
