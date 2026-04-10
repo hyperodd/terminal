@@ -63,9 +63,9 @@ export function UserMenu() {
 		setMounted(true);
 	}, []);
 
-	function handleLogout() {
+	async function handleLogout() {
 		if (authenticated) {
-			logout();
+			await logout();
 		}
 		disconnect();
 	}
