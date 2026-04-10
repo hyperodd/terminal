@@ -52,7 +52,7 @@ export function UserMenu() {
 	const { authenticated, ready } = usePrivy();
 	const { login } = useLogin();
 	const { logout } = useLogout();
-	const { disconnect } = useDisconnect();
+	const { mutate: disconnect } = useDisconnect();
 	const { data: ensName } = useEnsName({ address });
 	const [mounted, setMounted] = useState(false);
 
@@ -66,9 +66,8 @@ export function UserMenu() {
 	function handleLogout() {
 		if (authenticated) {
 			logout();
-		} else {
-			disconnect();
 		}
+		disconnect();
 	}
 
 	if (!mounted || !ready || isConnecting) {
