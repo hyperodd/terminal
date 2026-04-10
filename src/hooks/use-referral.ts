@@ -33,12 +33,12 @@ export function useReferralCapture() {
 
 export function useAutoRegisterReferral() {
 	const { address, isConnected } = useConnection();
-	const { user } = usePrivy();
+	const { user, authenticated } = usePrivy();
 	const registeredRef = useRef(false);
 
 	useEffect(() => {
 		async function autoRegister() {
-			if (!isConnected || !address || registeredRef.current) return;
+			if (!isConnected || !authenticated || !address || registeredRef.current) return;
 
 			registeredRef.current = true;
 
@@ -72,7 +72,7 @@ export function useAutoRegisterReferral() {
 		}
 
 		autoRegister();
-	}, [isConnected, address, user?.id]);
+	}, [isConnected, authenticated, address, user?.id]);
 }
 
 export { getStoredReferral };
