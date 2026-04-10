@@ -33,14 +33,16 @@ export function useReferralCapture() {
 
 export function useAutoRegisterReferral() {
 	const { address, isConnected } = useConnection();
-	const { user } = usePrivy();
-	const registeredRef = useRef(false);
+	const { user, authenticated } = usePrivy();
+	const registeredAddressRef = useRef<string | null>(null);
 
 	useEffect(() => {
 		async function autoRegister() {
-			if (!isConnected || !address || registeredRef.current) return;
+			if (!isConnected || !authenticated || !address) return;
+			if (authenticated && !user?.id) return;
+			if (registeredAddressRef.current === address) return;
 
-			registeredRef.current = true;
+			registeredAddressRef.current = address;
 
 			try {
 				const res = await fetch(`${API_URL}/user_points?user_address=${address}`);
@@ -67,12 +69,12 @@ export function useAutoRegisterReferral() {
 				}
 			} catch (error) {
 				console.error("Auto-registration failed:", error);
-				registeredRef.current = false;
+				registeredAddressRef.current = null;
 			}
 		}
 
 		autoRegister();
-	}, [isConnected, address, user?.id]);
+	}, [isConnected, authenticated, address, user?.id]);
 }
 
 export { getStoredReferral };

@@ -6,6 +6,7 @@ import {
 	PlusCircleIcon,
 	SignOutIcon,
 	SpinnerGapIcon,
+	TrophyIcon,
 	WalletIcon,
 } from "@phosphor-icons/react";
 import { useLogin, useLogout, usePrivy } from "@privy-io/react-auth";
@@ -22,6 +23,7 @@ import {
 import { useCopyToClipboard } from "@/hooks/ui/use-copy-to-clipboard";
 import { useAutoRegisterReferral } from "@/hooks/use-referral";
 import { shortenAddress } from "@/lib/format";
+import { usePointsModalActions } from "@/stores/use-global-modal-store";
 
 function CopyAddressMenuItem({ address }: { address: string }) {
 	const { copied, copy } = useCopyToClipboard();
@@ -50,22 +52,22 @@ export function UserMenu() {
 	const { authenticated, ready } = usePrivy();
 	const { login } = useLogin();
 	const { logout } = useLogout();
-	const { disconnect } = useDisconnect();
+	const { mutate: disconnect } = useDisconnect();
 	const { data: ensName } = useEnsName({ address });
 	const [mounted, setMounted] = useState(false);
 
 	useAutoRegisterReferral();
+	const { open: openPointsModal } = usePointsModalActions();
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
 
-	function handleLogout() {
+	async function handleLogout() {
 		if (authenticated) {
-			logout();
-		} else {
-			disconnect();
+			await logout();
 		}
+		disconnect();
 	}
 
 	if (!mounted || !ready || isConnecting) {
@@ -102,6 +104,12 @@ export function UserMenu() {
 						<PlusCircleIcon className="size-3.5 text-text-600" />
 						<span>
 							<Trans>Add funds</Trans>
+						</span>
+					</DropdownMenuItem>
+					<DropdownMenuItem className="flex items-center gap-2" onClick={openPointsModal}>
+						<TrophyIcon className="size-3.5 text-text-600" />
+						<span>
+							<Trans>Referrals</Trans>
 						</span>
 					</DropdownMenuItem>
 					<DropdownMenuSeparator />

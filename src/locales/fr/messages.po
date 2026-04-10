@@ -1467,6 +1467,10 @@ msgstr ""
 msgid "Referral Code (optional)"
 msgstr ""
 
+#: src/components/trade/header/user-menu.tsx
+msgid "Referrals"
+msgstr ""
+
 #: src/components/pages/builder-page.tsx
 #~ msgid "Register Another"
 #~ msgstr ""
