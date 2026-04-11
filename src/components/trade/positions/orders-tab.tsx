@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { FALLBACK_VALUE_PLACEHOLDER } from "@/config/constants";
+import { FALLBACK_VALUE_PLACEHOLDER, HL_ALL_DEXS } from "@/config/constants";
 import { cn } from "@/lib/cn";
 import { formatDateTime, formatToken, formatUSD } from "@/lib/format";
 import { useMarkets } from "@/lib/hyperliquid";
@@ -44,7 +44,7 @@ export function OrdersTab() {
 		data: openOrdersEvent,
 		status,
 		error,
-	} = useSubOpenOrders({ user: address ?? "0x0" }, { enabled: isConnected && !!address });
+	} = useSubOpenOrders({ user: address ?? "0x0", dex: HL_ALL_DEXS }, { enabled: isConnected && !!address });
 	const markets = useMarkets();
 	const [selectedOrderIds, setSelectedOrderIds] = useState<Set<number>>(() => new Set());
 

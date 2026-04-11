@@ -12,8 +12,10 @@ interface ButtonContentInput {
 	canApprove: boolean;
 	side: Side;
 	isSubmitting: boolean;
+	isTestnet: boolean;
 	onConnectWallet: () => void;
 	onDeposit: () => void;
+	onFaucet: () => void;
 	onRegister: () => void;
 	onSubmit: () => void;
 }
@@ -58,8 +60,8 @@ export function useButtonContent(input: ButtonContentInput): ButtonContent {
 		}
 		if (input.availableBalance <= 0) {
 			return {
-				text: t`Deposit`,
-				action: input.onDeposit,
+				text: input.isTestnet ? t`Deposit USDH or use Faucet` : t`Deposit`,
+				action: input.isTestnet ? input.onFaucet : input.onDeposit,
 				disabled: false,
 				variant: "cyan",
 			};
@@ -79,8 +81,10 @@ export function useButtonContent(input: ButtonContentInput): ButtonContent {
 		isRegistering,
 		input.canApprove,
 		input.isAgentLoading,
+		input.isTestnet,
 		input.onConnectWallet,
 		input.onDeposit,
+		input.onFaucet,
 		input.onRegister,
 		input.onSubmit,
 		input.side,

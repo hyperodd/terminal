@@ -509,6 +509,10 @@ msgstr "Deposit failed"
 #~ msgid "Deposit on Hyperliquid"
 #~ msgstr "Deposit on Hyperliquid"
 
+#: src/lib/trade/use-button-content.ts
+msgid "Deposit USDH or use Faucet"
+msgstr "Deposit USDH or use Faucet"
+
 #: src/components/trade/positions/send-dialog.tsx
 msgid "Destination"
 msgstr "Destination"

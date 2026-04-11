@@ -4,7 +4,7 @@ import { useConnection } from "wagmi";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { POSITIONS_TABS, UI_TEXT } from "@/config/constants";
+import { HL_ALL_DEXS, POSITIONS_TABS, UI_TEXT } from "@/config/constants";
 import { useAccountBalances } from "@/hooks/trade/use-account-balances";
 import { cn } from "@/lib/cn";
 import { useSubOpenOrders } from "@/lib/hyperliquid/hooks/subscription";
@@ -32,7 +32,7 @@ export function MobilePositionsView({ className }: MobilePositionsViewProps) {
 	const { perpPositions, isLoading: isLoadingState } = useAccountBalances();
 
 	const { data: ordersEvent, status: ordersStatus } = useSubOpenOrders(
-		{ user: address ?? "0x0" },
+		{ user: address ?? "0x0", dex: HL_ALL_DEXS },
 		{ enabled: isConnected && !!address },
 	);
 	const openOrders = ordersEvent?.orders;
