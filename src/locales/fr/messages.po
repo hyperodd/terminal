@@ -508,6 +508,10 @@ msgstr ""
 #~ msgid "Deposit on Hyperliquid"
 #~ msgstr "Déposer sur Hyperliquid"
 
+#: src/lib/trade/use-button-content.ts
+msgid "Deposit USDH or use Faucet"
+msgstr ""
+
 #: src/components/trade/positions/send-dialog.tsx
 msgid "Destination"
 msgstr ""

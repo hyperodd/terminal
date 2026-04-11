@@ -31,7 +31,12 @@ import {
 import type { ActiveDialog } from "@/lib/trade/types";
 import { useButtonContent } from "@/lib/trade/use-button-content";
 import { perpInput, spotInput, useOrderValidation } from "@/lib/trade/use-order-validation";
-import { useDepositModalActions, useSettingsDialogActions, useSwapModalActions } from "@/stores/use-global-modal-store";
+import {
+	useDepositModalActions,
+	useFaucetModalActions,
+	useSettingsDialogActions,
+	useSwapModalActions,
+} from "@/stores/use-global-modal-store";
 import { useMarketOrderSlippageBps, useMarketOrderSlippagePercent } from "@/stores/use-global-settings-store";
 import {
 	useLimitPrice,
@@ -137,8 +142,11 @@ export function TradePanel() {
 	const [activeDialog, setActiveDialog] = useState<Exclude<ActiveDialog, "wallet">>(null);
 
 	const { open: openDepositModal } = useDepositModalActions();
+	const { open: openFaucetModal } = useFaucetModalActions();
 	const { open: openSettingsDialog } = useSettingsDialogActions();
 	const { open: openSwapModal } = useSwapModalActions();
+
+	const isTestnet = import.meta.env.VITE_HYPERLIQUID_TESTNET === "true";
 
 	const swapTargetToken = useMemo(() => {
 		if (!market || market.kind !== "builderPerp") return null;
@@ -424,8 +432,10 @@ export function TradePanel() {
 		canApprove,
 		side,
 		isSubmitting,
+		isTestnet,
 		onConnectWallet: () => !authenticated && login(),
 		onDeposit: () => openDepositModal("deposit"),
+		onFaucet: openFaucetModal,
 		onRegister: handleRegister,
 		onSubmit: handleSubmit,
 	});

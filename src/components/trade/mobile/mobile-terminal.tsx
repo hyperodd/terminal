@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useConnection } from "wagmi";
+import { HL_ALL_DEXS } from "@/config/constants";
 import { useAccountBalances } from "@/hooks/trade/use-account-balances";
 import { cn } from "@/lib/cn";
 import { useSubOpenOrders } from "@/lib/hyperliquid/hooks/subscription";
@@ -22,7 +23,10 @@ export function MobileTerminal({ className }: Props) {
 
 	const { address, isConnected } = useConnection();
 	const { perpPositions } = useAccountBalances();
-	const { data: ordersEvent } = useSubOpenOrders({ user: address ?? "0x0" }, { enabled: isConnected && !!address });
+	const { data: ordersEvent } = useSubOpenOrders(
+		{ user: address ?? "0x0", dex: HL_ALL_DEXS },
+		{ enabled: isConnected && !!address },
+	);
 	const openOrders = ordersEvent?.orders;
 
 	const positionsCount = useMemo(() => {

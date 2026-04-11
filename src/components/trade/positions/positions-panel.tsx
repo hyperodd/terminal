@@ -26,7 +26,10 @@ export function PositionsPanel() {
 	const { address, isConnected } = useConnection();
 	const { perpSummary, spotBalances } = useAccountBalances();
 	const { positions } = useUserPositions();
-	const { data: ordersEvent } = useSubOpenOrders({ user: address ?? "0x0" }, { enabled: isConnected && !!address });
+	const { data: ordersEvent } = useSubOpenOrders(
+		{ user: address ?? "0x0", dex: HL_ALL_DEXS },
+		{ enabled: isConnected && !!address },
+	);
 	const { data: twapStatesEvent } = useSubTwapStates(
 		{ user: address ?? "0x0", dex: HL_ALL_DEXS },
 		{ enabled: isConnected && !!address },

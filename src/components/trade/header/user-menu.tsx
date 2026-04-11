@@ -64,10 +64,13 @@ export function UserMenu() {
 	}, []);
 
 	async function handleLogout() {
-		if (authenticated) {
-			await logout();
+		try {
+			if (authenticated) {
+				await logout();
+			}
+		} finally {
+			disconnect();
 		}
-		disconnect();
 	}
 
 	if (!mounted || !ready || isConnecting) {
