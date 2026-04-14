@@ -391,6 +391,10 @@
 }
 
 @layer components {
+  #privy-dialog input#email-input ~ button {
+    display: none;
+  }
+
   .active\:scale-98:active {
     transform: scale(0.98);
   }
