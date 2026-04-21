@@ -10,6 +10,7 @@ type GlobalModal =
 	| { type: "commandMenu" }
 	| { type: "faucet" }
 	| { type: "points" }
+	| { type: "acrossBridge" }
 	| null;
 
 interface DepositActions {
@@ -43,6 +44,11 @@ interface PointsActions {
 	close: () => void;
 }
 
+interface AcrossBridgeActions {
+	open: () => void;
+	close: () => void;
+}
+
 interface GlobalModalState {
 	modal: GlobalModal;
 	depositActions: DepositActions;
@@ -51,6 +57,7 @@ interface GlobalModalState {
 	commandMenuActions: CommandMenuActions;
 	faucetActions: FaucetActions;
 	pointsActions: PointsActions;
+	acrossBridgeActions: AcrossBridgeActions;
 }
 
 const useGlobalModalStore = create<GlobalModalState>((set) => {
@@ -83,6 +90,10 @@ const useGlobalModalStore = create<GlobalModalState>((set) => {
 			open: () => set({ modal: { type: "points" } }),
 			close,
 		},
+		acrossBridgeActions: {
+			open: () => set({ modal: { type: "acrossBridge" } }),
+			close,
+		},
 	};
 });
 
@@ -109,3 +120,6 @@ export const useFaucetModalActions = () => useGlobalModalStore((s) => s.faucetAc
 
 export const usePointsModalOpen = () => useGlobalModalStore((s) => s.modal?.type === "points");
 export const usePointsModalActions = () => useGlobalModalStore((s) => s.pointsActions);
+
+export const useAcrossBridgeModalOpen = () => useGlobalModalStore((s) => s.modal?.type === "acrossBridge");
+export const useAcrossBridgeModalActions = () => useGlobalModalStore((s) => s.acrossBridgeActions);

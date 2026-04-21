@@ -7,6 +7,7 @@ const GlobalSettingsDialog = createLazyComponent(() => import("./global-settings
 const SpotSwapModal = createLazyComponent(() => import("./spot-swap-modal"), "SpotSwapModal");
 const CommandMenu = createLazyComponent(() => import("./command-menu"), "CommandMenu");
 const PointsModal = createLazyComponent(() => import("../tradebox/points-modal"), "PointsModal");
+const AcrossBridgeModal = createLazyComponent(() => import("../tradebox/across-bridge-modal"), "AcrossBridgeModal");
 
 export function GlobalModals() {
 	return (
@@ -17,6 +18,7 @@ export function GlobalModals() {
 			<SpotSwapModal />
 			<CommandMenu />
 			<PointsModal />
+			<AcrossBridgeModal />
 		</Suspense>
 	);
 }
