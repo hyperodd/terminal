@@ -175,7 +175,7 @@ function AcrossBridgeModalContent() {
 				destinationChainId: HYPER_CORE_CHAIN_ID,
 				amount: parseUnits(amount, tokenDecimals),
 				recipient: finalRecipient,
-				refundAddress: finalRecipient,
+				refundAddress: recipientAddress || finalRecipient,
 			});
 			setDeposit(response);
 			setView("address");
