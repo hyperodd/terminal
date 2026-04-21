@@ -53,6 +53,10 @@ msgstr "Account"
 msgid "Account Balances"
 msgstr "Account Balances"
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Across API key is not configured. Set VITE_ACROSS_API_KEY in your environment."
+msgstr "Across API key is not configured. Set VITE_ACROSS_API_KEY in your environment."
+
 #: src/components/trade/positions/balances-tab.tsx
 #: src/components/trade/positions/orders-tab.tsx
 #: src/components/trade/positions/positions-tab.tsx
@@ -87,6 +91,10 @@ msgstr "Add to favorites"
 #: src/components/trade/positions/positions-tab.tsx
 msgid "Add TP/SL"
 msgstr "Add TP/SL"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Address expires in"
+msgstr "Address expires in"
 
 #: src/components/trade/tradebox/advanced-order-dropdown.tsx
 msgid "Advanced order types"
@@ -184,6 +192,10 @@ msgstr "Balance"
 #: src/components/ui/breadcrumb.tsx
 #~ msgid "Breadcrumb"
 #~ msgstr "Breadcrumb"
+
+#: src/components/trade/header/top-nav.tsx
+msgid "Bridge"
+msgstr "Bridge"
 
 #: src/components/trade/order-entry/deposit-modal.tsx
 #~ msgid "Bridge USDC from Arbitrum or other chains to your Hyperliquid account."
@@ -312,6 +324,7 @@ msgid "Claiming USDH..."
 msgstr "Claiming USDH..."
 
 #: src/components/trade/positions/position-actions-dropdown.tsx
+#: src/components/trade/tradebox/across-bridge-modal.tsx
 #: src/components/trade/tradebox/points-modal.tsx
 #: src/components/ui/dialog.tsx
 #: src/components/ui/sheet.tsx
@@ -493,6 +506,10 @@ msgstr "Current"
 msgid "Deposit"
 msgstr "Deposit"
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Deposit address"
+msgstr "Deposit address"
+
 #: src/components/trade/tradebox/deposit-modal.tsx
 msgid "Deposit complete"
 msgstr "Deposit complete"
@@ -512,6 +529,10 @@ msgstr "Deposit failed"
 #: src/lib/trade/use-button-content.ts
 msgid "Deposit USDH or use Faucet"
 msgstr "Deposit USDH or use Faucet"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Deposit via Across"
+msgstr "Deposit via Across"
 
 #: src/components/trade/positions/send-dialog.tsx
 msgid "Destination"
@@ -554,6 +575,10 @@ msgstr "Displays the mobile sidebar."
 #: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Done"
 msgstr "Done"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Done — I've sent funds"
+msgstr "Done — I've sent funds"
 
 #: src/components/trade/tradebox/trade-form-fields.tsx
 msgid "Duration (Minutes)"
@@ -630,6 +655,10 @@ msgstr "Equity"
 msgid "Est. Fee"
 msgstr "Est. Fee"
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Est. fill time"
+msgstr "Est. fill time"
+
 #: src/components/trade/order-entry/tp-sl-section.tsx
 #: src/components/trade/order-entry/tp-sl-section.tsx
 #~ msgid "Est. P&L"
@@ -656,6 +685,10 @@ msgstr "Execution"
 #~ msgid "Expand account panel"
 #~ msgstr "Expand account panel"
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Expired"
+msgstr "Expired"
+
 #: src/components/trade/tradebox/order-toast.tsx
 msgid "failed"
 msgstr "failed"
@@ -671,6 +704,10 @@ msgstr "Failed to copy"
 #: src/components/trade/tradebox/trade-panel.tsx
 msgid "Failed to enable trading"
 msgstr "Failed to enable trading"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Failed to generate deposit address"
+msgstr "Failed to generate deposit address"
 
 #: src/components/trade/positions/balances-tab.tsx
 msgid "Failed to load balances."
@@ -731,6 +768,7 @@ msgid "Faucet"
 msgstr "Faucet"
 
 #: src/components/trade/positions/history-tab.tsx
+#: src/components/trade/tradebox/across-bridge-modal.tsx
 msgid "Fee"
 msgstr "Fee"
 
@@ -756,6 +794,7 @@ msgid "Format for numbers and dates"
 msgstr "Format for numbers and dates"
 
 #: src/components/trade/components/spot-swap-modal.tsx
+#: src/components/trade/tradebox/across-bridge-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 msgid "From"
 msgstr "From"
@@ -777,9 +816,25 @@ msgstr "Funding History"
 #~ msgid "Funding Payments"
 #~ msgstr "Funding Payments"
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Funds will arrive directly in this account's trading balance."
+msgstr "Funds will arrive directly in this account's trading balance."
+
 #: src/components/trade/footer/footer-bar.tsx
 #~ msgid "Gas:"
 #~ msgstr "Gas:"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Generate deposit address"
+msgstr "Generate deposit address"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Generate new address"
+msgstr "Generate new address"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Generating deposit address..."
+msgstr "Generating deposit address..."
 
 #: src/components/trade/tradebox/points-modal.tsx
 msgid "Get Started"
@@ -805,6 +860,10 @@ msgstr "Hide small"
 #: src/components/trade/tradebox/points-modal.tsx
 msgid "How to earn"
 msgstr "How to earn"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Hyperliquid account"
+msgstr "Hyperliquid account"
 
 #: src/components/trade/tradebox/points-modal.tsx
 #: src/components/trade/tradebox/points-modal.tsx
@@ -945,6 +1004,10 @@ msgstr "Loading"
 #: src/components/trade/positions/balances-tab.tsx
 msgid "Loading balances..."
 msgstr "Loading balances..."
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Loading bridge routes..."
+msgstr "Loading bridge routes..."
 
 #: src/components/trade/positions/funding-tab.tsx
 msgid "Loading funding history..."
@@ -1156,6 +1219,10 @@ msgstr "Network fee"
 msgid "NEW"
 msgstr "NEW"
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "New deposit"
+msgstr "New deposit"
+
 #: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "New to wallets?"
 #~ msgstr "New to wallets?"
@@ -1272,6 +1339,10 @@ msgstr "Offline"
 #: src/components/trade/market-overview.tsx
 msgid "OI"
 msgstr "OI"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "on"
+msgstr "on"
 
 #: src/components/trade/components/wallet-dialog.tsx
 #~ msgid "Only you control your funds. No email or password required."
@@ -1509,6 +1580,7 @@ msgstr "Remove from favorites"
 #~ msgid "Requirements:"
 #~ msgstr "Requirements:"
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/deposit-modal.tsx
 #: src/components/trade/tradebox/faucet-modal.tsx
@@ -1609,6 +1681,14 @@ msgstr "Sell"
 #: src/components/trade/positions/send-dialog.tsx
 msgid "Send"
 msgstr "Send"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Send exactly"
+msgstr "Send exactly"
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Send exactly {amount} {sourceSymbol} on {sourceChainName} to this address. Other amounts or chains may cause loss of funds."
+msgstr "Send exactly {amount} {sourceSymbol} on {sourceChainName} to this address. Other amounts or chains may cause loss of funds."
 
 #: src/components/trade/positions/send-dialog.tsx
 msgid "Send failed"
@@ -2143,6 +2223,14 @@ msgstr "Type"
 #~ msgid "Unable to close position."
 #~ msgstr "Unable to close position."
 
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Unable to load bridge module. Please try again."
+msgstr "Unable to load bridge module. Please try again."
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Unable to load bridge routes. Please try again."
+msgstr "Unable to load bridge routes. Please try again."
+
 #: src/lib/errors/format.ts
 msgid "Unknown error"
 msgstr "Unknown error"
@@ -2282,6 +2370,20 @@ msgstr "Yes"
 #: src/components/pages/builder-page.tsx
 #~ msgid "You can revoke permissions at any time by registering a new approval with 0% fee rate. Builder codes are processed entirely onchain as part of the fee logic."
 #~ msgstr "You can revoke permissions at any time by registering a new approval with 0% fee rate. Builder codes are processed entirely onchain as part of the fee logic."
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "You receive"
+msgstr "You receive"
+
+#. placeholder {0}: selectedToken?.symbol || "tokens"
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "You'll get an address to send {0} from any wallet — no signing required."
+msgstr "You'll get an address to send {0} from any wallet — no signing required."
+
+#. placeholder {0}: USDC_PERPS.symbol
+#: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Your {0} will arrive directly in your Hyperliquid trading balance once confirmed."
+msgstr "Your {0} will arrive directly in your Hyperliquid trading balance once confirmed."
 
 #: src/components/trade/tradebox/points-modal.tsx
 #~ msgid "Your Referral Code"
