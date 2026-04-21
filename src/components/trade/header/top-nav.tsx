@@ -91,14 +91,16 @@ export function TopNav() {
 								<Trans>Deposit</Trans>
 							</Button>
 						)}
-						<Button
-							variant="outlined"
-							onClick={openAcrossBridge}
-							className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
-						>
-							<ArrowsLeftRightIcon className="size-4" />
-							<Trans>Bridge</Trans>
-						</Button>
+						{!isTestnet && (
+							<Button
+								variant="outlined"
+								onClick={openAcrossBridge}
+								className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
+							>
+								<ArrowsLeftRightIcon className="size-4" />
+								<Trans>Bridge</Trans>
+							</Button>
+						)}
 					</>
 				)}
 				<UserMenu />

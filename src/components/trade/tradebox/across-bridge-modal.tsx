@@ -108,26 +108,32 @@ function AcrossBridgeModalContent() {
 
 	useEffect(() => {
 		let cancelled = false;
-		import("@across-protocol/app-sdk").then(async ({ createAcrossClient }) => {
-			const client = createAcrossClient({
-				integratorId: INTEGRATOR_ID,
-				chains: [mainnet, arbitrum, base],
-			});
-			if (cancelled) return;
-			setAcrossClient(client);
-			try {
-				const tokens = await client.getSwapTokens({ chainId: arbitrum.id });
+		import("@across-protocol/app-sdk")
+			.then(async ({ createAcrossClient }) => {
+				const client = createAcrossClient({
+					integratorId: INTEGRATOR_ID,
+					chains: [mainnet, arbitrum, base],
+				});
 				if (cancelled) return;
-				const popular = tokens.filter((tok) => POPULAR_SYMBOLS.has(tok.symbol));
-				setSourceTokens(popular);
-				if (popular.length > 0) setSelectedTokenAddress(popular[0].address);
-				setView("form");
-			} catch {
+				setAcrossClient(client);
+				try {
+					const tokens = await client.getSwapTokens({ chainId: arbitrum.id });
+					if (cancelled) return;
+					const popular = tokens.filter((tok) => POPULAR_SYMBOLS.has(tok.symbol));
+					setSourceTokens(popular);
+					if (popular.length > 0) setSelectedTokenAddress(popular[0].address);
+					setView("form");
+				} catch {
+					if (cancelled) return;
+					setError(t`Unable to load bridge routes. Please try again.`);
+					setView("error");
+				}
+			})
+			.catch(() => {
 				if (cancelled) return;
-				setError(t`Unable to load bridge routes. Please try again.`);
+				setError(t`Unable to load bridge module. Please try again.`);
 				setView("error");
-			}
-		});
+			});
 		return () => {
 			cancelled = true;
 		};
@@ -193,7 +199,7 @@ function AcrossBridgeModalContent() {
 	}
 
 	const expectedOutput = deposit ? formatUnits(BigInt(deposit.expectedOutputAmount), USDC_PERPS.decimals) : "";
-	const feePct = deposit?.fees?.total?.pct ? Number(deposit.fees.total.pct) / 1e16 : null;
+	const feePct = deposit?.fees?.total?.pct !== undefined ? Number(deposit.fees.total.pct) / 1e16 : null;
 	const selectedChainName = COUNTERFACTUAL_CHAINS.find((c) => c.id === selectedChainId)?.name ?? "";
 
 	return (

@@ -2224,6 +2224,10 @@ msgstr "Type"
 #~ msgstr "Unable to close position."
 
 #: src/components/trade/tradebox/across-bridge-modal.tsx
+msgid "Unable to load bridge module. Please try again."
+msgstr "Unable to load bridge module. Please try again."
+
+#: src/components/trade/tradebox/across-bridge-modal.tsx
 msgid "Unable to load bridge routes. Please try again."
 msgstr "Unable to load bridge routes. Please try again."
 
