@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { TradeTerminalPage } from "@/components/trade/trade-terminal-page";
+import { DEFAULT_SELECTED_MARKETS } from "@/domain/market";
 import { buildPageHead } from "@/lib/seo";
 import { useMarketActions } from "@/stores/use-market-store";
 
@@ -21,7 +22,7 @@ function IndexPage() {
 	const { setSelectedMarket } = useMarketActions();
 
 	useEffect(() => {
-		setSelectedMarket("all", "VOLX-USDH");
+		setSelectedMarket("all", DEFAULT_SELECTED_MARKETS.all);
 	}, [setSelectedMarket]);
 
 	return <TradeTerminalPage />;
