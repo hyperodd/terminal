@@ -194,8 +194,8 @@ msgstr "Balance"
 #~ msgstr "Breadcrumb"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Bridge"
-msgstr "Bridge"
+#~ msgid "Bridge"
+#~ msgstr "Bridge"
 
 #: src/components/trade/order-entry/deposit-modal.tsx
 #~ msgid "Bridge USDC from Arbitrum or other chains to your Hyperliquid account."
@@ -373,15 +373,6 @@ msgstr "Confirm in wallet"
 #: src/components/trade/positions/positions-tab.tsx
 #~ msgid "Connect a wallet to manage positions."
 #~ msgstr "Connect a wallet to manage positions."
-
-#: src/components/trade/header/user-menu.tsx
-#: src/lib/trade/use-button-content.ts
-msgid "Connect Wallet"
-msgstr "Connect Wallet"
-
-#: src/components/trade/tradebox/account-panel.tsx
-msgid "Connect wallet to view account"
-msgstr "Connect wallet to view account"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Connect your wallet to claim USDH"
@@ -1052,6 +1043,15 @@ msgstr "Loading wallet..."
 #: src/lib/trade/use-button-content.ts
 msgid "Loading..."
 msgstr "Loading..."
+
+#: src/components/trade/header/user-menu.tsx
+#: src/lib/trade/use-button-content.ts
+msgid "Login"
+msgstr "Login"
+
+#: src/components/trade/tradebox/account-panel.tsx
+msgid "Login to view account"
+msgstr "Login to view account"
 
 #: src/components/trade/positions/position-limit-close-modal.tsx
 #: src/components/trade/positions/position-tpsl-modal.tsx

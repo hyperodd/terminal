@@ -83,7 +83,7 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 						<WalletIcon className="size-10 text-text-600" />
 					</div>
 					<div className="text-center space-y-2">
-						<h2 className="text-lg font-semibold">Connect Wallet</h2>
+						<h2 className="text-lg font-semibold">Login</h2>
 						<p className="text-sm text-text-600 max-w-xs">
 							Connect your wallet to view your account, positions, and start trading.
 						</p>
@@ -99,7 +99,7 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 							"min-h-[48px]",
 						)}
 					>
-						Connect Wallet
+						Login
 					</Button>
 				</div>
 				<MobileBottomNavSpacer />
@@ -145,7 +145,7 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 							"transition-colors rounded-xs hover:bg-transparent",
 							"min-h-[44px] min-w-[44px] flex items-center justify-center",
 						)}
-						aria-label="Disconnect wallet"
+						aria-label="DisLogin"
 					>
 						<SignOutIcon className="size-5" />
 					</Button>

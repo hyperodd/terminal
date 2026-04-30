@@ -194,8 +194,8 @@ msgstr "शेष"
 #~ msgstr "ब्रेडक्रम्ब"
 
 #: src/components/trade/header/top-nav.tsx
-msgid "Bridge"
-msgstr ""
+#~ msgid "Bridge"
+#~ msgstr ""
 
 #: src/components/trade/order-entry/deposit-modal.tsx
 #~ msgid "Bridge USDC from Arbitrum or other chains to your Hyperliquid account."
@@ -372,15 +372,6 @@ msgstr ""
 #: src/components/trade/positions/positions-tab.tsx
 #~ msgid "Connect a wallet to manage positions."
 #~ msgstr "पोजीशन प्रबंधित करने के लिए वॉलेट कनेक्ट करें।"
-
-#: src/components/trade/header/user-menu.tsx
-#: src/lib/trade/use-button-content.ts
-msgid "Connect Wallet"
-msgstr "वॉलेट कनेक्ट करें"
-
-#: src/components/trade/tradebox/account-panel.tsx
-msgid "Connect wallet to view account"
-msgstr "खाता देखने के लिए वॉलेट कनेक्ट करें"
 
 #: src/components/trade/tradebox/faucet-modal.tsx
 msgid "Connect your wallet to claim USDH"
@@ -1046,6 +1037,15 @@ msgstr "वॉलेट लोड हो रहा है..."
 #: src/lib/trade/use-button-content.ts
 msgid "Loading..."
 msgstr "लोड हो रहा है..."
+
+#: src/components/trade/header/user-menu.tsx
+#: src/lib/trade/use-button-content.ts
+msgid "Login"
+msgstr "वॉलेट कनेक्ट करें"
+
+#: src/components/trade/tradebox/account-panel.tsx
+msgid "Login to view account"
+msgstr "खाता देखने के लिए वॉलेट कनेक्ट करें"
 
 #: src/components/trade/positions/position-limit-close-modal.tsx
 #: src/components/trade/positions/position-tpsl-modal.tsx

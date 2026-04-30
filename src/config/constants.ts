@@ -35,9 +35,9 @@ export const TWAP_MINUTES_MAX = 1440;
 export const SCALE_LEVELS_MIN = 2;
 export const SCALE_LEVELS_MAX = 20;
 
-export const DEFAULT_MAX_LEVERAGE = 50;
+export const DEFAULT_MAX_LEVERAGE = 5;
 export const MARKET_LEVERAGE_HARD_MAX = 100;
-export const DEFAULT_MARKET_ORDER_SLIPPAGE_PERCENT = 2.5;
+export const DEFAULT_MARKET_ORDER_SLIPPAGE_PERCENT = 1.0;
 export const MARKET_ORDER_SLIPPAGE_MIN_PERCENT = 0.1;
 export const MARKET_ORDER_SLIPPAGE_MAX_PERCENT = 100;
 export const DEFAULT_LEVERAGE_BY_MODE = { cross: 10, isolated: 10 } as const;
@@ -186,7 +186,6 @@ export const CHART_DISABLED_FEATURES = [
 	"display_market_status",
 	"popup_hints",
 	"header_saveload",
-	"create_volume_indicator_by_default",
 	"volume_force_overlay",
 	"show_logo_on_all_charts",
 	"caption_buttons_text_if_possible",
@@ -282,7 +281,7 @@ export const UI_TEXT = {
 	USER_MENU: {
 		COPY_ADDRESS: "Copy Address",
 		CONNECTING: "Connecting...",
-		CONNECT_WALLET: "Connect Wallet",
+		CONNECT_WALLET: "Login",
 		ADD_FUNDS: "Add funds",
 		DISCONNECT: "Disconnect",
 	},
@@ -367,7 +366,7 @@ export const UI_TEXT = {
 		PNL_LABEL: "PNL",
 		TAB_PERPS: "Perps",
 		TAB_SPOT: "Spot",
-		CONNECT: "Connect wallet to view account",
+		CONNECT: "Login to view account",
 		LOADING: "Loading...",
 		BALANCE_LABEL: "Balance",
 		UNREALIZED_LABEL: "Unrealized PNL",
@@ -507,7 +506,7 @@ export const UI_TEXT = {
 		HELP_TEXT: "Bridge USDC from Arbitrum or other chains to your Hyperliquid account.",
 	},
 	WALLET_DIALOG: {
-		TITLE: "Connect Wallet",
+		TITLE: "Login",
 		EMPTY: "No wallets found",
 	},
 	ORDER_ENTRY: {
@@ -522,7 +521,7 @@ export const UI_TEXT = {
 		ERROR_SIZE: "Enter size",
 		ERROR_MIN_NOTIONAL: "Min order value $10",
 		ERROR_EXCEEDS_MAX: "Exceeds max size",
-		BUTTON_CONNECT: "Connect Wallet",
+		BUTTON_CONNECT: "Login",
 		BUTTON_SWITCHING: "Switching...",
 		BUTTON_SWITCH_CHAIN: "Switch to Arbitrum",
 		BUTTON_DEPOSIT: "Deposit",

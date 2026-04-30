@@ -146,6 +146,7 @@ export function createDatafeed(): IBasicDataFeed {
 					minmov: CHART_DATAFEED_CONFIG.MIN_MOVEMENT,
 					has_intraday: true,
 					supported_resolutions: SUPPORTED_RESOLUTIONS,
+					visible_plots_set: "ohlcv",
 					volume_precision: CHART_DATAFEED_CONFIG.VOLUME_PRECISION,
 					data_status: CHART_DATAFEED_CONFIG.DATA_STATUS,
 				};

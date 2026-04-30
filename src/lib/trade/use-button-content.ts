@@ -44,7 +44,7 @@ export function useButtonContent(input: ButtonContentInput): ButtonContent {
 	return useMemo<ButtonContent>(() => {
 		if (!input.isConnected) {
 			return {
-				text: t`Connect Wallet`,
+				text: t`Login`,
 				action: input.onConnectWallet,
 				disabled: false,
 				variant: "cyan",

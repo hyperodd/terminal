@@ -1,13 +1,12 @@
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { ArrowsLeftRightIcon, DownloadSimpleIcon, DropIcon, GearIcon, TrophyIcon } from "@phosphor-icons/react";
+import { ArrowsLeftRightIcon, DropIcon, GearIcon, TrophyIcon } from "@phosphor-icons/react";
 import { useConnection } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { useExchangeScope } from "@/providers/exchange-scope";
 import {
 	useAcrossBridgeModalActions,
-	useDepositModalActions,
 	useFaucetModalActions,
 	usePointsModalActions,
 	useSettingsDialogActions,
@@ -32,7 +31,6 @@ function getScopeAccentClass(scope: string): string {
 }
 
 export function TopNav() {
-	const { open: openDepositModal } = useDepositModalActions();
 	const { open: openFaucetModal } = useFaucetModalActions();
 	const { open: openPointsModal } = usePointsModalActions();
 	const { open: openSettingsDialog } = useSettingsDialogActions();
@@ -81,7 +79,7 @@ export function TopNav() {
 								<Trans>Faucet</Trans>
 							</Button>
 						)}
-						{!isTestnet && (
+						{/* {!isTestnet && (
 							<Button
 								variant="outlined"
 								onClick={() => openDepositModal("deposit")}
@@ -90,7 +88,7 @@ export function TopNav() {
 								<DownloadSimpleIcon className="size-4" />
 								<Trans>Deposit</Trans>
 							</Button>
-						)}
+						)} */}
 						{!isTestnet && (
 							<Button
 								variant="outlined"
@@ -98,7 +96,7 @@ export function TopNav() {
 								className="h-6 px-2 text-xs font-medium rounded-xs bg-fill-100 border border-border-300 text-text-950 hover:border-border-500 transition-colors inline-flex items-center gap-1 shadow-xs"
 							>
 								<ArrowsLeftRightIcon className="size-4" />
-								<Trans>Bridge</Trans>
+								<Trans>Deposit</Trans>
 							</Button>
 						)}
 					</>

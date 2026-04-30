@@ -34,7 +34,7 @@ const marketScopes: { value: MarketScope; label: string }[] = [
 	{ value: "all", label: "All" },
 	{ value: "perp", label: "Perp" },
 	{ value: "spot", label: "Spot" },
-	{ value: "hip3", label: "HIP-3" },
+	{ value: "hip3", label: "TradFi" },
 ];
 
 function getSzDecimals(market: MarketRow): number {

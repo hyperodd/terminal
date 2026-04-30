@@ -18,6 +18,8 @@ import {
 import { createDatafeed } from "./datafeed";
 import { buildChartOverrides, generateChartCssUrl, getLoadingScreenColors, getToolbarBgColor } from "./theme-colors";
 
+const VOLUME_STUDY_NAME = "Volume";
+
 interface Props {
 	symbol?: string;
 	interval?: string;
@@ -86,6 +88,14 @@ export function TradingViewChart({
 
 				widgetRef.current.onChartReady(() => {
 					chartReadyRef.current = true;
+
+					const chart = widgetRef.current?.activeChart();
+					if (!chart) return;
+
+					const hasVolumeStudy = chart.getAllStudies().some((study) => study.name === VOLUME_STUDY_NAME);
+					if (!hasVolumeStudy) {
+						void chart.createStudy(VOLUME_STUDY_NAME, false, false, undefined, undefined, { disableUndo: true });
+					}
 				});
 			} catch (error) {
 				console.error("Error initializing TradingView widget:", error);
