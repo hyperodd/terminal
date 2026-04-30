@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Address } from "viem";
 import { formatUnits, parseUnits } from "viem";
 import { useConnection } from "wagmi";
-import { arbitrum, base, mainnet } from "wagmi/chains";
+import { arbitrum, base, mainnet, polygon } from "wagmi/chains";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { InfoRow, InfoRowGroup } from "@/components/ui/info-row";
@@ -28,9 +28,11 @@ const COUNTERFACTUAL_CHAINS = [
 	{ id: mainnet.id, name: "Ethereum", shortName: "ETH" },
 	{ id: arbitrum.id, name: "Arbitrum", shortName: "ARB" },
 	{ id: base.id, name: "Base", shortName: "BASE" },
+	{ id: polygon.id, name: "Polygon", shortName: "POLY" },
 ] as const;
 
-const POPULAR_SYMBOLS = new Set(["USDC", "USDT", "USDT0", "ETH", "WETH", "WBTC", "DAI", "cbBTC"]);
+// const POPULAR_SYMBOLS = new Set(["USDC", "USDT", "USDT0", "ETH", "WETH", "WBTC", "DAI", "cbBTC"]);
+const POPULAR_SYMBOLS = new Set(["USDT", "USDT0"]);
 
 const INTEGRATOR_ID = (import.meta.env.VITE_ACROSS_INTEGRATOR_ID ?? "0xdead") as `0x${string}`;
 const ACROSS_API_KEY = import.meta.env.VITE_ACROSS_API_KEY as string | undefined;

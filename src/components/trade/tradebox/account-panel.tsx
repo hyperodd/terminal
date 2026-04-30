@@ -223,7 +223,7 @@ export function AccountPanel() {
 				</TabsList>
 
 				{!isConnected ? (
-					<div className="text-2xs text-text-600 text-center py-4">{t`Connect wallet to view account`}</div>
+					<div className="text-2xs text-text-600 text-center py-4">{t`Login to view account`}</div>
 				) : (
 					<div className="p-2 overflow-y-auto">
 						<TabsContentGroup>

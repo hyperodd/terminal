@@ -86,7 +86,7 @@ export function UserMenu() {
 		return (
 			<Button size="md" variant="outlined" onClick={() => !authenticated && login()}>
 				<WalletIcon className="size-4" />
-				<Trans>Connect Wallet</Trans>
+				<Trans>Login</Trans>
 			</Button>
 		);
 	}
