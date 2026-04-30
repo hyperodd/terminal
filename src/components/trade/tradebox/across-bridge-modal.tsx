@@ -31,8 +31,7 @@ const COUNTERFACTUAL_CHAINS = [
 	{ id: polygon.id, name: "Polygon", shortName: "POLY" },
 ] as const;
 
-// const POPULAR_SYMBOLS = new Set(["USDC", "USDT", "USDT0", "ETH", "WETH", "WBTC", "DAI", "cbBTC"]);
-const POPULAR_SYMBOLS = new Set(["USDT", "USDT0"]);
+const POPULAR_SYMBOLS = new Set(["USDC"]);
 
 const INTEGRATOR_ID = (import.meta.env.VITE_ACROSS_INTEGRATOR_ID ?? "0xdead") as `0x${string}`;
 const ACROSS_API_KEY = import.meta.env.VITE_ACROSS_API_KEY as string | undefined;
