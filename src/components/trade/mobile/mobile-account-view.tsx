@@ -145,7 +145,7 @@ export function MobileAccountView({ className }: MobileAccountViewProps) {
 							"transition-colors rounded-xs hover:bg-transparent",
 							"min-h-[44px] min-w-[44px] flex items-center justify-center",
 						)}
-						aria-label="DisLogin"
+						aria-label="Logout"
 					>
 						<SignOutIcon className="size-5" />
 					</Button>
